@@ -1,0 +1,24 @@
+{
+  "name": "kochanowski.js",
+  "version": "1.0.0",
+  "description": "When a person that doesn't know how to create a programming language tries to create a programming language ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./modules/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CheryX/kochanowski.js.git"
+  },
+  "keywords": [
+    "polska", "literatura"
+  ],
+  "author": "Cheryx & Electruuu",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/CheryX/kochanowski.js/issues"
+  },
+  "homepage": "https://github.com/CheryX/kochanowski.js#readme"
+}
