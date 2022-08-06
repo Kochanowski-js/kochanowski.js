@@ -16,8 +16,8 @@ fs.readdir(config.folderWejścia, (err, files) => {
         const fileFormat = filePath.split('.').pop();
         if (fileFormat != 'pol') continue;
 
-        const content = fs.readFileSync(outPath, 'utf8');
-        fs.writeFileSync(filePath.replace('.pol', '.js'), convertToJs(content));
+        const content = fs.readFileSync(filePath, 'utf8');
+        fs.writeFileSync(outPath.replace('.pol', '.js'), convertToJs(content));
 
     };
 

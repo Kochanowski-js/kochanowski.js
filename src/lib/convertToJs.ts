@@ -47,6 +47,10 @@ function wordConverter(lines: string[]) {
     for (let i in lines) {
         lines[i] = lines[i].replaceAll(/Drukuj(?=([^"]*"[^"]*")*[^"]*$)/g, 'console.log')
         lines[i] = lines[i].replaceAll(/Jeżeli(?=([^"]*"[^"]*")*[^"]*$)/g, 'if')
+        lines[i] = lines[i].replaceAll(/Stałej(?=([^"]*"[^"]*")*[^"]*$)/g, 'const')
+        lines[i] = lines[i].replaceAll(/Zmiennej(?=([^"]*"[^"]*")*[^"]*$)/g, 'let')
+        lines[i] = lines[i].replaceAll(/przypisz wartość(?=([^"]*"[^"]*")*[^"]*$)/g, '=')
+        lines[i] = lines[i].replaceAll(/nie jest(?=([^"]*"[^"]*")*[^"]*$)/g, '!=')
         lines[i] = lines[i].replaceAll(/jest równe(?=([^"]*"[^"]*")*[^"]*$)/g, '==')
         lines[i] = lines[i].replaceAll(/jest większe od(?=([^"]*"[^"]*")*[^"]*$)/g, '>')
         lines[i] = lines[i].replaceAll(/jest mniejsze od(?=([^"]*"[^"]*")*[^"]*$)/g, '<')
