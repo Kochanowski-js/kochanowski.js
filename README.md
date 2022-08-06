@@ -1,8 +1,16 @@
 # kochanowski.js
-When a person that doesn't know how to create a programming language tries to create a programming language
+Najbardziej bazowany język programowania.
 
-To jest najbardziej bazowany język programowania.
+## Instalacja
 
-Proces działania:
+1. Stwórz nowy projekt przez `npm init`
+2. Zainstaluj najlepszy package `kochanowski` przez `npm i -D kochanowski`
+3. Stwórz plik `konfiguracja.json`.
+    ```json
+    {
+        "folderWyjścia": "./out",
+        "folderWejścia": "./src"
+    }
+    ```
 
-"Polski" ---> "Chiński (Angielski)"
+4. Do `package.json` dodaj skrypt o treści `kochanowski`
