@@ -34,7 +34,7 @@ function throwErrors(sentences: string[]) {
         if (!sentences[i].replaceAll(' ', '').length) continue;
         const firstChar = sentences[i].replaceAll(' ', '')[0];
 
-        if (!firstChar.match(/[A-Z]/)) {
+        if (!firstChar.match(/[A-Z]|}|{/)) {
             throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`)
         }
 
@@ -44,6 +44,7 @@ function throwErrors(sentences: string[]) {
 function wordConverter(lines: string[]) {
 
     for (let i in lines) {
+        lines[i] = lines[i].replaceAll(/,(?=([^"]*"[^"]*")*[^"]*$)/g, '.');
         lines[i] = lines[i].replaceAll(/Brak(?=([^"]*"[^"]*")*[^"]*$)/g, 'null')
         lines[i] = lines[i].replaceAll(/Niezdefinowane(?=([^"]*"[^"]*")*[^"]*$)/g, 'undefined')
         lines[i] = lines[i].replaceAll(/Dla(?=([^"]*"[^"]*")*[^"]*$)/g, 'for')
@@ -73,8 +74,8 @@ function wordConverter(lines: string[]) {
         lines[i] = lines[i].replaceAll(/Prawda(?=([^"]*"[^"]*")*[^"]*$)/g, 'true')
         lines[i] = lines[i].replaceAll(/Funkcja(?=([^"]*"[^"]*")*[^"]*$)/g, 'function')
         lines[i] = lines[i].replaceAll(/Załącz(?=([^"]*"[^"]*")*[^"]*$)/g, 'import')
-        lines[i] = lines[i].replaceAll(/z(?=([^"]*"[^"]*")*[^"]*$)/g, 'with')
-        lines[i] = lines[i].replaceAll(/w(?=([^"]*"[^"]*")*[^"]*$)/g, 'in')
+        lines[i] = lines[i].replaceAll(/z biblioteki(?=([^"]*"[^"]*")*[^"]*$)/g, 'with')
+        lines[i] = lines[i].replaceAll(/wewnątrz(?=([^"]*"[^"]*")*[^"]*$)/g, 'in')
     }
 
     return lines.join(';')+';'

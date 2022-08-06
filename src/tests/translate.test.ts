@@ -40,11 +40,11 @@ test('Normal programs', () => {
   Stałej r przypisz wartość 5.
   Zmiennej pole przypisz wartość PI*r*r.
   Drukuj(pole).`
-  
-  expect(convertToJs(field)).toBe('console.log("Witaj świecie");  const PI = 3,14;  const r = 5;  let pole = PI*r*r;  console.log(pole);')
-
   const loop = `Dla (Zmiennej X przypisz wartość 0. X jest mniejsze od 5. X zwiększ o 1) Drukuj(X).`
+  const whileLoop = `Zmiennej I przypisz wartość 1. Dopóki (I jest mniejsze od 5) { Drukuj(X). I zwiększ o 1 }.`
   
+  expect(convertToJs(field)).toBe('console.log("Witaj świecie");  const PI = 3.14;  const r = 5;  let pole = PI*r*r;  console.log(pole);')
   expect(convertToJs(loop)).toBe('for (let X = 0; X < 5; X += 1) console.log(X);')
+  expect(convertToJs(whileLoop)).toBe('let I = 1; while (I < 5) { console.log(X); I += 1 };')
 
 })
