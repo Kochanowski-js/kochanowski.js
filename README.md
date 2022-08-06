@@ -14,3 +14,4 @@ Najbardziej bazowany język programowania.
     ```
 
 4. Do `package.json` dodaj skrypt o treści `kochanowski`
+5. Utwórz foldery które zadeklarowałeś w `konfiguracja.json`
