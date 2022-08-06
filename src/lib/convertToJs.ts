@@ -10,7 +10,6 @@ export default function convertToJs(src: string) {
 
     //Split the file between operations, then remove undefined
     let sentences = getSentences(src);
-    console.log(sentences)
 
     // Check if the code is written correctly
     throwErrors(sentences);
