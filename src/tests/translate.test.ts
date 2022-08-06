@@ -32,3 +32,19 @@ test('Weird Syntax', () => {
   expect(convertToJs(keywordsInString)).toBe('console.log("Witaj Drukuj świecie.");')
 
 })
+
+test('Normal programs', () => {
+
+  const field = `Drukuj("Witaj świecie").
+  Stałej PI przypisz wartość 3,14.
+  Stałej r przypisz wartość 5.
+  Zmiennej pole przypisz wartość PI*r*r.
+  Drukuj(pole).`
+  
+  expect(convertToJs(field)).toBe('console.log("Witaj świecie");  const PI = 3,14;  const r = 5;  let pole = PI*r*r;  console.log(pole);')
+
+  const loop = `Dla (Zmiennej X przypisz wartość 0. X jest mniejsze od 5. X zwiększ o 1) Drukuj(X).`
+  
+  expect(convertToJs(loop)).toBe('for (let X = 0; X < 5; X += 1) console.log(X);')
+
+})

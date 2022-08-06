@@ -44,6 +44,11 @@ function throwErrors(sentences: string[]) {
 function wordConverter(lines: string[]) {
 
     for (let i in lines) {
+        lines[i] = lines[i].replaceAll(/Brak(?=([^"]*"[^"]*")*[^"]*$)/g, 'null')
+        lines[i] = lines[i].replaceAll(/Niezdefinowane(?=([^"]*"[^"]*")*[^"]*$)/g, 'undefined')
+        lines[i] = lines[i].replaceAll(/Dla(?=([^"]*"[^"]*")*[^"]*$)/g, 'for')
+        lines[i] = lines[i].replaceAll(/Dopóki(?=([^"]*"[^"]*")*[^"]*$)/g, 'while')
+        lines[i] = lines[i].replaceAll(/zwiększ o(?=([^"]*"[^"]*")*[^"]*$)/g, '+=')
         lines[i] = lines[i].replaceAll(/Drukuj(?=([^"]*"[^"]*")*[^"]*$)/g, 'console.log')
         lines[i] = lines[i].replaceAll(/Jeżeli(?=([^"]*"[^"]*")*[^"]*$)/g, 'if')
         lines[i] = lines[i].replaceAll(/Stałej(?=([^"]*"[^"]*")*[^"]*$)/g, 'const')
@@ -57,6 +62,19 @@ function wordConverter(lines: string[]) {
         lines[i] = lines[i].replaceAll(/jest większe bądź równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '=>')
         lines[i] = lines[i].replaceAll(/jest mniejsze lub równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '<=')
         lines[i] = lines[i].replaceAll(/jest większe lub równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '=>')
+        lines[i] = lines[i].replaceAll(/Wyczekuj(?=([^"]*"[^"]*")*[^"]*$)/g, 'await')
+        lines[i] = lines[i].replaceAll(/Złam(?=([^"]*"[^"]*")*[^"]*$)/g, 'break')
+        lines[i] = lines[i].replaceAll(/Łap(?=([^"]*"[^"]*")*[^"]*$)/g, 'catch')
+        lines[i] = lines[i].replaceAll(/Klasa(?=([^"]*"[^"]*")*[^"]*$)/g, 'class')
+        lines[i] = lines[i].replaceAll(/Kontynuuj(?=([^"]*"[^"]*")*[^"]*$)/g, 'continue')
+        lines[i] = lines[i].replaceAll(/Rób(?=([^"]*"[^"]*")*[^"]*$)/g, 'do')
+        lines[i] = lines[i].replaceAll(/W przeciwnym wypadku(?=([^"]*"[^"]*")*[^"]*$)/g, 'else')
+        lines[i] = lines[i].replaceAll(/Fałsz(?=([^"]*"[^"]*")*[^"]*$)/g, 'false')
+        lines[i] = lines[i].replaceAll(/Prawda(?=([^"]*"[^"]*")*[^"]*$)/g, 'true')
+        lines[i] = lines[i].replaceAll(/Funkcja(?=([^"]*"[^"]*")*[^"]*$)/g, 'function')
+        lines[i] = lines[i].replaceAll(/Załącz(?=([^"]*"[^"]*")*[^"]*$)/g, 'import')
+        lines[i] = lines[i].replaceAll(/z(?=([^"]*"[^"]*")*[^"]*$)/g, 'with')
+        lines[i] = lines[i].replaceAll(/w(?=([^"]*"[^"]*")*[^"]*$)/g, 'in')
     }
 
     return lines.join(';')+';'
