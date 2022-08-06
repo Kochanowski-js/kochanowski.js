@@ -1,7 +1,7 @@
-# kochanowski.js
-Najbardziej bazowany język programowania. (Logo wkrótce™)
-
 <div align="center">
+    
+<img src="https://cdn.discordapp.com/attachments/739575474711166976/1005512112593961031/kochanowskiJSlogo512.png" width="200" />
+    
 <p>
 <a href=""><img src="https://forthebadge.com/images/badges/gluten-free.svg" /></a>
 <a href=""><img src="https://forthebadge.com/images/badges/powered-by-electricity.svg" /></a>
