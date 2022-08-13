@@ -46,7 +46,7 @@ function wordConverter(lines: string[]) {
     for (let i in lines) {
         lines[i] = lines[i].replaceAll(/,(?=([^"]*"[^"]*")*[^"]*$)/g, '.');
         lines[i] = lines[i].replaceAll(/Brak(?=([^"]*"[^"]*")*[^"]*$)/g, 'null')
-        lines[i] = lines[i].replaceAll(/Niezdefinowane(?=([^"]*"[^"]*")*[^"]*$)/g, 'undefined')
+        lines[i] = lines[i].replaceAll(/Niezdefiniowane(?=([^"]*"[^"]*")*[^"]*$)/g, 'undefined')
         lines[i] = lines[i].replaceAll(/Dla(?=([^"]*"[^"]*")*[^"]*$)/g, 'for')
         lines[i] = lines[i].replaceAll(/Dopóki(?=([^"]*"[^"]*")*[^"]*$)/g, 'while')
         lines[i] = lines[i].replaceAll(/zwiększ o(?=([^"]*"[^"]*")*[^"]*$)/g, '+=')
@@ -59,10 +59,10 @@ function wordConverter(lines: string[]) {
         lines[i] = lines[i].replaceAll(/jest równe(?=([^"]*"[^"]*")*[^"]*$)/g, '==')
         lines[i] = lines[i].replaceAll(/jest większe od(?=([^"]*"[^"]*")*[^"]*$)/g, '>')
         lines[i] = lines[i].replaceAll(/jest mniejsze od(?=([^"]*"[^"]*")*[^"]*$)/g, '<')
-        lines[i] = lines[i].replaceAll(/jest mniejsze bądź równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '<=')
-        lines[i] = lines[i].replaceAll(/jest większe bądź równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '=>')
-        lines[i] = lines[i].replaceAll(/jest mniejsze lub równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '<=')
-        lines[i] = lines[i].replaceAll(/jest większe lub równe od(?=([^"]*"[^"]*")*[^"]*$)/g, '=>')
+        lines[i] = lines[i].replaceAll(/jest mniejsze bądź równe(?=([^"]*"[^"]*")*[^"]*$)/g, '<=')
+        lines[i] = lines[i].replaceAll(/jest większe bądź równe(?=([^"]*"[^"]*")*[^"]*$)/g, '=>')
+        lines[i] = lines[i].replaceAll(/jest mniejsze lub równe(?=([^"]*"[^"]*")*[^"]*$)/g, '<=')
+        lines[i] = lines[i].replaceAll(/jest większe lub równe(?=([^"]*"[^"]*")*[^"]*$)/g, '=>')
         lines[i] = lines[i].replaceAll(/Wyczekuj(?=([^"]*"[^"]*")*[^"]*$)/g, 'await')
         lines[i] = lines[i].replaceAll(/Złam(?=([^"]*"[^"]*")*[^"]*$)/g, 'break')
         lines[i] = lines[i].replaceAll(/Łap(?=([^"]*"[^"]*")*[^"]*$)/g, 'catch')
