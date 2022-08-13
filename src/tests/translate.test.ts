@@ -1,4 +1,4 @@
-import convertToJs from "../lib/convertToJs"
+import convertToJs from "../convertToJs"
 
 test('Convert basic programs', () => {
 

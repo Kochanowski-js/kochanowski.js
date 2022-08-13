@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import fs from "fs"
-import convertToJs from "./lib/convertToJs";
+import convertToJs from "./convertToJs";
 
-const config = JSON.parse(fs.readFileSync("konfiguracja.json", 'utf8'));
+const config = JSON.parse(fs.readFileSync("konfiguracja.zojs", 'utf8'));
 
 // Run a conversion algorithm for every file in input directory
 fs.readdir(config.folderWejścia, (err, files) => {
