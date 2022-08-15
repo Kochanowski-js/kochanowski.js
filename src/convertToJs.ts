@@ -83,37 +83,47 @@ let translatedKeywords = [
     ['Prawda', 'true'],
     ['Funkcja', 'function'],
     ['Załącz', 'import'],
+    ['Zwróć', 'return'],
     ['z biblioteki', 'from'],
     ['wewnątrz', 'in'],
-    //matematyka
+    
+    // Addition
     ['plus', '+'],
     ['dodać', '+'],
     ['dodane do', '+'],
+
+    // Substraction
     ['minus', '-'],
     ['odjąć', '-'],
     ['odjęte od', '-'],
-    //mnożenie
+    
+    // Multiplication
     ['razy', '*'],
     ['pomnożyć przez', '*'],
     ['pomnożone przez', '*'],
     ['pomnożona przez', '*'],
-    //dzielenie
+
+    // Division
     ['podzielić na', '/'],
     ['podzielone na', '/'],
     ['podzielona na', '/'],
     ['podzielony na', '/'],
-    //potęgi
+
+    // Rasing to the power
     ['do potęgi', '**'],
     ['do kwadratu', '**2'],
     ['do sześcianu', '**3'],
     ['kwadrat', '**2'],
     ['sześcian', '**3'],
-    //π
+    ['pierwiastek', '**0.5'],
+
+    // π
     ['ciasto', 'Math.PI'],
     ['pi', 'Math.PI'],
     ['𝝅', 'Math.PI'],
     ['π', 'Math.PI'],
-    //random
+    
+    // Random
     ['losowaLiczba', 'Math.random()'],
     ['losowanie', 'Math.random()'],
 ]
