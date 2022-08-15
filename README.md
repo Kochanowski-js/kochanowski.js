@@ -8,6 +8,10 @@
 </p>
 </div>
 
+## Kochanowski Online
+
+Spróbuj Kochanowskiego bez konfiguracji projektu! https://mmusielik.xyz/projects/kochanowski
+
 ## Instalacja
 
 1. Stwórz nowy projekt przez `npm init`
