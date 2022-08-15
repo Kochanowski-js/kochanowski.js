@@ -31,6 +31,7 @@ Kochanowski.js to jest przetłumaczony JavaScript z paroma zasadami:
 2. Zdania kończymy kropką
 3. Nazwy własne (zmienne) rozpoczynamy wielką literą
 4. Pliki nazywamy **po polsku** np. `główny.pol`
+5. Nie używamy an*ielskich operatorów jak `+`, `-`. Używamy za to `plus` `minus`
 
 ### Przykładowe polecenia
 

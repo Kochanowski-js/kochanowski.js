@@ -14,7 +14,12 @@ export default function convertToJs(src: string) {
     // Check if the code is written correctly
     throwErrors(sentences);
 
+    // Convert keywords
     return wordConverter(sentences)
+}
+
+function countChars(str: string[], match: string) {
+    return str.join('').split(match).length - 1;
 }
 
 /**
@@ -23,22 +28,30 @@ export default function convertToJs(src: string) {
  */
 function throwErrors(sentences: string[]) {
 
-    let c = sentences.join('').split('"').length - 1;
+    // Which symbols cannot be used outside quotations
+    const illegalSymbols = ['+', '-', '*', '/']
 
-    if (c % 2) {
-        throw new SyntaxError(`Błąd: Nie domykanie cudzysłowiów (idk)`)
-    }
+    // Not matching quotes
+    if (countChars(sentences, '"') % 2) throw new SyntaxError(`Błąd: Nie domykanie cudzysłowiów (sens)`)
 
-    for (let i = 0; i < sentences.length; i++) {
+    // Not matching brackets - btw i am aware that you also need to match them inside strings :>
+    if (countChars(sentences, '{') != countChars(sentences, '}')) throw new SyntaxError(`Błąd: Nie domykanie klamerek (sens)`)
+    if (countChars(sentences, '[') != countChars(sentences, ']')) throw new SyntaxError(`Błąd: Nie domykanie nawiasów kwadratowych (sens)`)
+    if (countChars(sentences, '(') != countChars(sentences, ')')) throw new SyntaxError(`Błąd: Nie domykanie nawiasów (sens)`)
 
-        if (!sentences[i].replaceAll(' ', '').length) continue;
+    for (let i in sentences) {
+
         const firstChar = sentences[i].replaceAll(' ', '')[0];
+        if (!firstChar.match(/[A-Z]|}|{/)) throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`)
 
-        if (!firstChar.match(/[A-Z]|}|{/)) {
-            throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`)
+        // Illegal characters
+        for (let j of illegalSymbols) {
+            if (countCharFixed(sentences[i], j)) throw new SyntaxError(`Błąd w linii ${i+1}: Używanie ang*elskich symboli (jęz) (Symbol ${j})`)
         }
 
     }
+
+
 }
 
 let translatedKeywords = [
@@ -95,11 +108,14 @@ let translatedKeywords = [
     ['do sześcianu', '**3'],
     ['kwadrat', '**2'],
     ['sześcian', '**3'],
-    //
+    //π
     ['ciasto', 'Math.PI'],
     ['pi', 'Math.PI'],
     ['𝝅', 'Math.PI'],
     ['π', 'Math.PI'],
+    //random
+    ['losowaLiczba', 'Math.random()'],
+    ['losowanie', 'Math.random()'],
 ]
 
 function wordConverter(lines: string[]) {
@@ -117,28 +133,18 @@ function wordConverter(lines: string[]) {
 }
 
 function getSentences(src: string): string[] {
+    return src.split(/\.(?=(?:(?:[^"]*"){2})*[^"]*$)/g).filter( e => e.trim() );
+}
 
-    let sentences = [];
-    let isString = false;
+/**
+ * Count char outside strings
+ * @param src Source
+ * @param match Match
+ * @returns How many occurences
+ */
+function countCharFixed(src: string, match: string): number {
 
-    let sentence = '';
-    for (let i = 0; i < src.length; i++) {
-    
-        if (src[i] == '"') isString = !isString 
+    let countRegex = new RegExp(`\\${match}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
+    return (src.match(countRegex) || []).length;
 
-        if (src[i] == '.') {
-            if (isString) {
-                sentence += src[i];
-                continue;
-            } else {
-                sentences.push(sentence);
-                sentence = '';
-            }
-        } else {
-            sentence += src[i];
-        }
-
-    }
-
-    return sentences
 }
