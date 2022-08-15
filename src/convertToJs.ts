@@ -86,6 +86,7 @@ let translatedKeywords = [
     ['Zwróć', 'return'],
     ['z biblioteki', 'from'],
     ['wewnątrz', 'in'],
+    ['oraz', ','],
     
     // Addition
     ['plus', '+'],
@@ -126,6 +127,9 @@ let translatedKeywords = [
     // Random
     ['losowaLiczba', 'Math.random()'],
     ['losowanie', 'Math.random()'],
+
+    // Dots (for objects)
+    [' z upchniętym ', '.'],
 ]
 
 function wordConverter(lines: string[]) {
