@@ -48,3 +48,11 @@ test('Normal programs', () => {
   expect(convertToJs(whileLoop)).toBe('let I = 1; while (I < 5) { console.log(X); I += 1 };')
 
 })
+
+test('Math', () => {
+  const math = `Drukuj(2 dodać 4 odjąć 1).
+  Drukuj(ciasto pomnożone przez pi podzielić na π odjąć 𝝅).`
+
+  expect(convertToJs(math)).toBe('console.log(2 + 4 - 1);  console.log(Math.PI * Math.PI / Math.PI - Math.PI);')
+
+})

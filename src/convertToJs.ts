@@ -72,6 +72,34 @@ let translatedKeywords = [
     ['Załącz', 'import'],
     ['z biblioteki', 'from'],
     ['wewnątrz', 'in'],
+    //matematyka
+    ['plus', '+'],
+    ['dodać', '+'],
+    ['dodane do', '+'],
+    ['minus', '-'],
+    ['odjąć', '-'],
+    ['odjęte od', '-'],
+    //mnożenie
+    ['razy', '*'],
+    ['pomnożyć przez', '*'],
+    ['pomnożone przez', '*'],
+    ['pomnożona przez', '*'],
+    //dzielenie
+    ['podzielić na', '/'],
+    ['podzielone na', '/'],
+    ['podzielona na', '/'],
+    ['podzielony na', '/'],
+    //potęgi
+    ['do potęgi', '**'],
+    ['do kwadratu', '**2'],
+    ['do sześcianu', '**3'],
+    ['kwadrat', '**2'],
+    ['sześcian', '**3'],
+    //
+    ['ciasto', 'Math.PI'],
+    ['pi', 'Math.PI'],
+    ['𝝅', 'Math.PI'],
+    ['π', 'Math.PI'],
 ]
 
 function wordConverter(lines: string[]) {
