@@ -39,7 +39,7 @@ function throwErrors(sentences: string[]) {
     if (countChars(sentences, '[') != countChars(sentences, ']')) throw new SyntaxError(`Błąd: Nie domykanie nawiasów kwadratowych (sens)`)
     if (countChars(sentences, '(') != countChars(sentences, ')')) throw new SyntaxError(`Błąd: Nie domykanie nawiasów (sens)`)
 
-    for (let i in sentences) {
+    for (let i = 0; i < sentences.length; i++) {
 
         const firstChar = sentences[i].replaceAll(' ', '')[0];
         if (!firstChar.match(/[A-Z]|}|{/)) throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`)
