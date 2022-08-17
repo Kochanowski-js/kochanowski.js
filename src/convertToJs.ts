@@ -55,7 +55,7 @@ function throwErrors(sentences: string[]) {
 }
 
 let translatedKeywords = [
-    [',', '.'],
+    [', ', '.'],
     ['Brak', 'null'],
     ['Niezdefiniowane', 'undefined'],
     ['Dla', 'for'],
