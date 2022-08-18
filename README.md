@@ -48,3 +48,67 @@ Zmiennej R przypisz wartość 5. | let R = 5;
 Dla (Zmiennej I przypisz wartość 0. I jest mniejsze od 5. I zwiększ o 1) | for (let i = 0; i < 5; i++)
 Dopóki (X jest mniejsze od 5) {} | while (X < 5) {}
 X zwiększ o 1. | x += 1;
+
+### Lista zmapowanych slow ( i nie tylko )
+
+A | B
+-|-
+,|.
+Brak|null
+Niezdefiniowane|undefined
+Dla|for
+Dopóki|while
+zwiększ o|+=
+Drukuj|console.log
+Jeżeli|if
+Stałej|const
+Zmiennej|let
+przypisz wartość|=
+nie jest równe|!=
+jest równe|==
+jest większe od|>
+jest mniejsze od|<
+jest mniejsze bądź równe|<=
+jest większe bądź równe|>=
+Wyczekuj|await
+Złam|break
+Łap|catch
+Klasa|class
+Kontynuuj|continue
+Rób|do
+W przeciwnym wypadku|else
+Fałsz|false
+Prawda|true
+Funkcja|function
+Załącz|import
+Zwróć|return
+z biblioteki|from
+wewnątrz|in
+oraz|,
+plus|+
+dodać|+
+dodane do|+
+minus|-
+odjąć|-
+odjęte od|-
+razy|*
+pomnożyć przez|*
+pomnożone przez|*
+pomnożona przez|*
+podzielić na|/
+podzielone na|/
+podzielona na|/
+podzielony na|/
+do potęgi|**
+do kwadratu|**2
+do sześcianu|**3
+kwadrat|**2
+sześcian|**3
+pierwiastek|**0.5
+ciasto|Math.PI
+pi|Math.PI
+𝝅|Math.PI
+π|Math.PI
+losowaLiczba|Math.random()
+losowanie|Math.random()
+z upchniętym |.
