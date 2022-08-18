@@ -51,7 +51,7 @@ X zwiększ o 1. | x += 1;
 
 ### Lista zmapowanych slow ( i nie tylko )
 
-A | B
+Slowo w kochanowski.js | Przetlumaczenie do js
 -|-
 ,|.
 Brak|null
