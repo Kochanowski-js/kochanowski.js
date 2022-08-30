@@ -55,7 +55,7 @@ function throwErrors(sentences: string[]) {
 }
 
 let translatedKeywords = [
-    [', ', '.'],
+    [',', '.'],
     ['Brak', 'null'],
     ['Niezdefiniowane', 'undefined'],
     ['Dla', 'for'],
@@ -77,8 +77,6 @@ let translatedKeywords = [
     ['Łap', 'catch'],
     ['Klasa', 'class'],
     ['Konstruktor', 'constructor'],
-    ['ja', 'this'],
-    ['to', 'this'],
     ['Kontynuuj', 'continue'],
     ['Rób', 'do'],
     ['W przeciwnym wypadku', 'else'],
@@ -132,7 +130,11 @@ let translatedKeywords = [
     ['losowanie', 'Math.random()'],
 
     // Dots (for objects)
-    [' z upchniętym ', '.'],
+    ['z upchniętym', '.'],
+
+    // Other
+    ['ja', 'this'],
+    ['to', 'this'],
 ]
 
 function wordConverter(lines: string[]) {

@@ -1,35 +1,15 @@
 import convertToJs from "../convertToJs"
+import fs from 'fs'
+
+function getJsFromFile(filename: string): string {
+  let content = fs.readFileSync('src/tests/'+filename, 'utf8');
+  return convertToJs(content);
+}
 
 test('Convert basic programs', () => {
 
-  const hello = 'Drukuj("Witaj świecie").';
-  const multiline = 'Drukuj("Witaj świecie").\nDrukuj("Witaj świecie 2").';
-
-  expect(convertToJs(hello)).toBe('console.log("Witaj świecie");');
-  expect(convertToJs(multiline)).toBe('console.log("Witaj świecie");console.log("Witaj świecie 2");');
+  expect(getJsFromFile('helloWorld.pol')).toBe('console.log(\"Witaj świecie\");console.log(\"Witaj świecie V2\");');
   
-})
-
-test('Detect errors', () => {
-
-  function testError(src: string) { convertToJs(src) };
-  const smallCase = 'drukuj("Witaj świecie").';
-
-  expect(() => {
-    testError(smallCase)
-  }).toThrow(SyntaxError)
-
-})
-
-test('Detect En*lish', () => {
-
-  function testError(src: string) { convertToJs(src) };
-  const illegalChar = 'Drukuj(2 + 2). Drukuj(2 * 2). Drukuj(4 / 2).'; 
-
-  expect(() => {
-    testError(illegalChar)
-  }).toThrow(SyntaxError)
-
 })
 
 
