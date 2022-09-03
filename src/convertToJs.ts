@@ -55,35 +55,89 @@ function throwErrors(sentences: string[]) {
 }
 
 let translatedKeywords = [
+
+    //C++ Base
+    ["Załącz biblioteke", "#include"],
+    ["Używając", "using"],
+    ["przestrzeni nazw", "namespace"],
+    ["Definiując", "#define"],
+    ["Główna", "main"],
+    ['z upchniętym', '::'],
+    [';', '\n'],
+    ['wypluj', '<<'],
+    ['wpluj', '>>'],
+    ['Bp', ''],
+
+    //Var types
+    ["Liczba", "int"],
+    ["Liczby", "int"],
+    ["Liczbie", "int"],
+
+    ["Podwójny", "double"],
+    ["Podwójnea", "double"],
+    ["Podwójnej", "double"],
+    ["Podwójnemu", "double"],
+
+    ["Latać", "float"],
+    ["Latającej", "float"],
+    ["Latającemu", "float"],
+    ["Latająy", "float"],
+
+    ["Binarny", "Boolean"],
+    ["Binarnej", "Boolean"],
+    ["Binarnemu", "Boolean"],
+
+    ["Znak", "char"],
+    ["Znak", "char"],
+    ["Znak", "char"],
+
+    ["Nazwa", "string"],
+    ["Nazwie", "string"],
+
+    ['której wartość jest równa', '='],
+
+    // Comparsions
+    ['nie jest równe', '!='],
+    ['nie jest równy', '!='],
+    ['nie jest równa', '!='],
+
+    ['jest równe', '=='],
+    ['jest równa', '=='],
+    ['jest równy', '=='],
+
+    ['jest większe od', '>'],
+    ['jest większa od', '>'],
+    ['jest większy od', '>'],
+
+    ['jest mniejsze od', '<'],
+    ['jest mniejsza od', '<'],
+    ['jest mniejszy od', '<'],
+
+    ['jest mniejsza bądź równa', '<='],
+    ['jest mniejszy bądź równy', '<='],
+    ['jest mniejsze bądź równe', '<='],
+
+    ['jest większe bądź równe', '>='],
+    ['jest większy bądź równy', '>='],
+    ['jest większa bądź równa', '>='],
+
+
+    // Other
     [',', '.'],
     ['Brak', 'null'],
     ['Niezdefiniowane', 'undefined'],
     ['Dla', 'for'],
     ['Dopóki', 'while'],
     ['zwiększ o', '+='],
-    ['Drukuj', 'console.log'],
     ['Jeżeli', 'if'],
-    ['Stałej', 'const'],
-    ['Zmiennej', 'let'],
     ['przypisz wartość', '='],
-    ['nie jest równe', '!='],
-    ['jest równe', '=='],
-    ['jest większe od', '>'],
-    ['jest mniejsze od', '<'],
-    ['jest mniejsze bądź równe', '<='],
-    ['jest większe bądź równe', '>='],
-    ['Wyczekuj', 'await'],
     ['Złam', 'break'],
-    ['Łap', 'catch'],
     ['Klasa', 'class'],
-    ['Konstruktor', 'constructor'],
     ['Kontynuuj', 'continue'],
     ['Rób', 'do'],
     ['W przeciwnym wypadku', 'else'],
     ['Fałsz', 'false'],
     ['Prawda', 'true'],
-    ['Funkcja', 'function'],
-    ['Załącz', 'import'],
     ['Zwróć', 'return'],
     ['z biblioteki', 'from'],
     ['wewnątrz', 'in'],
@@ -111,30 +165,16 @@ let translatedKeywords = [
     ['podzielona na', '/'],
     ['podzielony na', '/'],
 
-    // Rasing to the power
-    ['do potęgi', '**'],
-    ['do kwadratu', '**2'],
-    ['do sześcianu', '**3'],
-    ['kwadrat', '**2'],
-    ['sześcian', '**3'],
-    ['pierwiastek', '**0.5'],
+    // Modulos
+    ['modulować na', '%'],
+    ['modulowane na', '%'],
+    ['modulowana na', '%'],
+    ['modulowny na', '%'],
 
-    // π
-    ['ciasto', 'Math.PI'],
-    ['pi', 'Math.PI'],
-    ['𝝅', 'Math.PI'],
-    ['π', 'Math.PI'],
-    
-    // Random
-    ['losowaLiczba', 'Math.random()'],
-    ['losowanie', 'Math.random()'],
-
-    // Dots (for objects)
-    ['z upchniętym', '.'],
-
-    // Other
-    ['ja', 'this'],
-    ['to', 'this'],
+    ['zmodulować na', '%'],
+    ['zmodulowane na', '%'],
+    ['zmodulowana na', '%'],
+    ['zmodulowny na', '%'],
 ]
 
 function wordConverter(lines: string[]) {

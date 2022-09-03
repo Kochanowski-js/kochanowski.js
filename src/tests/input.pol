@@ -4,6 +4,11 @@ Definiując Std std;
 Używając przestrzeni nazw std.
 
 Liczba Główna() {
-    Std z upchniętym cout wypluj "Witaj świecie".
+    
+    Liczbie n.
+
+    Std z upchniętym cin wpluj n.
+    Std z upchniętym cout wypluj n.
+
     Zwróć 0.
 }

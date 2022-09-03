@@ -1,0 +1,18 @@
+Załącz biblioteke <iostream>;
+Definiując Std std;
+
+Używając przestrzeni nazw std.
+
+Liczba Główna() {
+    
+    Liczbie Wiek przypisz wartość 15.
+
+    Jeżeli (Wiek jest większy od 18) {
+        Std z upchniętym cout wypluj "Osoba jest pełnoletnia".
+    } W przeciwnym wypadku {
+        Std z upchniętym cout wypluj "Osoba jest pełnoletnia".
+    }
+
+    Zwróć 0.
+
+}

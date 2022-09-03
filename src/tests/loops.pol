@@ -1,0 +1,17 @@
+Załącz biblioteke <iostream>;
+Definiując Std std;
+
+Używając przestrzeni nazw std.
+
+Liczba Główna() {
+    
+    Dla (Liczby I której wartość jest równa 0. I jest mniejsze od 100. I zwiększ o 1) Std z upchniętym cout wypluj I.
+
+    Dla (Liczby I której wartość jest równa 0. I jest mniejsze od 100. I zwiększ o 1) {
+        Jeżeli (I modulowane na 2 jest równe 0) {
+            Std z upchniętym cout wypluj I wypluj "\n".
+        }
+    }
+
+    Zwróć 0.
+}
