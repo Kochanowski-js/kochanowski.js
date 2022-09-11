@@ -53,67 +53,184 @@ X zwiększ o 1. | x += 1;
 
 ### Słownik
 
+### Biblioteki
+
 Kochanowski | JavaScript
--- | --
-`,` | `.`
-`Brak` | `null`
-`Niezdefiniowane` | `undefined`
-`Dla` | `for`
-`Dopóki` | `while`
-`zwiększ o` | `+=`
-`Drukuj` | `console.log`
-`Jeżeli` | `if`
-`Stałej` | `const`
-`Zmiennej` | `let`
-`przypisz wartość` | `=`
-`nie jest równe` | `!=`
-`jest równe` | `==`
-`jest większe od` | `>`
-`jest mniejsze od` | `<`
-`jest mniejsze bądź równe` | `<=`
-`jest większe bądź równe` | `>=`
-`Wyczekuj` | `await`
-`Złam` | `break`
-`Łap` | `catch`
-`Klasa` | `class`
-`Konstruktor` | `constructor`
-`Kontynuuj` | `continue`
-`Rób` | `do`
-`W przeciwnym wypadku` | `else`
-`Fałsz` | `false`
-`Prawda` | `true`
-`Funkcja` | `function`
+--- | ---
 `Załącz` | `import`
 `Zwróć` | `return`
 `z biblioteki` | `from`
-`wewnątrz` | `in`
-`oraz` | `,`
+
+### Stałe
+
+Kochanowski | JavaScript
+--- | ---
+`Brak` | `null`
+`Niezdefiniowane` | `undefined`
+`Fałsz` | `false`
+`Prawda` | `true`
+
+### Funkcje i klasy
+
+Kochanowski | JavaScript
+--- | ---
+`Funkcja` | `function`
+`Wyczekuj` | `await`
+`Klasa` | `class`
+`Konstruktor` | `constructor`
+
+### Jeśli i pętle
+
+Kochanowski | JavaScript
+--- | ---
+`Jeżeli` | `if`
+`Jeśli` | `if`
+`W przeciwnym wypadku` | `else`
+`Dla` | `for`
+`Dopóki` | `while`
+`Rób` | `do`
+`Sróbój` | `try`
+`Łap` | `catch`
+`Złam` | `break`
+`Kontynuuj` | `continue`
+
+### Nadawanie wartości   
+
+Kochanowski | JavaScript
+--- | ---
+`Stałej` | `const`
+`Stałych` | `const`
+`Stałym` | `const`
+`Stały` | `const`
+`Stałe` | `const`
+`Stała` | `const`
+`Zmiennemu` | `let`
+`Zmiennej` | `let`
+`Zmienne` | `let`
+`Zmiennym` | `let`
+`Zmienny` | `let`
+`Zmienna` | `let`
+`której wartość jest równa` | `=`
+`który wartość jest równa` | `=`
+`któremu wartość jest równa` | `=`
+`gdzie wartość jest równa` | `=`
+`przypisz wartość` | `=`
+
+### Porównywanie
+
+Kochanowski | JavaScript
+--- | ---
+`nie jest równe` | `!=`
+`nie jest równy` | `!=`
+`nie jest równa` | `!=`
+`jest równe` | `==`
+`jest równa` | `==`
+`jest równy` | `==`
+`jest większe od` | `>`
+`jest większa od` | `>`
+`jest większy od` | `>`
+`jest mniejsze od` | `<`
+`jest mniejsza od` | `<`
+`jest mniejszy od` | `<`
+`jest mniejsza bądź równa` | `<=`
+`jest mniejszy bądź równy` | `<=`
+`jest mniejsze bądź równe` | `<=`
+`jest większe bądź równe` | `>=`
+`jest większy bądź równy` | `>=`
+`jest większa bądź równa` | `>=`
+
+### Dodawanie
+
+Kochanowski | JavaScript
+--- | ---
 `plus` | `+`
 `dodać` | `+`
 `dodane do` | `+`
+
+### Odejmowanie
+
+Kochanowski | JavaScript
+--- | ---
 `minus` | `-`
 `odjąć` | `-`
 `odjęte od` | `-`
+
+### Mnożenie
+
+Kochanowski | JavaScript
+--- | ---
 `razy` | `*`
 `pomnożyć przez` | `*`
 `pomnożone przez` | `*`
 `pomnożona przez` | `*`
+
+### Dzielenie
+
+Kochanowski | JavaScript
+--- | ---
 `podzielić na` | `/`
 `podzielone na` | `/`
 `podzielona na` | `/`
 `podzielony na` | `/`
+
+### Potęgowanie
+
+Kochanowski | JavaScript
+--- | ---
 `do potęgi` | `**`
 `do kwadratu` | `**2`
 `do sześcianu` | `**3`
 `kwadrat` | `**2`
 `sześcian` | `**3`
 `pierwiastek` | `**0.5`
+
+### π
+
+Kochanowski | JavaScript
+--- | ---
 `ciasto` | `Math.PI`
 `pi` | `Math.PI`
 `𝝅` | `Math.PI`
 `π` | `Math.PI`
+
+### Losowanie
+
+Kochanowski | JavaScript
+--- | ---
 `losowaLiczba` | `Math.random()`
 `losowanie` | `Math.random()`
+
+### Modulo
+
+Kochanowski | JavaScript
+--- | ---
+`modulować na` | `%`
+`modulowane na` | `%`
+`modulowana na` | `%`
+`modulowny na` | `%`
+`zmodulować na` | `%`
+`zmodulowane na` | `%`
+`zmodulowana na` | `%`
+`zmodulowny na` | `%`
+
+### Inne z matmy
+
+Kochanowski | JavaScript
+--- | ---
+`zwiększ o` | `+=`
+`zmniejsz o` | `-=`
+`pomnoż o` | `*=`
+`podziel o` | `/=`
+`moduluj o` | `%=`
+`zmoduluj o` | `%=`
+
+### Inne
+
+Kochanowski | JavaScript
+--- | ---
 `z upchniętym` | `.`
-`ja` | `this`
-`to` | `this`
+`To` | `this`
+`Drukuj` | `console.log`
+`wewnątrz` | `in`
+`oraz` | `,`
+`,` | `.`

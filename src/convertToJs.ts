@@ -56,38 +56,84 @@ function throwErrors(sentences: string[]) {
 
 let translatedKeywords = [
     [',', '.'],
-    ['Brak', 'null'],
-    ['Niezdefiniowane', 'undefined'],
-    ['Dla', 'for'],
-    ['Dopóki', 'while'],
-    ['zwiększ o', '+='],
-    ['Drukuj', 'console.log'],
-    ['Jeżeli', 'if'],
-    ['Stałej', 'const'],
-    ['Zmiennej', 'let'],
-    ['przypisz wartość', '='],
-    ['nie jest równe', '!='],
-    ['jest równe', '=='],
-    ['jest większe od', '>'],
-    ['jest mniejsze od', '<'],
-    ['jest mniejsze bądź równe', '<='],
-    ['jest większe bądź równe', '>='],
-    ['Wyczekuj', 'await'],
-    ['Złam', 'break'],
-    ['Łap', 'catch'],
-    ['Klasa', 'class'],
-    ['Konstruktor', 'constructor'],
-    ['Kontynuuj', 'continue'],
-    ['Rób', 'do'],
-    ['W przeciwnym wypadku', 'else'],
-    ['Fałsz', 'false'],
-    ['Prawda', 'true'],
-    ['Funkcja', 'function'],
+
+    // Libraries
     ['Załącz', 'import'],
     ['Zwróć', 'return'],
     ['z biblioteki', 'from'],
-    ['wewnątrz', 'in'],
-    ['oraz', ','],
+
+    // Constants
+    ['Brak', 'null'],
+    ['Niezdefiniowane', 'undefined'],
+    ['Fałsz', 'false'],
+    ['Prawda', 'true'],
+
+    // Functions & Classes
+    ['Funkcja', 'function'],
+    ['Wyczekuj', 'await'],
+    ['Klasa', 'class'],
+    ['Konstruktor', 'constructor'],
+    
+    // If else & Loops
+    ['Jeżeli', 'if'],
+    ['Jeśli', 'if'],
+    ['W przeciwnym wypadku', 'else'],
+    
+    ['Dla', 'for'],
+    ['Dopóki', 'while'],
+    ['Rób', 'do'],
+    
+    ['Sróbój', 'try'],
+    ['Łap', 'catch'],
+    ['Złam', 'break'],
+    ['Kontynuuj', 'continue'],
+
+    // Assigments    
+    ['Stałej', 'const'],
+    ['Stałych', 'const'],
+    ['Stałym', 'const'],
+    ['Stały', 'const'],
+    ['Stałe', 'const'],
+    ['Stała', 'const'],
+
+    ['Zmiennemu', 'let'],
+    ['Zmiennej', 'let'],
+    ['Zmienne', 'let'],
+    ['Zmiennym', 'let'],
+    ['Zmienny', 'let'],
+    ['Zmienna', 'let'],
+
+    ['której wartość jest równa', '='],
+    ['który wartość jest równa', '='],
+    ['któremu wartość jest równa', '='],
+    ['gdzie wartość jest równa', '='],
+
+    ['przypisz wartość', '='],
+
+    // Comparsions
+    ['nie jest równe', '!='],
+    ['nie jest równy', '!='],
+    ['nie jest równa', '!='],
+
+    ['jest równe', '=='],
+    ['jest równa', '=='],
+    ['jest równy', '=='],
+
+    ['jest większe od', '>'],
+    ['jest większa od', '>'],
+    ['jest większy od', '>'],
+
+    ['jest mniejsze od', '<'],
+    ['jest mniejsza od', '<'],
+    ['jest mniejszy od', '<'],
+
+    ['jest mniejsza bądź równa', '<='],
+    ['jest mniejszy bądź równy', '<='],
+    ['jest mniejsze bądź równe', '<='],
+
+    ['jest większe bądź równe', '>='],
+    ['jest większy bądź równy', '>='],
+    ['jest większa bądź równa', '>='],
     
     // Addition
     ['plus', '+'],
@@ -129,12 +175,33 @@ let translatedKeywords = [
     ['losowaLiczba', 'Math.random()'],
     ['losowanie', 'Math.random()'],
 
+    // Modulos
+    ['modulować na', '%'],
+    ['modulowane na', '%'],
+    ['modulowana na', '%'],
+    ['modulowny na', '%'],
+
+    ['zmodulować na', '%'],
+    ['zmodulowane na', '%'],
+    ['zmodulowana na', '%'],
+    ['zmodulowny na', '%'],
+
+    // Other (MATH)
+    ['zwiększ o', '+='],
+    ['zmniejsz o', '-='],
+    ['pomnoż o', '*='],
+    ['podziel o', '/='],
+    ['moduluj o', '%='],
+    ['zmoduluj o', '%='],
+
     // Dots (for objects)
     ['z upchniętym', '.'],
 
     // Other
-    ['ja', 'this'],
-    ['to', 'this'],
+    ['To', 'this'],
+    ['Drukuj', 'console.log'],
+    ['wewnątrz', 'in'],
+    ['oraz', ','],
 ]
 
 function wordConverter(lines: string[]) {
