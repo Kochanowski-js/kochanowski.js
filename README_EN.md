@@ -1,5 +1,3 @@
-Not a polish speaker? [Read the english version here.](README_EN.md)
-
 <div align="center">
     
 <img src="https://cdn.discordapp.com/attachments/739575474711166976/1005512112593961031/kochanowskiJSlogo512.png" width="200" />
@@ -12,13 +10,13 @@ Not a polish speaker? [Read the english version here.](README_EN.md)
 
 ## Kochanowski Online
 
-Spróbuj Kochanowskiego bez konfiguracji projektu! https://mmusielik.xyz/projects/kochanowski
+Try Kochanowski Online without setting up the project! https://mmusielik.xyz/projects/kochanowski
 
-## Instalacja
+## Installation
 
-1. Stwórz nowy projekt przez `npm init`
-2. Zainstaluj najlepszy package `kochanowski` przez `npm i -D kochanowski`
-3. Stwórz plik `konfiguracja.zojs`.
+1. Initialize a new project using `npm init`
+2. Install package `kochanowski` using `npm i -D kochanowski`
+3. Create a file `konfiguracja.zojs`.
     ```json
     {
         "folderWyjścia": "./out",
@@ -26,20 +24,20 @@ Spróbuj Kochanowskiego bez konfiguracji projektu! https://mmusielik.xyz/project
     }
     ```
 
-4. Do `package.json` dodaj skrypt o treści `kochanowski`
-5. Utwórz foldery które zadeklarowałeś w `konfiguracja.zojs`
+4. To `package.json` create a script with content `kochanowski`
+5. Create folders that you have defined in `konfiguracja.zojs`
 
-## Jak używać
+## How to use
 
-Kochanowski to jest przetłumaczony JavaScript z paroma zasadami:
+Kochanowski.js is ***polished*** JavaScript with a few rules:
 
-1. Zdania rozpoczynamy wielką literą
-2. Zdania kończymy kropką
-3. Nazwy własne (zmienne) rozpoczynamy wielką literą
-4. Pliki nazywamy **po polsku** np. `główny.pol`
-5. Nie używamy an*ielskich operatorów jak `+`, `-`. Używamy za to `plus` `minus`
+1. Begin sentences with upper case
+2. End senteces with a dot `.`
+3. Custom names (variables) also begin with upper case
+4. Name files **in polish** e.g. `główny.pol` *(this is optional tho)*
+5. Don't use English math operators e.g. `+`, `-`. Use `plus` `minus`
 
-### Przykładowe polecenia
+### Example programs
 
 Kochanowski | JavaScript
 -|-
@@ -51,7 +49,7 @@ Dla (Zmiennej I przypisz wartość 0. I jest mniejsze od 5. I zwiększ o 1) | fo
 Dopóki (X jest mniejsze od 5) {} | while (X < 5) {}
 X zwiększ o 1. | x += 1;
 
-### Słownik
+### Dictionary
 
 Kochanowski | JavaScript
 -- | --
