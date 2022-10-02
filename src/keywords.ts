@@ -2,51 +2,51 @@ export default [
     [',', '.'],
 
     // Libraries
-    ['Załącz', 'import'],
-    ['Zwróć', 'return'],
+    ['załącz', 'import'],
+    ['zwróć', 'return'],
     ['z biblioteki', 'from'],
 
     // Constants
-    ['Brak', 'null'],
-    ['Niezdefiniowane', 'undefined'],
-    ['Fałsz', 'false'],
-    ['Prawda', 'true'],
+    ['brak', 'null'],
+    ['niezdefiniowane', 'undefined'],
+    ['fałsz', 'false'],
+    ['prawda', 'true'],
 
     // Functions & Classes
-    ['Funkcja', 'function'],
-    ['Wyczekuj', 'await'],
-    ['Klasa', 'class'],
-    ['Konstruktor', 'constructor'],
+    ['funkcja', 'function'],
+    ['wyczekuj', 'await'],
+    ['klasa', 'class'],
+    ['konstruktor', 'constructor'],
     
     // If else & Loops
-    ['Jeżeli', 'if'],
-    ['Jeśli', 'if'],
-    ['W przeciwnym wypadku', 'else'],
+    ['jeżeli', 'if'],
+    ['jeśli', 'if'],
+    ['w przeciwnym wypadku', 'else'],
     
-    ['Dla', 'for'],
-    ['Dopóki', 'while'],
-    ['Rób', 'do'],
+    ['dla', 'for'],
+    ['dopóki', 'while'],
+    ['rób', 'do'],
     
-    ['Sróbój', 'try'],
-    ['Łap', 'catch'],
-    ['Złam', 'break'],
-    ['Kontynuuj', 'continue'],
+    ['sróbój', 'try'],
+    ['łap', 'catch'],
+    ['złam', 'break'],
+    ['kontynuuj', 'continue'],
 
     // Assigments    
-    ['Stałej', 'const'],
-    ['Stałych', 'const'],
-    ['Stałym', 'const'],
-    ['Stały', 'const'],
-    ['Stałe', 'const'],
-    ['Stała', 'const'],
+    ['stałej', 'const'],
+    ['stałych', 'const'],
+    ['stałym', 'const'],
+    ['stały', 'const'],
+    ['stałe', 'const'],
+    ['stała', 'const'],
 
-    ['Zmiennemu', 'let'],
-    ['Zmiennej', 'let'],
-    ['Zmienne', 'let'],
-    ['Zmiennym', 'let'],
-    ['Zmienny', 'let'],
-    ['Zmienna', 'let'],
-
+    ['zmiennemu', 'let'],
+    ['zmiennej', 'let'],
+    ['zmienne', 'let'],
+    ['zmiennym', 'let'],
+    ['zmienny', 'let'],
+    ['zmienna', 'let'],
+    
     ['której wartość jest równa', '='],
     ['który wartość jest równa', '='],
     ['któremu wartość jest równa', '='],
@@ -111,7 +111,6 @@ export default [
 
     // π
     ['ciasto', 'Math.PI'],
-    ['pi', 'Math.PI'],
     ['𝝅', 'Math.PI'],
     ['π', 'Math.PI'],
     
@@ -142,8 +141,8 @@ export default [
     ['z upchniętym', '.'],
 
     // Other
-    ['To', 'this'],
-    ['Drukuj', 'console.log'],
+    ['to', 'this'],
+    ['drukuj', 'console.log'],
     ['wewnątrz', 'in'],
     ['oraz', ','],
 ]

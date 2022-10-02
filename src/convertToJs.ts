@@ -1,5 +1,5 @@
 import translatedKeywords from "./keywords";
-import r, { getSentences, matchOutsideQuotes } from "./regex";
+import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "./regex";
 
 /**
  * Converts .pol to .js
@@ -11,7 +11,7 @@ export default function convertToJs(src: string) {
     let sentences = getSentences(src);
 
     // Making lives harder
-    throwErrors(sentences);
+    throwRandomErrors(sentences);
 
     return wordConverter(sentences);
 
@@ -19,8 +19,9 @@ export default function convertToJs(src: string) {
 
 function wordConverter(lines: string[]) {
 
-    for (let i in lines) {
+    lines = lines.map(e => convertToLower(e));
 
+    for (let i in lines) {
         for (let j in translatedKeywords) {
             const keywords = new RegExp(`${translatedKeywords[j][0]}(?=([^"]*"[^"]*")*[^"]*$)`, 'g');
 
@@ -35,7 +36,7 @@ function wordConverter(lines: string[]) {
  * Checks if the code is written correctly
  * @param sentences Array of instructions
  */
-function throwErrors(sentences: string[]) {
+function throwRandomErrors(sentences: string[]) {
 
     // Which symbols cannot be used outside quotations
     const illegalSymbols = ['+', '-', '*', '/', '%']
@@ -57,8 +58,19 @@ function throwErrors(sentences: string[]) {
             if (matchOutsideQuotes(sentences.join("\n"), j[0]) != matchOutsideQuotes(sentences.join("\n"), j[1]))
                 throw new SyntaxError(`Błąd w linii ${i+1}: Nie domykanie nawiasów (sens)`);
         }
-
     }
+}
 
+/**
+ * Converts every character to lower case that isn't in quotes
+ * @param content Content
+ * @returns Modified string
+ */
+export function convertToLower(content: string): string {
+
+    // Drukuj("Witaj świecie"). => drukuj("witaj świecie").
+    return content.replaceAll(r.anythingOutsideQuotes, function(txt) {
+        return txt.toLocaleLowerCase()
+    });
 
 }

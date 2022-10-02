@@ -1,9 +1,9 @@
 // Regexes
 const regex = {
     firstCharLower: /^[a-z]/,
-    sentencesDots: /\.(?=(?:(?:[^"]*"){2})*[^"]*$)/g
+    sentencesDots: /\.(?=(?:(?:[^"]*"){2})*[^"]*$)/g,
+    anythingOutsideQuotes: /.(?=(?:(?:[^"]*"){2})*[^"]*$)/g
 }
-
 
 /**
  * Get sentences divided by dots that are not in quotes
@@ -46,5 +46,6 @@ function matchOutsideQuotes(content: string, match: string): number {
     return (content.match(outsideConstructor(match)) || []).length;
 }
 
+
 export default regex
-export { getSentences, matchOutsideQuotes }
+export { getSentences, matchOutsideQuotes, outsideConstructor}

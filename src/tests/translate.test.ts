@@ -1,4 +1,4 @@
-import convertToJs from "../convertToJs"
+import convertToJs, { convertToLower } from "../convertToJs";
 import fs from 'fs'
 
 function getJsFromFile(filename: string): string {
@@ -29,22 +29,29 @@ test('Normal programs', () => {
 
   const field = `Drukuj("Witaj świecie").
   Stałej PI przypisz wartość 3,14.
-  Stałej r przypisz wartość 5.
-  Zmiennej pole przypisz wartość PI razy r razy r.
+  Stałej R przypisz wartość 5.
+  Zmiennej pole przypisz wartość PI razy R kwadrat.
   Drukuj(pole).`
   const loop = `Dla (Zmiennej X przypisz wartość 0. X jest mniejsze od 5. X zwiększ o 1) Drukuj(X).`
   const whileLoop = `Zmiennej I przypisz wartość 1. Dopóki (I jest mniejsze od 5) { Drukuj(X). I zwiększ o 1 }.`
   
-  expect(convertToJs(field)).toBe('console.log("Witaj świecie");const PI = 3.14;const r = 5;let pole = PI * r * r;console.log(pole);')
-  expect(convertToJs(loop)).toBe('for (let X = 0;X < 5;X += 1) console.log(X);')
-  expect(convertToJs(whileLoop)).toBe('let I = 1;while (I < 5) { console.log(X);I += 1 };')
+  expect(convertToJs(field)).toBe('console.log("Witaj świecie");const pi = 3.14;const r = 5;let pole = pi * r **2;console.log(pole);')
+  expect(convertToJs(loop)).toBe('for (let x = 0;x < 5;x += 1) console.log(x);')
+  expect(convertToJs(whileLoop)).toBe('let i = 1;while (i < 5) { console.log(x);i += 1 };')
 
 })
 
 test('Math', () => {
   const math = `Drukuj(2 dodać 4 odjąć 1).
-  Drukuj(ciasto pomnożone przez pi podzielić na π odjąć 𝝅).`
+  Drukuj(ciasto pomnożone przez π podzielić na π odjąć 𝝅).`
 
   expect(convertToJs(math)).toBe('console.log(2 + 4 - 1);console.log(Math.PI * Math.PI / Math.PI - Math.PI);')
+
+})
+
+test("Lowercasing", () => {
+
+  expect(convertToLower("Drukuj")).toBe("drukuj");
+  expect(convertToLower('Drukuj("Witaj świecie.")')).toBe("drukuj(\"Witaj świecie.\")");
 
 })
