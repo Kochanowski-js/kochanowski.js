@@ -1,6 +1,6 @@
 {
   "name": "kochanowski",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "When a person that doesn't know how to create a programming language tries to create a programming language ",
   "main": "index.js",
   "bin": "./dist/index.js",
