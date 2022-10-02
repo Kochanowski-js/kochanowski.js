@@ -139,6 +139,11 @@ Kochanowski | JavaScript
 `jest większy bądź równy` | `>=`
 `jest większa bądź równa` | `>=`
 
+### Operatory logiczne
+`lub` | `||`
+`albo` | `||`
+`oraz` | `&&`
+
 ### Dodawanie
 
 Kochanowski | JavaScript
@@ -232,5 +237,5 @@ Kochanowski | JavaScript
 `To` | `this`
 `Drukuj` | `console.log`
 `wewnątrz` | `in`
-`oraz` | `,`
+`;` | `,`
 `,` | `.`

@@ -137,6 +137,11 @@ Kochanowski | JavaScript
 `jest większy bądź równy` | `>=`
 `jest większa bądź równa` | `>=`
 
+### Logic gates
+`lub` | `||`
+`albo` | `||`
+`oraz` | `&&`
+
 ### Addition
 
 Kochanowski | JavaScript
