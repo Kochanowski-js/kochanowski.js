@@ -19,7 +19,7 @@ test('Weird Syntax', () => {
   const dotsInString = 'Drukuj("Witaj.. .. .świecie.").'
   const keywordsInString = 'Drukuj("Witaj Drukuj świecie.").'
 
-  expect(convertToJs(altHello)).toBe('   console.log   ("Witaj świecie")  ;')
+  expect(convertToJs(altHello)).toBe('console.log   ("Witaj świecie");')
   expect(convertToJs(dotsInString)).toBe('console.log("Witaj.. .. .świecie.");')
   expect(convertToJs(keywordsInString)).toBe('console.log("Witaj Drukuj świecie.");')
 
@@ -35,9 +35,9 @@ test('Normal programs', () => {
   const loop = `Dla (Zmiennej X przypisz wartość 0. X jest mniejsze od 5. X zwiększ o 1) Drukuj(X).`
   const whileLoop = `Zmiennej I przypisz wartość 1. Dopóki (I jest mniejsze od 5) { Drukuj(X). I zwiększ o 1 }.`
   
-  expect(convertToJs(field)).toBe('console.log("Witaj świecie");  const PI = 3.14;  const r = 5;  let pole = PI * r * r;  console.log(pole);')
-  expect(convertToJs(loop)).toBe('for (let X = 0; X < 5; X += 1) console.log(X);')
-  expect(convertToJs(whileLoop)).toBe('let I = 1; while (I < 5) { console.log(X); I += 1 };')
+  expect(convertToJs(field)).toBe('console.log("Witaj świecie");const PI = 3.14;const r = 5;let pole = PI * r * r;console.log(pole);')
+  expect(convertToJs(loop)).toBe('for (let X = 0;X < 5;X += 1) console.log(X);')
+  expect(convertToJs(whileLoop)).toBe('let I = 1;while (I < 5) { console.log(X);I += 1 };')
 
 })
 
@@ -45,6 +45,6 @@ test('Math', () => {
   const math = `Drukuj(2 dodać 4 odjąć 1).
   Drukuj(ciasto pomnożone przez pi podzielić na π odjąć 𝝅).`
 
-  expect(convertToJs(math)).toBe('console.log(2 + 4 - 1);  console.log(Math.PI * Math.PI / Math.PI - Math.PI);')
+  expect(convertToJs(math)).toBe('console.log(2 + 4 - 1);console.log(Math.PI * Math.PI / Math.PI - Math.PI);')
 
 })

@@ -1,4 +1,5 @@
 import translatedKeywords from "./keywords";
+import r, { getSentences, matchOutsideQuotes } from "./regex";
 
 /**
  * Converts .pol to .js
@@ -7,25 +8,13 @@ import translatedKeywords from "./keywords";
  */
 export default function convertToJs(src: string) {
     
-    src = src.replaceAll(/\n|\r/g, '');
     let sentences = getSentences(src);
+
+    // Making lives harder
     throwErrors(sentences);
 
     return wordConverter(sentences);
 
-}
-
-function countChars(str: string[], match: string) {
-    return str.join('').split(match).length - 1;
-}
-
-function countCharFixed(src: string, match: string): number {
-    let countRegex = new RegExp(`\\${match}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
-    return (src.match(countRegex) || []).length;
-}
-
-function getSentences(src: string): string[] {
-    return src.split(/\.(?=(?:(?:[^"]*"){2})*[^"]*$)/g).filter( e => e.trim() );
 }
 
 function wordConverter(lines: string[]) {
@@ -51,26 +40,22 @@ function throwErrors(sentences: string[]) {
     // Which symbols cannot be used outside quotations
     const illegalSymbols = ['+', '-', '*', '/', '%']
     const brackets = [["[", "]"], ["{", "}"], ["(", ")"]]
-    const quotes = ['"', "'", "`"]
 
     for (let i = 0; i < sentences.length; i++) {
 
-        const firstChar = sentences[i].replaceAll(' ', '')[0];
-        if (!firstChar.match(/[A-Z]|}|{/)) throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`)
+        if (sentences[i].match(r.firstCharLower))
+            throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`);
 
         // Illegal characters
         for (let j of illegalSymbols) {
-            if (countCharFixed(sentences[i], j)) throw new SyntaxError(`Błąd w linii ${i+1}: Używanie ang*elskich symboli (jęz) (Symbol ${j})`)
-        }
-
-        // Not matching quotes
-        for (let j of quotes) {
-            if (countChars(sentences, j) % 2) throw new SyntaxError(`Błąd w linii ${i+1} Nie domykanie cudzysłowiów (sens)`)
+            if (matchOutsideQuotes(sentences[i], j))
+                throw new SyntaxError(`Błąd w linii ${i+1}: Używanie ang*elskich symboli (jęz) (Symbol ${j})`);
         }
 
         // Not matching brackets
         for (let j of brackets) {
-            if (countChars(sentences, j[0]) != countChars(sentences, j[1])) throw new SyntaxError(`Błąd w linii ${i+1}: Nie domykanie nawiasów (sens)`)
+            if (matchOutsideQuotes(sentences.join("\n"), j[0]) != matchOutsideQuotes(sentences.join("\n"), j[1]))
+                throw new SyntaxError(`Błąd w linii ${i+1}: Nie domykanie nawiasów (sens)`);
         }
 
     }
