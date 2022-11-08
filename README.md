@@ -89,7 +89,7 @@ Kochanowski | JavaScript
 `Dla` | `for`
 `Dopóki` | `while`
 `Rób` | `do`
-`Sróbój` | `try`
+`Spróbuj` | `try`
 `Łap` | `catch`
 `Złam` | `break`
 `Kontynuuj` | `continue`

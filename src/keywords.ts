@@ -27,7 +27,7 @@ export default [
     ['dopóki', 'while'],
     ['rób', 'do'],
     
-    ['sróbój', 'try'],
+    ['spróbuj', 'try'],
     ['łap', 'catch'],
     ['złam', 'break'],
     ['kontynuuj', 'continue'],
@@ -79,6 +79,11 @@ export default [
     ['jest większy bądź równy', '>='],
     ['jest większa bądź równa', '>='],
     
+    // Logic Gates SOON™
+    ['lub', '||'],
+    ['albo', '||'],
+    ['oraz', '&&'],
+
     // Addition
     ['plus', '+'],
     ['dodać', '+'],
@@ -144,5 +149,5 @@ export default [
     ['to', 'this'],
     ['drukuj', 'console.log'],
     ['wewnątrz', 'in'],
-    ['oraz', ','],
+    [';', ','],
 ]
