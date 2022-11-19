@@ -1,4 +1,5 @@
 import translatedKeywords from "./keywords";
+import getPoints from "./CQGrade";
 import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "./regex";
 
 /**
@@ -9,6 +10,8 @@ import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "./regex
 export default function convertToJs(src: string) {
     
     let sentences = getSentences(src);
+    let score = getPoints(src);
+    console.log(score)
 
     // Making lives harder
     throwRandomErrors(sentences);
