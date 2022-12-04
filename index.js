@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "fs"
-import convertToJs from "./convertToJs";
+import convertToJs from "./models/Parser.js";
 
 const config = JSON.parse(fs.readFileSync("konfiguracja.zojs", 'utf8'));
 

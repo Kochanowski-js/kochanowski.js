@@ -4,9 +4,7 @@
   "description": "When a person that doesn't know how to create a programming language tries to create a programming language ",
   "main": "index.js",
   "bin": "./index.js",
-  "scripts": {
-    "test": "jest"
-  },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kochanowski-js/kochanowski.js.git"
@@ -21,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/kochanowski-js/kochanowski.js/issues"
   },
-  "homepage": "https://github.com/kochanowski-js/kochanowski.js#readme",
-  "devDependencies": {
-    "jest": "^28.1.3"
-  }
+  "homepage": "https://github.com/kochanowski-js/kochanowski.js#readme"
 }

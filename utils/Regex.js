@@ -10,7 +10,7 @@ const regex = {
  * @param content Content string
  * @returns Array of sentences
  */
-function getSentences(content: string): string[] {
+function getSentences(content) {
     return content.split(regex.sentencesDots).map(e => e.trim()).filter(Boolean)
 }
 
@@ -19,7 +19,7 @@ function getSentences(content: string): string[] {
  * @param content User input
  * @returns Sanitized regex
  */
-function sanitizeRegex(content: string): string {
+function sanitizeRegex(content) {
     const chars = "\\^$*+?.()|{}[]";
     
     for (let char of chars)
@@ -32,7 +32,7 @@ function sanitizeRegex(content: string): string {
  * Construct a regex that matches all occurences outside qoutes
  * @param match The character to match
  */
-function outsideConstructor(match: string): RegExp {
+function outsideConstructor(match) {
     return new RegExp(`${sanitizeRegex(match)}(?=(?:(?:[^"]*"){2})*[^"]*$)`, 'g')
 }
 
@@ -42,7 +42,7 @@ function outsideConstructor(match: string): RegExp {
  * @param match The character to match
  * @returns How many occurences
  */
-function matchOutsideQuotes(content: string, match: string): number {
+function matchOutsideQuotes(content, match) {
     return (content.match(outsideConstructor(match)) || []).length;
 }
 

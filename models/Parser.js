@@ -1,13 +1,13 @@
-import translatedKeywords from "./keywords";
-import getPoints from "./CQGrade";
-import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "./regex";
+import translatedKeywords from "../utils/keywords.js";
+import getPoints from "./CQGrade.js";
+import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "../utils/Regex.js";
 
 /**
  * Converts .pol to .js
  * @param src Kochanowski.js file content
  * @returns JavaScript file content
  */
-export default function convertToJs(src: string) {
+export default function convertToJs(src) {
     
     let sentences = getSentences(src);
     let score = getPoints(src);
@@ -20,7 +20,7 @@ export default function convertToJs(src: string) {
 
 }
 
-function wordConverter(lines: string[]) {
+function wordConverter(lines) {
 
     lines = lines.map(e => convertToLower(e));
 
@@ -39,7 +39,7 @@ function wordConverter(lines: string[]) {
  * Checks if the code is written correctly
  * @param sentences Array of instructions
  */
-function throwRandomErrors(sentences: string[]) {
+function throwRandomErrors(sentences) {
 
     // Which symbols cannot be used outside quotations
     const illegalSymbols = ['+', '-', '*', '/', '%']
@@ -69,9 +69,9 @@ function throwRandomErrors(sentences: string[]) {
  * @param content Content
  * @returns Modified string
  */
-export function convertToLower(content: string): string {
+export function convertToLower(content) {
 
-    // Drukuj("Witaj świecie"). => drukuj("witaj świecie").
+    // Drukuj("Witaj świecie"). => drukuj("Witaj Świecie").
     return content.replaceAll(r.anythingOutsideQuotes, function(txt) {
         return txt.toLocaleLowerCase()
     });
