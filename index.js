@@ -1,24 +1,34 @@
 #!/usr/bin/env node
 
-import fs from "fs"
-import convertToJs from "./models/Parser.js";
+import { build } from "./cli/build.js";
+import { notImplemented } from "./utils/NotImplemented.js";
+import { run } from "./cli/run.js";
 
-const config = JSON.parse(fs.readFileSync("konfiguracja.zojs", 'utf8'));
+const commands = {
+    "build": build,
+    "run": run,
+    "update": notImplemented,
+    "init": notImplemented
+}
 
-// Run a conversion algorithm for every file in input directory
-fs.readdir(config.folderWejścia, (err, files) => {
+let isInvalid = true;
 
-    for (let i = 0; i < files.length; i++) {
+for (const commandIndex in commands) {
+    const command = commands[commandIndex];
+    if(process.argv.includes(commandIndex))
+    {
+        isInvalid = false;
+        command();
+        break;
+    }
+}
 
-        const filePath = `${config.folderWejścia}/${files[i]}`;
-        const outPath = `${config.folderWyjścia}/${files[i].replace('.pol', '.js')}`;
-
-        const fileFormat = filePath.split('.').pop();
-        if (fileFormat != 'pol') continue;
-
-        const content = fs.readFileSync(filePath, 'utf8');
-        fs.writeFileSync(outPath.replace('.pol', '.js'), convertToJs(content));
-
-    };
-
-});
+if(isInvalid)
+{
+    let message = "USAGE:\n    kochanowski [";
+    for (const commandIndex in commands) {
+        message += commandIndex + ", ";
+    }
+    message = message.substring(0, message.length-2) + "]";
+    console.log(message);
+}
