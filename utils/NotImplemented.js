@@ -1,4 +1,6 @@
+import { KError } from "../models/ErrorHandler.js";
+
 export function notImplemented ()
 {
-    throw {name : "NotImplementedError", message : "Not implemented yet"}; 
+    throw new KError("Not implemented yet", 0)
 }

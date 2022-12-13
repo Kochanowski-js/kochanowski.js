@@ -3,10 +3,21 @@ import fs from "fs"
 import convertToJs from "./../models/Parser.js"
 import util from "util";
 import path from "path";
+import { KError } from "../models/ErrorHandler.js";
 
 export function build(run = false)
 {
-    const config = JSON.parse(fs.readFileSync("konfiguracja.zojs", 'utf8'));
+    let config;
+    
+    try {
+        config = JSON.parse(fs.readFileSync("konfiguracja.zojs", 'utf8'));
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            throw new KError('No configuration file found!\n Add \'konfiguracja.zojs\' to the root of your project.', 0);
+        } else {
+            throw err;
+        }
+    }
     
     // Run a conversion algorithm for every file in input directory
     fs.readdir(config.folderWejścia, (err, files) => {
@@ -20,7 +31,7 @@ export function build(run = false)
             if (fileFormat != 'pol') continue;
     
             const content = fs.readFileSync(filePath, 'utf8');
-            fs.writeFileSync(outPath.replace('.pol', '.js'), convertToJs(content));
+            fs.writeFileSync(outPath.replace('.pol', '.js'), convertToJs(content, config));
     
         };
     
