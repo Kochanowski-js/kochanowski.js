@@ -15,9 +15,16 @@ export function build(run = false)
         if (err.code === 'ENOENT') {
             throw new KError('No configuration file found!\n Add \'konfiguracja.zojs\' to the root of your project.', 0);
         } else {
-            throw err;
+            throw new KError('An error has occured when parsing the configuration file.', 0)
         }
     }
+
+    // for the time of development:
+    config.bypassErrors = true;
+
+    if (!fs.existsSync(config.folderWejścia+"/")) throw new KError('Missing/Invalid field \'folderWejścia\' from the configuration file.', 0);
+    if (!fs.existsSync(config.folderWyjścia+"/")) throw new KError('Missing/Invalid field \'folderWyjścia\' from the configuration file.', 0);
+    if (config.bypassErrors) console.log("Developer Mode, Aktivatet");
     
     // Run a conversion algorithm for every file in input directory
     fs.readdir(config.folderWejścia, (err, files) => {

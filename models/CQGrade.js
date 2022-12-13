@@ -57,8 +57,7 @@ function getPoints(text) {
   if (total >= 40) {
     new ScoreError(score);
   } else {
-    //throw new ScoreError(score); TODO BYPASS
-    console.warn("throw thing is disabled in dev branch please fix before merging to the main branch");
+    throw new ScoreError(score);
   }
 
   return total;

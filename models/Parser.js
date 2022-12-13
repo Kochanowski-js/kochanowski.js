@@ -5,16 +5,18 @@ import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "../util
 /**
  * Converts .pol to .js
  * @param src Kochanowski.js file content
+ * @param config Kochanowski configuration file
  * @returns JavaScript file content
  */
-export default function convertToJs(src) {
+export default function convertToJs(src, config) {
     
     let sentences = getSentences(src);
-    let score = getPoints(src);
-    console.log(score)
-
+    
     // Making lives harder
-    throwRandomErrors(sentences);
+    if (!(config && config.bypassErrors)) {
+        let score = getPoints(src);
+        throwRandomErrors(sentences);
+    }
 
     return wordConverter(sentences);
 
