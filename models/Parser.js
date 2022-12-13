@@ -13,10 +13,8 @@ export default function convertToJs(src, config) {
     let sentences = getSentences(src);
     
     // Making lives harder
-    if (!(config && config.bypassErrors)) {
-        let score = getPoints(src);
-        throwRandomErrors(sentences);
-    }
+    if (!config || !config.bypassStyle) getPoints(src);
+    if (!config || !config.bypassErrors) throwRandomErrors(sentences);
 
     return wordConverter(sentences);
 

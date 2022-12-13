@@ -5,6 +5,9 @@
   "main": "index.js",
   "bin": "./index.js",
   "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kochanowski-js/kochanowski.js.git"
@@ -19,5 +22,15 @@
   "bugs": {
     "url": "https://github.com/kochanowski-js/kochanowski.js/issues"
   },
-  "homepage": "https://github.com/kochanowski-js/kochanowski.js#readme"
+  "homepage": "https://github.com/kochanowski-js/kochanowski.js#readme",
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1"
+  }
 }

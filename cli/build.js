@@ -21,10 +21,12 @@ export function build(run = false)
 
     // for the time of development:
     config.bypassErrors = true;
+    config.bypassStyle = true;
 
+    // Validate(-ish) every field, add more as more fields are added
     if (!fs.existsSync(config.folderWejścia+"/")) throw new KError('Missing/Invalid field \'folderWejścia\' from the configuration file.', 0);
     if (!fs.existsSync(config.folderWyjścia+"/")) throw new KError('Missing/Invalid field \'folderWyjścia\' from the configuration file.', 0);
-    if (config.bypassErrors) console.log("Developer Mode, Aktivatet");
+    if (config.bypassErrors || config.bypassStyle) console.log("Developer Mode, Aktivatet");
     
     // Run a conversion algorithm for every file in input directory
     fs.readdir(config.folderWejścia, (err, files) => {
