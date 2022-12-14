@@ -1,3 +1,5 @@
+// Math function dump, destined to be a mess.
+
 // https://stackoverflow.com/questions/7343890/standard-deviation-javascript
 export function getStandardDeviation(array) {
     const n = array.length;

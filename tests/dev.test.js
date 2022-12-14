@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import convertToJs from "../models/Parser.js";
 
 const config = { bypassStyle: true };

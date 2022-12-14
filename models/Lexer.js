@@ -1,0 +1,1 @@
+//prędzej napisze fraszkę niż ten kod
