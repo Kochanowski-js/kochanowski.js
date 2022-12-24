@@ -74,15 +74,22 @@ export default [
     ['jest mniejsza bądź równa', '<='],
     ['jest mniejszy bądź równy', '<='],
     ['jest mniejsze bądź równe', '<='],
+    ['jest mniejsza lub równa', '<='],
+    ['jest mniejszy lub równy', '<='],
+    ['jest mniejsze lub równe', '<='],
 
     ['jest większe bądź równe', '>='],
     ['jest większy bądź równy', '>='],
     ['jest większa bądź równa', '>='],
+    ['jest większe lub równe', '>='],
+    ['jest większy lub równy', '>='],
+    ['jest większa lub równa', '>='],
     
-    // Logic Gates SOON™
+    // Logic Gates
     ['lub', '||'],
     ['albo', '||'],
     ['oraz', '&&'],
+    ['ale', '&&'],
 
     // Addition
     ['plus', '+'],
