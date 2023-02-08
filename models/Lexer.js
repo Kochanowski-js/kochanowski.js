@@ -5,6 +5,18 @@ class Lexer {
       this.currentChar = this.input[this.pos];
     }
   
+    tokenize() {
+        let tokens = [];
+        let currentToken = this.getNextToken();
+
+        while (currentToken.type !== "EOF") {
+            tokens.push(currentToken);
+            currentToken = this.getNextToken();
+        }
+
+        return tokens;
+    }
+
     simplify() {
         // KPL to readable format, which is then tokenized
     }
