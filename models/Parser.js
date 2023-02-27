@@ -1,20 +1,61 @@
 import Lexer from "./Lexer.js";
 
-const input = new Lexer(`def var X val 5; def var X val 5;`).tokenize();
-const output = [];
-let currentGroup = [];
+/**
+ * Determines whether a given string has valid parenthesis matches.
+ *
+ * @param {string} str - The string to check for valid parenthesis matches.
+ *                      Only contains parenthesis characters: (, ), [, ], {, }.
+ * @returns {boolean} - True if the string contains valid parenthesis matches, 
+ *                      false otherwise.
+ */ 
+function matchParenthesis(str) {
 
-for (const item of input) {
-    if (item.type === "SEPARATOR") {
-        output.push(currentGroup);
-        currentGroup = [];
-    } else {
-        currentGroup.push(item);
+    const paren = [ "[", "]", "(", ")", "{", "}" ]
+    let parenStack = [];
+
+    for (let i in str) {
+        if (paren.indexOf(str[i]) % 2 === 0) {
+
+            parenStack.push(str[i]);
+            
+        } else {
+
+            // paren[paren.indexOf(str[i]) - 1] converts from a closing parenthesis to the opening one  
+            const lastOpening = parenStack.pop();
+            if (lastOpening !== paren[paren.indexOf(str[i]) - 1])
+                return false;
+
+        }
     }
+
+    return parenStack.length === 0;
+
 }
 
-if (currentGroup.length > 0) {
-    output.push(currentGroup);
+/**
+ * Returns a string containing only opening and closing parenthesis characters from an array of tokens.
+ *
+ * @param {Lexer} tokens - An array of tokens created using the Lexer class.
+ * @returns {string} A string containing only opening and closing parenthesis characters.
+ *
+ */
+function tokensToParens(tokens) {
+
+    let onlyParenthesis = "";
+    const parens = ["[", "(", "{", "]", ")", "}"];
+    
+    for (let token of tokens) {
+        if (parens.includes(token.value)) {
+          onlyParenthesis += token.value;
+        }
+      }
+
+    return onlyParenthesis;
+
 }
 
-console.log(output);
+// const lexer = new Lexer(`def function FUNCNAME args [A,B,C] [] [] [[[][[]]]] callback 1 LINES1; 1`).tokenize();
+
+export {
+    matchParenthesis, tokensToParens
+}

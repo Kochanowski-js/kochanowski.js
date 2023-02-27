@@ -17,8 +17,9 @@ class Lexer {
         return tokens;
     }
 
-    simplify() {
+    simplify(tokens) {
         // KPL to readable format, which is then tokenized
+        return tokens;
     }
 
     getNextToken() {
