@@ -43,4 +43,18 @@ describe('Lexer', () => {
         const output = new Lexer(input).tokenize();
         expect(output).toEqual(expectedOutput);
     });
+
+    it('Tokenize a KPL variable definition', () => {
+        const input = 'def var VARNAME val "PIERDOLE TO KURWA JEST 23 GODZINA KURWA JUTRO SPRAWDZIAN Z CHEMII MAM DO KURWY";';
+        const expectedOutput = [
+            { type: 'KEYWORD', value: 'def' },
+            { type: 'KEYWORD', value: 'var' },
+            { type: 'VARIABLE', value: 'VARNAME' },
+            { type: 'KEYWORD', value: 'val' },
+            { type: 'STRING', value: 'PIERDOLE TO KURWA JEST 23 GODZINA KURWA JUTRO SPRAWDZIAN Z CHEMII MAM DO KURWY' },
+            { type: 'SEPARATOR', value: ';' },
+        ];
+        const output = new Lexer(input).tokenize();
+        expect(output).toEqual(expectedOutput);
+    });
 });

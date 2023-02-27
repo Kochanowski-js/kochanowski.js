@@ -1,3 +1,5 @@
+import { debugStringWithHighlight } from "./Debug.js";
+
 class Lexer {
     constructor(input) {
       this.input = input;
@@ -24,6 +26,7 @@ class Lexer {
 
     getNextToken() {
         while (this.currentChar !== null) {
+            console.log(debugStringWithHighlight(this.input, this.pos))
 
             if (/\s/.test(this.currentChar)) {
                 this.skipWhitespace();
@@ -67,14 +70,23 @@ class Lexer {
                 let value = '';
                 this.pos++;
                 while (this.input[this.pos] !== '"') {
-                  value += this.input[this.pos++];
+                    console.log("#", debugStringWithHighlight(this.input, this.pos))
+
+                    if (this.input[this.pos] === undefined) {
+                        throw new Error(`Index Error:\n${debugStringWithHighlight(this.input, this.pos)}`)
+                    }
+
+                    value += this.input[this.pos++];
+
                 }
-                this.pos++;
+
+                this.advance();
                 return { type: 'STRING', value };
             }
         
             const char = this.currentChar;
             this.advance();
+
             return { type: "SYMBOL", value: char };
 
         }
@@ -111,7 +123,7 @@ class Lexer {
     }
     
     isKeyword(word) {
-        return word.match(/def|function|args|callback|var/)
+        return word.match(/def|function|args|callback|var|val/)
     }
 
     isOperator(word) {
