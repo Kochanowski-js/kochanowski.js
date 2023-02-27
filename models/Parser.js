@@ -56,6 +56,24 @@ function tokensToParens(tokens) {
 
 // const lexer = new Lexer(`def function FUNCNAME args [A,B,C] [] [] [[[][[]]]] callback 1 LINES1; 1`).tokenize();
 
+class Parser {
+
+    constructor (tokens) {
+
+        this.tokens = tokens;
+        this.mem = {
+            variables: {},
+            functions: {}
+        }; // efecient :)
+
+    }
+
+    compute(expression) {
+        console.log(`Compute the expression ${expression}`)
+    }
+
+}
+
 export {
     matchParenthesis, tokensToParens
 }
