@@ -1,4 +1,4 @@
-import Lexer from "./Lexer.js";
+import Lexer, { generateAbstractSyntaxTree } from "./Lexer.js";
 
 /**
  * Determines whether a given string has valid parenthesis matches.
@@ -73,6 +73,13 @@ class Parser {
     }
 
 }
+
+function parseExpression(expr) {
+    const tokens = new Lexer(expr).tokenize();
+    const ast = generateAbstractSyntaxTree(tokens);
+    return ast;
+}
+
 
 export {
     matchParenthesis, tokensToParens

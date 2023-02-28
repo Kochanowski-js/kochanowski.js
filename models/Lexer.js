@@ -1,5 +1,3 @@
-import { debugStringWithHighlight } from "./Debug.js";
-
 class Lexer {
     constructor(input) {
       this.input = input;
@@ -26,7 +24,6 @@ class Lexer {
 
     getNextToken() {
         while (this.currentChar !== null) {
-            console.log(debugStringWithHighlight(this.input, this.pos))
 
             if (/\s/.test(this.currentChar)) {
                 this.skipWhitespace();
@@ -41,14 +38,16 @@ class Lexer {
                 return this.handleNumber();
             }
 
-            if (this.currentChar === "[") {
+            if (/\[|\(/.test(this.currentChar)) {
+                const bracket = this.currentChar
                 this.advance();
-                return { type: "LEFT_BRACKET", value: "[" };
+                return { type: "L_PAREN", value: bracket };
             }
         
-            if (this.currentChar === "]") {
+            if (/\]|\)/.test(this.currentChar)) {
+                const bracket = this.currentChar
                 this.advance();
-                return { type: "RIGHT_BRACKET", value: "]" };
+                return { type: "R_PAREN", value: bracket };
             }
         
             if (this.currentChar === ",") {
@@ -69,15 +68,9 @@ class Lexer {
             if (this.currentChar === '"') {
                 let value = '';
                 this.pos++;
+
                 while (this.input[this.pos] !== '"') {
-                    console.log("#", debugStringWithHighlight(this.input, this.pos))
-
-                    if (this.input[this.pos] === undefined) {
-                        throw new Error(`Index Error:\n${debugStringWithHighlight(this.input, this.pos)}`)
-                    }
-
                     value += this.input[this.pos++];
-
                 }
 
                 this.advance();
@@ -127,7 +120,7 @@ class Lexer {
     }
 
     isOperator(word) {
-        return word.match(/add|sub|return/)
+        return word.match(/add|sub|mul|div/)
     }
   
     advance() {
@@ -142,5 +135,51 @@ class Lexer {
     }
 
 }
+
+function generateAbstractSyntaxTree(tokens) {
+
+    for (let i in tokens) {
+
+        if (tokens[i].type === 'R_PAREN') {
+
+            let endIndex = i;
+            while (tokens[i].type !== 'L_PAREN') i--;
+            let startIndex = i;
+
+            const newToken = {
+                type: `PAREN_${tokens[i].value}`,
+                value: generateAbstractSyntaxTree(tokens.slice(startIndex+1, endIndex))
+            }
+
+            tokens.splice(startIndex, endIndex - startIndex + 1, newToken);
+
+        }
+
+    }
+
+    const orderOfOperations = [ /add|sub/, /mul|div/ ]
+
+    for (let o in orderOfOperations) {
+        for (let i in tokens) {
+
+            if (tokens[i].type === 'OPERATOR' && orderOfOperations[o].test(tokens[i].value)) {
+                
+                const newToken = {
+                    type: 'OPERATOR',
+                    value: tokens[i].value,
+                    left: tokens[i-1],
+                    right: tokens[parseInt(i)+1]
+                }
+
+                tokens.splice(parseInt(i)-1, 3, newToken);
+    
+            }
+    
+        }
+    }
+
+    return tokens
+}
   
 export default Lexer;
+export { generateAbstractSyntaxTree };
