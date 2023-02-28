@@ -1,9 +1,9 @@
-import Lexer from "../models/Lexer";
+import Lexer, { generateAbstractSyntaxTree } from "../models/Lexer";
 
 describe('Lexer', () => {
     it('Tokenize a string with a single left bracket', () => {
         const input = '[';
-        const expectedOutput = [{ type: 'LEFT_BRACKET', value: '[' }];
+        const expectedOutput = [{ type: 'L_PAREN', value: '[' }];
         const output = new Lexer(input).tokenize();
         expect(output).toEqual(expectedOutput);
     });
@@ -11,9 +11,9 @@ describe('Lexer', () => {
     it('Tokenize a string with multiple left brackets', () => {
         const input = '[[[';
         const expectedOutput = [
-            { type: 'LEFT_BRACKET', value: '[' },
-            { type: 'LEFT_BRACKET', value: '[' },
-            { type: 'LEFT_BRACKET', value: '[' },
+            { type: 'L_PAREN', value: '[' },
+            { type: 'L_PAREN', value: '[' },
+            { type: 'L_PAREN', value: '[' },
         ];
         const output = new Lexer(input).tokenize();
         expect(output).toEqual(expectedOutput);
@@ -22,9 +22,9 @@ describe('Lexer', () => {
     it('Tokenize a string with a left bracket and other characters', () => {
         const input = '[abc]';
         const expectedOutput = [
-            { type: 'LEFT_BRACKET', value: '[' },
+            { type: 'L_PAREN', value: '[' },
             { type: 'VARIABLE', value: 'abc' },
-            { type: 'RIGHT_BRACKET', value: ']' },
+            { type: 'R_PAREN', value: ']' },
         ];
         const output = new Lexer(input).tokenize();
         expect(output).toEqual(expectedOutput);
@@ -45,16 +45,56 @@ describe('Lexer', () => {
     });
 
     it('Tokenize a KPL variable definition', () => {
-        const input = 'def var VARNAME val "PIERDOLE TO KURWA JEST 23 GODZINA KURWA JUTRO SPRAWDZIAN Z CHEMII MAM DO KURWY";';
+        const input = 'def var VARNAME val "hello";';
         const expectedOutput = [
             { type: 'KEYWORD', value: 'def' },
             { type: 'KEYWORD', value: 'var' },
             { type: 'VARIABLE', value: 'VARNAME' },
             { type: 'KEYWORD', value: 'val' },
-            { type: 'STRING', value: 'PIERDOLE TO KURWA JEST 23 GODZINA KURWA JUTRO SPRAWDZIAN Z CHEMII MAM DO KURWY' },
+            { type: 'STRING', value: 'hello' },
             { type: 'SEPARATOR', value: ';' },
         ];
         const output = new Lexer(input).tokenize();
         expect(output).toEqual(expectedOutput);
     });
 });
+
+describe('Abstract Syntax Tree', () => {
+
+    it('Parse basic addition', () => {
+
+        const output = JSON.stringify(
+            generateAbstractSyntaxTree(
+                new Lexer("2 plus 2").tokenize()
+            )
+        );
+
+        expect(output).toEqual("[{\"type\":\"LITERAL\",\"value\":2},{\"type\":\"VARIABLE\",\"value\":\"plus\"},{\"type\":\"LITERAL\",\"value\":2}]")
+
+    });
+
+    it('Parse brackets', () => {
+
+        const output = JSON.stringify(
+            generateAbstractSyntaxTree(
+                new Lexer("[2 plus 2]").tokenize()
+            )
+        );
+
+        expect(output).toEqual("[{\"type\":\"PAREN_[\",\"value\":[{\"type\":\"LITERAL\",\"value\":2},{\"type\":\"VARIABLE\",\"value\":\"plus\"},{\"type\":\"LITERAL\",\"value\":2}]}]")
+
+    });
+
+    it('Parse simple computations with the correct order of operations', () => {
+
+        const output = JSON.stringify(
+            generateAbstractSyntaxTree(
+                new Lexer("(2 plus 2) mul (85 div 2137)").tokenize()
+            )
+        );
+
+        expect(output).toEqual("[{\"type\":\"OPERATOR\",\"value\":\"mul\",\"left\":{\"type\":\"PAREN_(\",\"value\":[{\"type\":\"LITERAL\",\"value\":2},{\"type\":\"VARIABLE\",\"value\":\"plus\"},{\"type\":\"LITERAL\",\"value\":2}]},\"right\":{\"type\":\"PAREN_(\",\"value\":[{\"type\":\"OPERATOR\",\"value\":\"div\",\"left\":{\"type\":\"LITERAL\",\"value\":85},\"right\":{\"type\":\"LITERAL\",\"value\":2137}}]}}]")
+
+    });
+
+})
