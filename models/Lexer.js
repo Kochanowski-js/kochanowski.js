@@ -1,6 +1,6 @@
 class Lexer {
     constructor(input) {
-      this.input = input;
+      this.input = input.replaceAll(/(^|\n)##.*(\n|$)/g, '');
       this.pos = 0;
       this.currentChar = this.input[this.pos];
     }
