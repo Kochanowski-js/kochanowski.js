@@ -1,4 +1,5 @@
 import { matchParenthesis, tokensToParens } from "./Parser.js";
+import kochanowski, { replaceWords } from "../dict/kochanowski.js";
 
 class Lexer {
     
@@ -6,6 +7,8 @@ class Lexer {
       this.input = input.replaceAll(/(^|\n)##.*(\n|$)/g, '');
       this.pos = 0;
       this.currentChar = this.input[this.pos];
+
+      this.simplify()
     }
   
     /**
@@ -13,6 +16,8 @@ class Lexer {
      * @returns {Array} An array of tokens.
      */
     tokenize() {
+
+        
         let tokens = [];
         let currentToken = this.getNextToken();
 
@@ -24,9 +29,10 @@ class Lexer {
         return tokens;
     }
 
-    simplify(tokens) {
-        // KPL to readable format, which is then tokenized
-        return tokens;
+    simplify() {
+
+        this.input = replaceWords(this.input, kochanowski);
+
     }
 
     /**
@@ -213,19 +219,19 @@ function generateAbstractSyntaxTree(tokens) {
     for (let i = 0; i < tokens.length; i++) {
 
         if (tokens[i].type === 'ASSIGN' && tokens[i].value === "def") {
-
+            
             // correct variable declaration syntax:
             // def [var|fun] (varname NAME) (varvalue VALUE);
             // () = order not required
-
+            
             const declarationIndex = i;
             let isFunction = tokens[declarationIndex+1] === 'fun';
             
-            while (tokens[i].type !== 'ASSIGN' || tokens[i].value !== "varname") i++;
+            while (tokens[i].value !== "varname") i++;
             let varName = tokens[i+1];
             i = declarationIndex;
             
-            while (tokens[i].type !== 'ASSIGN' || tokens[i].value !== "varvalue") i++;
+            while (tokens[i].value !== "varvalue") i++;
             let valueIndex = i+1;
 
             while (tokens[i].type !== 'SEPARATOR') i++;

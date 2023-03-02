@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
-import { build } from "./cli/build.js";
+// import { build } from "./cli/build.js";
+import { dev } from "./cli/dev.js";
 import { notImplemented } from "./utils/NotImplemented.js";
-import { run } from "./cli/run.js";
+// import { run } from "./cli/run.js";
 
 const commands = {
-    "build": build,
-    "run": run,
+    // "build": build,
+    // "run": run,
+    "dev": dev,
     "update": notImplemented,
     "init": notImplemented
 }

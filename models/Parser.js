@@ -123,8 +123,12 @@ class Parser {
 
         let left = token.left
         let right = token.right
-
-        console.log(left,right)
+        
+        if (left.type === "VARIABLE")
+        left.value = this.mem.variables[left.value].value
+        
+        if (right.type === "VARIABLE")
+        right.value = this.mem.variables[right.value].value
 
         if (left.type === "OPERATOR")
             left = this.compute(left)
@@ -132,11 +136,6 @@ class Parser {
         if (right.type === "OPERATOR")
             right = this.compute(right)
 
-        if (left.type === "VARIABLE")
-            left.value = this.mem.variables[left.value]
-
-        if (right.type === "VARIABLE")
-            right.value = this.mem.variables[right.value]
 
 
         let value;
@@ -152,8 +151,6 @@ class Parser {
                     throw new Error("Division by 0")
                 value = left.value / right.value; break
         }
-
-        console.log(`Compute the expression ${left.value} ${sign} ${right.value}`)
         
         return {
             type: "LITERAL",
