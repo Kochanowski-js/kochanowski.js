@@ -58,9 +58,9 @@ function tokensToParens(tokens) {
 
 class Parser {
 
-    constructor (tokens) {
+    constructor (AST) {
 
-        this.tokens = tokens;
+        this.tokens = AST;
         this.mem = {
             variables: {},
             functions: {}
@@ -68,7 +68,53 @@ class Parser {
 
     }
 
-    compute(expression) {
+    execute() {
+
+        const tokens = this.tokens
+        
+        for (let i in tokens) {
+            if ( tokens[i].type.startsWith("PAREN_") ) {
+                this.execute(tokens[i].value)
+            }
+        }
+
+        for (let i in tokens) {
+            if ( tokens[i].type === "ASSIGN" ) {
+                this.assign(tokens[i])
+            }
+        }
+
+    }
+
+    assign(token) {
+        const value = token.value
+
+        if (token.type === "ASSIGN") {
+
+            //TODO: Add functions
+
+            if (this.mem.variables[token.varName] === undefined) {
+
+                if (token.value.type === "VARIABLE") {
+                    token.value = this.mem.variables[token.value.value]
+                }
+
+                this.mem.variables[token.varName] = token.value
+            } else {
+                throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[varName]}`)
+            }
+
+        }
+
+        console.log(`Assign variable ${token.varName} := ${token.value.value}`)
+    }
+
+    compute(token) {
+
+        if (token.type === "OPERATOR") {
+
+        }
+
         console.log(`Compute the expression ${expression}`)
     }
 
@@ -77,9 +123,13 @@ class Parser {
 function parseExpression(expr) {
     const tokens = new Lexer(expr).tokenize();
     const ast = generateAbstractSyntaxTree(tokens);
-    return ast;
+    const parsed = new Parser(ast);
+    
+    parsed.execute()
+    
+    return parsed;
 }
 
 export {
-    matchParenthesis, tokensToParens
+    matchParenthesis, tokensToParens, parseExpression
 }

@@ -105,7 +105,7 @@ describe('Abstract Syntax Tree', () => {
             )
         );
 
-        expect(output).toEqual("[{\"type\":\"ASSIGN\",\"varName\":{\"type\":\"VARIABLE\",\"value\":\"foo\"},\"value\":{\"type\":\"LITERAL\",\"value\":123},\"isFunction\":false},{\"type\":\"SEPARATOR\",\"value\":\";\"}]")
+        expect(output).toEqual("[{\"type\":\"ASSIGN\",\"varName\":\"foo\",\"value\":{\"type\":\"LITERAL\",\"value\":123},\"isFunction\":false},{\"type\":\"SEPARATOR\",\"value\":\";\"}]")
 
     });
 
