@@ -1,79 +1,176 @@
-import translatedKeywords from "../utils/keywords.js";
-import getPoints from "./CQGrade.js";
-import r, { getSentences, matchOutsideQuotes, outsideConstructor } from "../utils/Regex.js";
+import Lexer, { generateAbstractSyntaxTree } from "./Lexer.js";
 
 /**
- * Converts .pol to .js
- * @param src Kochanowski.js file content
- * @param config Kochanowski configuration file
- * @returns JavaScript file content
- */
-export default function convertToJs(src, config) {
-    
-    let sentences = getSentences(src);
-    
-    // Making lives harder
-    if (!config || !config.bypassStyle) getPoints(src);
-    if (!config || !config.bypassErrors) throwRandomErrors(sentences);
+ * Determines whether a given string has valid parenthesis matches.
+ *
+ * @param {string} str - The string to check for valid parenthesis matches.
+ *                      Only contains parenthesis characters: (, ), [, ], {, }.
+ * @returns {boolean} - True if the string contains valid parenthesis matches, 
+ *                      false otherwise.
+ */ 
+function matchParenthesis(str) {
 
-    return wordConverter(sentences);
+    const paren = [ "[", "]", "(", ")", "{", "}" ]
+    let parenStack = [];
 
-}
+    for (let i in str) {
+        if (paren.indexOf(str[i]) % 2 === 0) {
 
-function wordConverter(lines) {
+            parenStack.push(str[i]);
+            
+        } else {
 
-    lines = lines.map(e => convertToLower(e));
+            // paren[paren.indexOf(str[i]) - 1] converts from a closing parenthesis to the opening one  
+            const lastOpening = parenStack.pop();
+            if (lastOpening !== paren[paren.indexOf(str[i]) - 1])
+                return false;
 
-    for (let i in lines) {
-        for (let j in translatedKeywords) {
-            const keywords = new RegExp(`${translatedKeywords[j][0]}(?=([^"]*"[^"]*")*[^"]*$)`, 'g');
-
-            lines[i] = lines[i].replaceAll(keywords, translatedKeywords[j][1]);
         }
     }
 
-    return lines.join(';')+';'
+    return parenStack.length === 0;
+
 }
 
 /**
- * Checks if the code is written correctly
- * @param sentences Array of instructions
+ * Returns a string containing only opening and closing parenthesis characters from an array of tokens.
+ *
+ * @param {Lexer} tokens - An array of tokens created using the Lexer class.
+ * @returns {string} A string containing only opening and closing parenthesis characters.
+ *
  */
-function throwRandomErrors(sentences) {
+function tokensToParens(tokens) {
 
-    // Which symbols cannot be used outside quotations
-    const illegalSymbols = ['+', '-', '*', '/', '%']
-    const brackets = [["[", "]"], ["{", "}"], ["(", ")"]]
-
-    for (let i = 0; i < sentences.length; i++) {
-
-        if (sentences[i].match(r.firstCharLower))
-            throw new SyntaxError(`Błąd w linii ${i+1}: Rozpoczynanie zdań z małej litery (ort)`);
-
-        // Illegal characters
-        for (let j of illegalSymbols) {
-            if (matchOutsideQuotes(sentences[i], j))
-                throw new SyntaxError(`Błąd w linii ${i+1}: Używanie ang*elskich symboli (jęz) (Symbol ${j})`);
+    let onlyParenthesis = "";
+    const parens = ["[", "(", "{", "]", ")", "}"];
+    
+    for (let token of tokens) {
+        if (parens.includes(token.value)) {
+          onlyParenthesis += token.value;
         }
+      }
 
-        // Not matching brackets
-        for (let j of brackets) {
-            if (matchOutsideQuotes(sentences.join("\n"), j[0]) != matchOutsideQuotes(sentences.join("\n"), j[1]))
-                throw new SyntaxError(`Błąd w linii ${i+1}: Nie domykanie nawiasów (sens)`);
-        }
+    return onlyParenthesis;
+
+}
+
+// const lexer = new Lexer(`def function FUNCNAME args [A,B,C] [] [] [[[][[]]]] callback 1 LINES1; 1`).tokenize();
+
+class Parser {
+
+    constructor (AST) {
+
+        this.tokens = AST;
+        this.mem = {
+            variables: {},
+            functions: {}
+        }; // efecient :)
+
     }
+
+    execute() {
+
+        const tokens = this.tokens
+        
+        for (let i in tokens) {
+            if ( tokens[i].type.startsWith("PAREN_") ) {
+                tokens[i] = this.execute(tokens[i].value)
+            }
+        }
+
+        for (let i in tokens) {
+            if ( tokens[i].type === "OPERATOR" ) {
+                tokens[i] = this.compute(tokens[i])
+            }
+        }
+
+        for (let i in tokens) {
+            if ( tokens[i].type === "ASSIGN" ) {
+                this.assign(tokens[i])
+            }
+        }
+
+        return tokens
+
+    }
+
+    assign(token) {
+
+        if (token.varName === undefined) {
+            console.log(this.tokens)
+            throw new Error('Bug in the parser. Variable name undefined')
+        }
+
+        if (this.mem.variables[token.varName] !== undefined)
+            throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[token.varName]}`)
+
+        token.value = token.value[0]
+
+        if (token.value.type === "VARIABLE")
+            token.value = this.mem.variables[token.value.value]
+            
+        if (token.value.type === "OPERATOR")
+            token.value = this.compute(token.value);
+            
+        this.mem.variables[token.varName] = token.value
+
+        // console.log(`Assign variable ${token.varName} := ${token.value}`)
+    }
+
+    compute(token) {
+
+        const sign = token.value
+
+        let left = token.left
+        let right = token.right
+        
+        if (left.type === "VARIABLE")
+        left.value = this.mem.variables[left.value].value
+        
+        if (right.type === "VARIABLE")
+        right.value = this.mem.variables[right.value].value
+
+        if (left.type === "OPERATOR")
+            left = this.compute(left)
+
+        if (right.type === "OPERATOR")
+            right = this.compute(right)
+
+
+
+        let value;
+        switch (sign) {
+            case 'add':
+                value = left.value + right.value; break
+            case 'sub':
+                value = left.value - right.value; break
+            case 'mul':
+                value = left.value * right.value; break
+            case 'div':
+                if (right.value === 0)
+                    throw new Error("Division by 0")
+                value = left.value / right.value; break
+        }
+        
+        return {
+            type: "LITERAL",
+            value
+        }
+
+    }
+
 }
 
-/**
- * Converts every character to lower case that isn't in quotes
- * @param content Content
- * @returns Modified string
- */
-export function convertToLower(content) {
+function parseExpression(expr) {
+    const tokens = new Lexer(expr).tokenize();
+    const ast = generateAbstractSyntaxTree(tokens);
+    const parsed = new Parser(ast);
+    
+    parsed.execute()
+    
+    return parsed;
+}
 
-    // Drukuj("Witaj świecie"). => drukuj("Witaj Świecie").
-    return content.replaceAll(r.anythingOutsideQuotes, function(txt) {
-        return txt.toLocaleLowerCase()
-    });
-
+export {
+    matchParenthesis, tokensToParens, parseExpression
 }
