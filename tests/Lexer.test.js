@@ -45,12 +45,12 @@ describe('Lexer', () => {
     });
 
     it('Tokenize a KPL variable definition', () => {
-        const input = 'def var VARNAME val "hello";';
+        const input = 'def varname VARNAME varvalue "hello";';
         const expectedOutput = [
-            { type: 'KEYWORD', value: 'def' },
-            { type: 'KEYWORD', value: 'var' },
+            { type: 'ASSIGN', value: 'def' },
+            { type: 'ASSIGN', value: 'varname' },
             { type: 'VARIABLE', value: 'VARNAME' },
-            { type: 'KEYWORD', value: 'val' },
+            { type: 'ASSIGN', value: 'varvalue' },
             { type: 'STRING', value: 'hello' },
             { type: 'SEPARATOR', value: ';' },
         ];
@@ -94,6 +94,18 @@ describe('Abstract Syntax Tree', () => {
         );
 
         expect(output).toEqual("[{\"type\":\"OPERATOR\",\"value\":\"mul\",\"left\":{\"type\":\"PAREN_(\",\"value\":[{\"type\":\"LITERAL\",\"value\":2},{\"type\":\"VARIABLE\",\"value\":\"plus\"},{\"type\":\"LITERAL\",\"value\":2}]},\"right\":{\"type\":\"PAREN_(\",\"value\":[{\"type\":\"OPERATOR\",\"value\":\"div\",\"left\":{\"type\":\"LITERAL\",\"value\":85},\"right\":{\"type\":\"LITERAL\",\"value\":2137}}]}}]")
+
+    });
+
+    it('Parse variable assignment', () => {
+
+        const output = JSON.stringify(
+            generateAbstractSyntaxTree(
+                new Lexer("def var varname foo varvalue 123;").tokenize()
+            )
+        );
+
+        expect(output).toEqual("[{\"type\":\"ASSIGN\",\"varName\":{\"type\":\"VARIABLE\",\"value\":\"foo\"},\"value\":{\"type\":\"LITERAL\",\"value\":123},\"isFunction\":false},{\"type\":\"SEPARATOR\",\"value\":\";\"}]")
 
     });
 

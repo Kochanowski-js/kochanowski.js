@@ -1,10 +1,17 @@
+import { matchParenthesis, tokensToParens } from "./Parser";
+
 class Lexer {
+    
     constructor(input) {
       this.input = input.replaceAll(/(^|\n)##.*(\n|$)/g, '');
       this.pos = 0;
       this.currentChar = this.input[this.pos];
     }
   
+    /**
+     * Tokenizes input text and returns an array of tokens.
+     * @returns {Array} An array of tokens.
+     */
     tokenize() {
         let tokens = [];
         let currentToken = this.getNextToken();
@@ -22,6 +29,10 @@ class Lexer {
         return tokens;
     }
 
+    /**
+     * Retrieves the next token from the input text.    
+     * @returns {Object} A basic token with type and value
+     */
     getNextToken() {
         while (this.currentChar !== null) {
 
@@ -98,6 +109,10 @@ class Lexer {
             return { type: "KEYWORD", value: word };
         }
 
+        if (this.isAssign(word)) {
+            return { type: "ASSIGN", value: word };
+        }
+
         if (this.isOperator(word)) {
             return { type: "OPERATOR", value: word };
         }
@@ -116,7 +131,11 @@ class Lexer {
     }
     
     isKeyword(word) {
-        return word.match(/def|function|args|callback|var|val/)
+        return word.match(/function/)
+    }
+
+    isAssign(word) {
+        return word.match(/def|var|varname|vartype|varvalue/)
     }
 
     isOperator(word) {
@@ -136,7 +155,20 @@ class Lexer {
 
 }
 
+/**
+ * Generates an abstract syntax tree (AST) from an array of tokens.
+ *
+ * @param {Array} tokens - An array of tokens representing a program.
+ * @returns {Object} An abstract syntax tree (AST) representing the program.
+ * @throws {Error} If the input is not a valid array of tokens.
+ *
+ */
 function generateAbstractSyntaxTree(tokens) {
+
+    const onlyParens = tokensToParens(tokens);
+    if (!matchParenthesis(onlyParens)) {
+        throw new Error("Parenthesis do not match")
+    }
 
     for (let i in tokens) {
 
@@ -178,8 +210,61 @@ function generateAbstractSyntaxTree(tokens) {
         }
     }
 
+    for (let i in tokens) {
+
+        if (tokens[i].type === 'ASSIGN' && tokens[i].value === "def") {
+            
+            // correct variable declaration syntax:
+            // def [var|fun] (varname NAME) (varvalue VALUE);
+            // () = order not required
+
+            const declarationIndex = i;
+            
+            while (tokens[i].type !== 'ASSIGN' || tokens[i].value !== "varname") i++;
+            let varName = tokens[parseInt(i+1)];
+            i = declarationIndex;
+            
+            while (tokens[i].type !== 'ASSIGN' || tokens[i].value !== "varvalue") i++;
+            let value = tokens[parseInt(i+1)];
+
+            let isFunction = tokens[parseInt(declarationIndex+1)] === 'fun';
+
+            while (tokens[i].type !== 'SEPARATOR') i++;
+            let end = i;
+
+            const newToken = { type: 'ASSIGN', varName, value, isFunction }
+
+            tokens.splice(declarationIndex, end, newToken);
+
+
+        }
+
+    }
+
     return tokens
 }
   
 export default Lexer;
 export { generateAbstractSyntaxTree };
+
+/*
+
+AST Mini Docs:
+
+Paren:
+- type: what paren
+- value: value inside paren
+
+Operator:
+- type: OPERATOR
+- value: literal value (+, -, *, ...)
+- left: value on the left
+- right: value on the right
+
+Assign:
+- type: ASSIGN
+- isFunction: boolean
+- varName: e.g. kurwiszon
+- value: 2137
+
+*/
