@@ -31,6 +31,9 @@ describe('parseExpression', () => {
         expect(parseExpression("def var varname moth varvalue 2 add 2 mul 2;").mem)
             .toStrictEqual({functions: {}, variables: { moth: { type: "LITERAL", value: 6 }}});
 
+        expect(parseExpression("def var varname moth varvalue 1 div 2;").mem)
+            .toStrictEqual({functions: {}, variables: { moth: { type: "LITERAL", value: 0.5 }}});
+
     });
 
 });

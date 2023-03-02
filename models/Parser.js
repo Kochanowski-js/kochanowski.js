@@ -148,6 +148,8 @@ class Parser {
             case 'mul':
                 value = left.value * right.value; break
             case 'div':
+                if (right.value === 0)
+                    throw new Error("Division by 0")
                 value = left.value / right.value; break
         }
 
