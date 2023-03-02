@@ -1,8 +1,8 @@
 export default {
     "def": [ "stwórz", "zdefiniuj" ],
-    "var": [ "zmienną", "osobe", "bohatera", "bohaterkę" ],
+    "var": [ "zmienną", "osobe", "osobę", "bohatera", "bohaterkę" ],
     "varname": ["o nazwie", "o imieniu", "zwaną", "zwanego"],
-    "varvalue": ["który jest", "która jest", "o wartości", "z wartością"],
+    "varvalue": ["który jest", "która jest", "o wartości", "z wartością", "przydomek", "von", "inaczej znany jako", "inaczej znanego jako", "inaczej znana jako"],
     "add": ["dodać"],
     "sub": ["minus", "odjąć"],
     "mul": ["razy", "pomnożone przez", "pomnożona przez"],
