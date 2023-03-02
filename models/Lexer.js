@@ -165,10 +165,12 @@ class Lexer {
  */
 function generateAbstractSyntaxTree(tokens) {
 
+    const orderOfOperations = [ /add|sub/, /mul|div/ ]
+
+    // Check if the parenthesis match
     const onlyParens = tokensToParens(tokens);
-    if (!matchParenthesis(onlyParens)) {
+    if (!matchParenthesis(onlyParens))
         throw new Error("Parenthesis do not match")
-    }
 
     for (let i in tokens) {
 
@@ -178,18 +180,20 @@ function generateAbstractSyntaxTree(tokens) {
             while (tokens[i].type !== 'L_PAREN') i--;
             let startIndex = i;
 
-            const newToken = {
+            let newToken = {
                 type: `PAREN_${tokens[i].value}`,
                 value: generateAbstractSyntaxTree(tokens.slice(startIndex+1, endIndex))
             }
+
+            // if (newToken.value.length === 1) {
+            //     newToken = newToken.value[0]
+            // }
 
             tokens.splice(startIndex, endIndex - startIndex + 1, newToken);
 
         }
 
     }
-
-    const orderOfOperations = [ /add|sub/, /mul|div/ ]
 
     for (let o in orderOfOperations) {
         for (let i in tokens) {
@@ -232,7 +236,7 @@ function generateAbstractSyntaxTree(tokens) {
             while (tokens[i].type !== 'SEPARATOR') i++;
             let end = i;
 
-            const newToken = { type: 'ASSIGN', varName, value, isFunction }
+            const newToken = { type: 'ASSIGN', varName: varName.value, value, isFunction }
 
             tokens.splice(declarationIndex, end, newToken);
 
