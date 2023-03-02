@@ -74,7 +74,13 @@ class Parser {
         
         for (let i in tokens) {
             if ( tokens[i].type.startsWith("PAREN_") ) {
-                this.execute(tokens[i].value)
+                tokens[i] = this.execute(tokens[i].value)
+            }
+        }
+
+        for (let i in tokens) {
+            if ( tokens[i].type === "OPERATOR" ) {
+                tokens[i] = this.compute(tokens[i])
             }
         }
 
@@ -84,38 +90,74 @@ class Parser {
             }
         }
 
+        return tokens
+
     }
 
     assign(token) {
-        const value = token.value
 
-        if (token.type === "ASSIGN") {
-
-            //TODO: Add functions
-
-            if (this.mem.variables[token.varName] === undefined) {
-
-                if (token.value.type === "VARIABLE") {
-                    token.value = this.mem.variables[token.value.value]
-                }
-
-                this.mem.variables[token.varName] = token.value
-            } else {
-                throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[varName]}`)
-            }
-
+        if (token.varName === undefined) {
+            console.log(this.tokens)
+            throw new Error('Bug in the parser. Variable name undefined')
         }
 
-        console.log(`Assign variable ${token.varName} := ${token.value.value}`)
+        if (this.mem.variables[token.varName] !== undefined)
+            throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[token.varName]}`)
+
+        token.value = token.value[0]
+
+        if (token.value.type === "VARIABLE")
+            token.value = this.mem.variables[token.value.value]
+            
+        if (token.value.type === "OPERATOR")
+            token.value = this.compute(token.value);
+            
+        this.mem.variables[token.varName] = token.value
+
+        // console.log(`Assign variable ${token.varName} := ${token.value}`)
     }
 
     compute(token) {
 
-        if (token.type === "OPERATOR") {
+        const sign = token.value
 
+        let left = token.left
+        let right = token.right
+
+        console.log(left,right)
+
+        if (left.type === "OPERATOR")
+            left = this.compute(left)
+
+        if (right.type === "OPERATOR")
+            right = this.compute(right)
+
+        if (left.type === "VARIABLE")
+            left.value = this.mem.variables[left.value]
+
+        if (right.type === "VARIABLE")
+            right.value = this.mem.variables[right.value]
+
+
+        let value;
+        switch (sign) {
+            case 'add':
+                value = left.value + right.value; break
+            case 'sub':
+                value = left.value - right.value; break
+            case 'mul':
+                value = left.value * right.value; break
+            case 'div':
+                value = left.value / right.value; break
         }
 
-        console.log(`Compute the expression ${expression}`)
+        console.log(`Compute the expression ${left.value} ${sign} ${right.value}`)
+        
+        return {
+            type: "LITERAL",
+            value
+        }
+
     }
 
 }

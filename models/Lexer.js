@@ -1,4 +1,4 @@
-import { matchParenthesis, tokensToParens } from "./Parser";
+import { matchParenthesis, tokensToParens } from "./Parser.js";
 
 class Lexer {
     
@@ -165,7 +165,7 @@ class Lexer {
  */
 function generateAbstractSyntaxTree(tokens) {
 
-    const orderOfOperations = [ /add|sub/, /mul|div/ ]
+    const orderOfOperations = [ /mul|div/, /add|sub/ ]
 
     // Check if the parenthesis match
     const onlyParens = tokensToParens(tokens);
@@ -184,10 +184,6 @@ function generateAbstractSyntaxTree(tokens) {
                 type: `PAREN_${tokens[i].value}`,
                 value: generateAbstractSyntaxTree(tokens.slice(startIndex+1, endIndex))
             }
-
-            // if (newToken.value.length === 1) {
-            //     newToken = newToken.value[0]
-            // }
 
             tokens.splice(startIndex, endIndex - startIndex + 1, newToken);
 
@@ -214,31 +210,37 @@ function generateAbstractSyntaxTree(tokens) {
         }
     }
 
-    for (let i in tokens) {
+    for (let i = 0; i < tokens.length; i++) {
 
         if (tokens[i].type === 'ASSIGN' && tokens[i].value === "def") {
-            
+
             // correct variable declaration syntax:
             // def [var|fun] (varname NAME) (varvalue VALUE);
             // () = order not required
 
             const declarationIndex = i;
+            let isFunction = tokens[declarationIndex+1] === 'fun';
             
             while (tokens[i].type !== 'ASSIGN' || tokens[i].value !== "varname") i++;
-            let varName = tokens[parseInt(i+1)];
+            let varName = tokens[i+1];
             i = declarationIndex;
             
             while (tokens[i].type !== 'ASSIGN' || tokens[i].value !== "varvalue") i++;
-            let value = tokens[parseInt(i+1)];
-
-            let isFunction = tokens[parseInt(declarationIndex+1)] === 'fun';
+            let valueIndex = i+1;
 
             while (tokens[i].type !== 'SEPARATOR') i++;
-            let end = i;
+            let valueEndIndex = i;
+
+            let value = tokens.slice(valueIndex, valueEndIndex);
+
+
+            while (tokens[i].type !== 'SEPARATOR') i++;
 
             const newToken = { type: 'ASSIGN', varName: varName.value, value, isFunction }
 
-            tokens.splice(declarationIndex, end, newToken);
+            tokens.splice(declarationIndex, i, newToken);
+
+            i = declarationIndex + 1;
 
 
         }
@@ -250,25 +252,3 @@ function generateAbstractSyntaxTree(tokens) {
   
 export default Lexer;
 export { generateAbstractSyntaxTree };
-
-/*
-
-AST Mini Docs:
-
-Paren:
-- type: what paren
-- value: value inside paren
-
-Operator:
-- type: OPERATOR
-- value: literal value (+, -, *, ...)
-- left: value on the left
-- right: value on the right
-
-Assign:
-- type: ASSIGN
-- isFunction: boolean
-- varName: e.g. kurwiszon
-- value: 2137
-
-*/
