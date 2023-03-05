@@ -192,8 +192,13 @@ function parseExpression(expr) {
     const ast = generateAbstractSyntaxTree(tokens);
     const parsed = new Parser(ast);
     
-    parsed.execute()
-    
+    parsed.execute();
+
+    const used = process.memoryUsage();
+    for (let key in used) {
+      console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+    }
+
     return parsed;
 }
 
