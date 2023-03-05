@@ -218,6 +218,7 @@ function generateAbstractSyntaxTree(tokens) {
 
     for (let i = 0; i < tokens.length; i++) {
 
+        // Defining a variable
         if (tokens[i].type === 'ASSIGN' && tokens[i].value === "def") {
             
             const declarationIndex = i;
@@ -236,14 +237,39 @@ function generateAbstractSyntaxTree(tokens) {
             let valueEndIndex = i;
 
             let value = tokens.slice(valueIndex, valueEndIndex);
-
-            const newToken = { type: 'ASSIGN', varName, value, isFunction }
+            
+            const newToken = { type: 'ASSIGN', varName, value, isFunction, isDefine: true }
             tokens.splice(declarationIndex, i-declarationIndex, newToken);
 
             i = declarationIndex;
 
-
         }
+
+        // if (tokens[i].type === 'ASSIGN' && tokens[i].value !== "def") {
+            
+        //     const declarationIndex = i;
+        //     let isFunction = tokens[i+1] === 'fun';
+            
+        //     // Get variable name -> go back
+        //     while (tokens[i].value !== "varname") i++;
+        //     let varName = tokens[i+1].value;
+        //     i = declarationIndex;
+            
+        //     // Get variable value -> go back
+        //     while (tokens[i].value !== "varvalue") i++;
+        //     let valueIndex = i+1;
+
+        //     while (tokens[i].type !== 'SEPARATOR') i++;
+        //     let valueEndIndex = i;
+
+        //     let value = tokens.slice(valueIndex, valueEndIndex);
+            
+        //     const newToken = { type: 'ASSIGN', varName, value, isFunction, isDefine: false }
+        //     tokens.splice(declarationIndex, i-declarationIndex, newToken);
+
+        //     i = declarationIndex;
+
+        // }
     }
 
     return tokens

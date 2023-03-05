@@ -101,17 +101,24 @@ class Parser {
             throw new Error('Bug in the parser. Variable name undefined')
         }
 
-        if (this.mem.variables[token.varName] !== undefined)
-            throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[token.varName]}`)
+        if (this.mem.variables[token.varName] !== undefined && token.isDefine)
+            throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[token.varName].value}`)
 
         token.value = token.value[0]
 
+        if (token.value.type === "PAREN_(") {
+            if (token.value.value.length !== 1)
+                throw new Error("Invalid value in parenthesis")
+
+            token.value = token.value.value[0]
+        }
+
         if (token.value.type === "VARIABLE")
             token.value = this.mem.variables[token.value.value]
-            
+
         if (token.value.type === "OPERATOR")
             token.value = this.compute(token.value);
-            
+
         this.mem.variables[token.varName] = token.value
 
         // console.log(`Assign variable ${token.varName} := ${token.value}`)
@@ -139,23 +146,42 @@ class Parser {
 
 
         let value;
+        let type = "LITERAL"
+
         switch (sign) {
             case 'add':
+                if (left.type !== 'LITERAL' || right.type !== 'LITERAL')
+                    throw new Error("Addition error, only can add literals")
                 value = left.value + right.value; break
             case 'sub':
+                if (left.type !== 'LITERAL' || right.type !== 'LITERAL')
+                    throw new Error("Substract error, only can substract literals")
                 value = left.value - right.value; break
             case 'mul':
+                if (right.type !== 'LITERAL')
+                    throw new Error("Can only multiply by a literal")
+                
+                if (left.type === 'STRING') {
+                
+                    if (!Number.isInteger(right.value))
+                        throw new Error("Can only multiply a string by a string")
+
+                    value = left.value.repeat(right.value);
+                    type = "STRING";
+                    break;
+                    
+                }
+
                 value = left.value * right.value; break
             case 'div':
                 if (right.value === 0)
                     throw new Error("Division by 0")
-                value = left.value / right.value; break
+                if (left.type !== 'LITERAL' || right.type !== 'LITERAL')
+                    throw new Error("Division error, only can divide literals")
+                value = ~~(left.value / right.value); break
         }
         
-        return {
-            type: "LITERAL",
-            value
-        }
+        return { type, value }
 
     }
 
