@@ -220,17 +220,15 @@ function generateAbstractSyntaxTree(tokens) {
 
         if (tokens[i].type === 'ASSIGN' && tokens[i].value === "def") {
             
-            // correct variable declaration syntax:
-            // def [var|fun] (varname NAME) (varvalue VALUE);
-            // () = order not required
-            
             const declarationIndex = i;
-            let isFunction = tokens[declarationIndex+1] === 'fun';
+            let isFunction = tokens[i+1] === 'fun';
             
+            // Get variable name -> go back
             while (tokens[i].value !== "varname") i++;
-            let varName = tokens[i+1];
+            let varName = tokens[i+1].value;
             i = declarationIndex;
             
+            // Get variable value -> go back
             while (tokens[i].value !== "varvalue") i++;
             let valueIndex = i+1;
 
@@ -239,18 +237,13 @@ function generateAbstractSyntaxTree(tokens) {
 
             let value = tokens.slice(valueIndex, valueEndIndex);
 
+            const newToken = { type: 'ASSIGN', varName, value, isFunction }
+            tokens.splice(declarationIndex, i-declarationIndex, newToken);
 
-            while (tokens[i].type !== 'SEPARATOR') i++;
-
-            const newToken = { type: 'ASSIGN', varName: varName.value, value, isFunction }
-
-            tokens.splice(declarationIndex, i, newToken);
-
-            i = declarationIndex + 1;
+            i = declarationIndex;
 
 
         }
-
     }
 
     return tokens
