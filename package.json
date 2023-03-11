@@ -32,5 +32,9 @@
     "@babel/preset-env": "^7.20.2",
     "babel-jest": "^29.3.1",
     "jest": "^29.3.1"
+  },
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "terminal-link": "^3.0.0"
   }
 }

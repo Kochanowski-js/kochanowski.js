@@ -1,91 +1,62 @@
+import chalk from "chalk";
+import terminalLink from 'terminal-link';
 import { choose } from "../utils/Math.js";
+import errorCodes from "../dict/errorCodes.js";
 
-// KDE Plasma Terror (Kochanowski Error)
+const newLine = "\n";
+
+/**
+ * Custom error handler so it looks nice
+ */
 class KError {
-  /**
-   * Custom Error Handler for Kochanowski Programming Language.
-   *
-   * Error code guide:
-   * - 0 - Danger
-   * - 1 - Warning
-   * - 2 - Success (dont exit)
-   *
-   * @param {string} message Detailed description of the error
-   * @param {number} code Code number
-   */
-  constructor(message, code) {
-    this.message = message;
-    this.code = code;
 
-    const colors = ["\x1b[31m", "\x1b[33m", "\x1b[32m"];
-    const titles = ["NIEZALICZONE", "DOPUSZCZAJĄCE", "ZALICZONE"];
+    constructor(code, context) {
+        this.code = code;
+        this.context = context;
 
-    console.log(`\nWynik Pracy:${colors[code]} ${titles[code]} \x1b[0m`);
-    console.log(`\x1b[30m ${message} \x1b[0m`);
+        const documentationLink = `https://github.com/Kochanowski-js/kochanowski.js/wiki/Errors#${this.code}`
 
-    if (code != 2) process.exit(1);
-  }
-}
+        console.log("");
 
-function splash(score) {
-  const splashes = [
-    [
-      "...",
-      "Jeszcze by tu nasr- na środku!",
-      " ",
-      "brak komentarza",
-      "tragedia",
-      " - ",
-      " ... ... ",
-      " .. .. ",
-    ],
-    [
-      "Nawet nie chcę tego sprawdzać",
-      "Za mało mi płacą za to",
-      "Nie wierzę, że ktoś może być tak głupi!",
-    ],
-    [
-      "L + bozo + ratio + no bitches",
-      "Ty pisać nie umiesz czy tylko udajesz",
-      "Nie oddałeś mi wypracowania, oddał#ś mi katastrofę",
-    ],
-    [
-      "Prześlizgn#ł#ś się, ale mam cię na oku",
-      "Zdałeś... ale i tak bym cię oblał gdybym tylko mógł",
-      "Idź lepiej kopać rowy",
-      "Dwója!",
-    ],
-    [
-      "To jest najgorsza rzecz jaką widziałem w życiu",
-      "Przestań, to ci nie wychodzi",
-      "Nie rób tak więcej",
-      "Miałeś chyba jakiś zły dzień",
-    ],
-    [
-      "Dobrze, ale czemu tak krótko?",
-      "Mogło być lepiej",
-      "Nie nadajesz się na olimpijczyka",
-      "Nie jest źle, ale Kochanowski do czegoś zobowiązuje",
-      "Nawet Mickiewicz by to lepiej napisał",
-    ],
-    [
-      "Chwała Arstotrzce!",
-      "Askamitnie",
-      "Wypompował#ś całą dostępną imaginację!",
-      "Oby tak dalej!",
-      "Splen robił! (Splendid)",
-      "Jakim cudem uzyskał#ś taki wynik?!",
-    ],
-  ];
+        switch (code % 4) {
+            case 0:
+                console.log(chalk.bgYellow.bold(`     ⚠  E${this.code}: ${errorCodes[this.code][0]}`.padEnd(64)))
+                break;
+            
+            case 1:
+                console.log(chalk.bgRedBright.bold(`     ⚠  E${this.code}:  ${errorCodes[this.code][0]}`.padEnd(64)))
+                break;
+        
+            default:
+                break;
+        }
 
-  const minScores = [-Infinity, -40, 0, 40, 100, 300, 500];
+        console.log("");
 
-  let splashText;
-  for (let i in minScores) {
-    if (score >= minScores[i]) splashText = choose(splashes[i]);
-  }
+        if (context !== undefined) {
 
-  return splashText;
+            const parsedString = trimStringWithFocus(context.code, 64-6, context.col);
+
+            console.log("     "+chalk.gray(`line ${chalk.white(context.line)};${chalk.white(context.col)} of ${chalk.white(context.fileName)}:`))
+            console.log("     "+parsedString[0])
+            console.log("     "+ chalk.bold.blue("▲ HERE".padStart(parsedString[1]+6))+"\n")
+            
+        }
+
+        if (errorCodes[this.code][1]) {
+            console.log("     "+chalk.blue(`Hint: ${errorCodes[this.code][1]}\n`));
+        }
+            
+            console.log(chalk.italic.gray("     "+"ⓘ  Get more information on", terminalLink("the official documentation", documentationLink)))
+
+        console.log()
+
+
+        process.exit(1);
+
+    }
+
+
 }
 
 class ScoreError extends KError {
@@ -112,5 +83,24 @@ class ScoreError extends KError {
     super(message, passed ? 2 : 0);
   }
 }
+
+function trimStringWithFocus(str, maxLength, focusColumn) {
+
+    const leftBound = Math.max(focusColumn - Math.floor(maxLength / 2), 0);
+    const rightBound = Math.min(leftBound + maxLength - 1, str.length - 1);
+  
+    let trimmedStr = str.substring(leftBound, rightBound + 1);
+    if (leftBound > 0) {
+      trimmedStr = "…" + trimmedStr.substring(1);
+    }
+    if (rightBound < str.length - 1) {
+      trimmedStr = trimmedStr.substring(0, maxLength - 1) + "…";
+    }
+  
+    const newFocusColumn = focusColumn - leftBound;
+    return [ trimmedStr, newFocusColumn ];
+    
+}
+  
 
 export { ScoreError, KError };

@@ -1,14 +1,29 @@
 import { matchParenthesis, tokensToParens } from "./Parser.js";
 import kochanowski, { replaceWords } from "../dict/kochanowski.js";
 
-class Lexer {
-    
-    constructor(input) {
-      this.input = input.replaceAll(/(^|\n)##.*(\n|$)/g, '');
-      this.pos = 0;
-      this.currentChar = this.input[this.pos];
+const commentRegex = /(^|\n)##.*(\n|$)/g;
 
-      this.simplify()
+/**
+ * A Lexer class for tokenizing source code.
+ * @class
+ */
+class Lexer {
+
+    /**
+     * Creates a new Lexer object.
+     * @constructor
+     * @param {string} input - The source code to tokenize.
+     */
+    constructor(input) {
+
+        this.input = input
+        this.pos = 0;
+        this.currentChar = this.input[this.pos];
+
+        // Remove comments from input string
+        this.input = input.replaceAll(commentRegex, '');
+        this.convertToRaw();
+
     }
   
     /**
@@ -29,10 +44,11 @@ class Lexer {
         return tokens;
     }
 
-    simplify() {
-
+    /**
+     * Convert `this.input` from KPL to raw KPL.
+     */
+    convertToRaw() {
         this.input = replaceWords(this.input, kochanowski);
-
     }
 
     /**
@@ -160,6 +176,8 @@ class Lexer {
     }
 
 }
+
+
 
 /**
  * Generates an abstract syntax tree (AST) from an array of tokens.
