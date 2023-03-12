@@ -14,19 +14,40 @@ class KError {
         this.code = code;
         this.context = context;
 
+        if (errorCodes[this.code] === undefined) {
+            throw new KError(2)
+        }
+
+        const args = process.argv.slice(2);
+        const useNerd = args.includes("--nerd");
+
+        let icons = {};
+        icons.warning = (useNerd) ? "\uea6c" : "⚠";
+        icons.error = (useNerd) ? "\uea87" : "⚠";
+        icons.debug = (useNerd) ? "\uebdc" : "⚠";
+        icons.success = (useNerd) ? "" : "⚠";
+        
+        icons.arrow = (useNerd) ? "\uf0aa" : "▲ ";
+        icons.hint = (useNerd) ? "\uea61 " : "";
+        icons.docs = (useNerd) ? "\udb81\udd9f" : "ⓘ ";
+        
         const documentationLink = `https://github.com/Kochanowski-js/kochanowski.js/wiki/Errors#${this.code}`
 
         console.log("");
 
-        switch (code % 4) {
-            case 0:
-                console.log(chalk.bgYellow.bold(`     ⚠  E${this.code}: ${errorCodes[this.code][0]}`.padEnd(64)))
+        switch (errorCodes[this.code][0]) {
+            case 1:
+                console.log(chalk.bgYellow.bold(`     ${icons.warning}  E${this.code}: ${errorCodes[this.code][1]}`.padEnd(64)))
                 break;
             
-            case 1:
-                console.log(chalk.bgRedBright.bold(`     ⚠  E${this.code}:  ${errorCodes[this.code][0]}`.padEnd(64)))
+            case 0:
+                console.log(chalk.bgRedBright.bold(`     ${icons.error}  E${this.code}: ${errorCodes[this.code][1]}`.padEnd(64)))
                 break;
-        
+
+            case 3:
+                console.log(chalk.bgBlue.bold(`     ${icons.debug}  E${this.code}: ${errorCodes[this.code][1]}`.padEnd(64)))
+                break;
+                
             default:
                 break;
         }
@@ -37,17 +58,18 @@ class KError {
 
             const parsedString = trimStringWithFocus(context.code, 64-6, context.col);
 
-            console.log("     "+chalk.gray(`line ${chalk.white(context.line)};${chalk.white(context.col)} of ${chalk.white(context.fileName)}:`))
+            console.log("     "+chalk.gray(`line ${chalk.white(context.line)};${chalk.white(context.col)}: `))
             console.log("     "+parsedString[0])
-            console.log("     "+ chalk.bold.blue("▲ HERE".padStart(parsedString[1]+6))+"\n")
+            console.log("     "+ chalk.bold.blue((icons.arrow + "  HERE").padStart(parsedString[1]+4))+"\n")
             
         }
 
-        if (errorCodes[this.code][1]) {
-            console.log("     "+chalk.blue(`Hint: ${errorCodes[this.code][1]}\n`));
+        if (errorCodes[this.code][2]) {
+            console.log("     "+chalk.blue(`${icons.hint}Hint: ${errorCodes[this.code][2]}`));
         }
             
-            console.log(chalk.italic.gray("     "+"ⓘ  Get more information on", terminalLink("the official documentation", documentationLink)))
+        // remove?
+        console.log(chalk.italic.gray("     "+icons.docs+" Get more information on", terminalLink("the official documentation", documentationLink)))
 
         console.log()
 
