@@ -71,7 +71,7 @@ class Parser {
     execute() {
 
         const tokens = this.tokens
-        
+
         for (let i in tokens) {
             if ( tokens[i].type.startsWith("PAREN_") ) {
                 tokens[i] = this.execute(tokens[i].value)
@@ -95,9 +95,8 @@ class Parser {
     }
 
     assign(token) {
-
+        
         if (token.varName === undefined) {
-            console.log(this.tokens)
             throw new Error('Bug in the parser. Variable name undefined')
         }
 
@@ -143,28 +142,36 @@ class Parser {
         if (right.type === "OPERATOR")
             right = this.compute(right)
 
+        if (left.type === "PAREN_(")
+            left = this.compute(left.value[0])
+
+        if (right.type === "PAREN_(")
+            right = this.compute(right.value[0])
+
 
 
         let value;
         let type = "LITERAL"
 
+        // what is this shit down there???
+
         switch (sign) {
             case 'add':
                 if (left.type !== 'LITERAL' || right.type !== 'LITERAL')
-                    throw new Error("Addition error, only can add literals")
+                    left.throwError(200);
                 value = left.value + right.value; break
             case 'sub':
                 if (left.type !== 'LITERAL' || right.type !== 'LITERAL')
-                    throw new Error("Substract error, only can substract literals")
+                    left.throwError(201);
                 value = left.value - right.value; break
             case 'mul':
                 if (right.type !== 'LITERAL')
-                    throw new Error("Can only multiply by a literal")
+                    right.throwError(202);
                 
                 if (left.type === 'STRING') {
                 
-                    if (!Number.isInteger(right.value))
-                        throw new Error("Can only multiply a string by a string")
+                    if (!Number.isInteger(right.value)) // remove?
+                        right.throwError(203);
 
                     value = left.value.repeat(right.value);
                     type = "STRING";
@@ -175,9 +182,9 @@ class Parser {
                 value = left.value * right.value; break
             case 'div':
                 if (right.value === 0)
-                    throw new Error("Division by 0")
+                    right.throwError(204);
                 if (left.type !== 'LITERAL' || right.type !== 'LITERAL')
-                    throw new Error("Division error, only can divide literals")
+                    right.throwError(205);
                 value = ~~(left.value / right.value); break
         }
         

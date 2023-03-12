@@ -11,7 +11,9 @@ async function dev() {
         console.log(" *", i, output.mem.variables[i].value)
     }
 
-    new KError(1, {
+    new KError(3)
+
+    new KError(0, {
         line: 64,
         col: 50,
         fileName: "index.kpl",

@@ -1,10 +1,12 @@
 import { matchParenthesis, tokensToParens } from "./Parser.js";
 import kochanowski, { replaceWords } from "../dict/kochanowski.js";
+import { KError } from "./ErrorHandler.js";
+import { AssignOperator, EOFToken, LiteralToken } from "./Token.js";
 
 const commentRegex = /(^|\n)##.*(\n|$)/g;
 
 /**
- * A Lexer class for tokenizing source code.
+ * A Lexer class for tokenizing code.
  * @class
  */
 class Lexer {
@@ -20,12 +22,36 @@ class Lexer {
         this.pos = 0;
         this.currentChar = this.input[this.pos];
 
-        // Remove comments from input string
+        // Remove comments from input string (remove soon)
         this.input = input.replaceAll(commentRegex, '');
         this.convertToRaw();
 
     }
   
+    /**
+     * Returns currect line and pos of the file
+     * @returns {Number[]}
+     */
+    getPos() {
+
+        let line = 1;
+        let col = this.pos;
+
+        for (let i = 0; i < this.pos; i++) {
+          if (this.input.charAt(i) === '\n') {
+            line++;
+            col = this.pos - i;
+          }
+        }
+
+        return [line, col];
+
+    }
+
+    getLine(line) {
+        return this.input.split("\n")[line-1]
+    }
+
     /**
      * Tokenizes input text and returns an array of tokens.
      * @returns {Array} An array of tokens.
@@ -45,7 +71,7 @@ class Lexer {
     }
 
     /**
-     * Convert `this.input` from KPL to raw KPL.
+     * Convert `this.input` from KPL to readable KPL.
      */
     convertToRaw() {
         this.input = replaceWords(this.input, kochanowski);
@@ -107,7 +133,7 @@ class Lexer {
                 }
 
                 this.advance();
-                return { type: 'STRING', value };
+                return new LiteralToken(this, "STRING", value);
             }
         
             const char = this.currentChar;
@@ -116,8 +142,8 @@ class Lexer {
             return { type: "SYMBOL", value: char };
 
         }
-        
-        return { type: "EOF", value: null };
+    
+        return new EOFToken(this);
     }
 
     handleWord() {
@@ -149,7 +175,7 @@ class Lexer {
             this.advance();
         }
     
-        return { type: "LITERAL", value: parseInt(number, 10) };
+        return new LiteralToken(this, "LITERAL", parseInt(number, 10));
     }
     
     isKeyword(word) {
@@ -177,8 +203,6 @@ class Lexer {
 
 }
 
-
-
 /**
  * Generates an abstract syntax tree (AST) from an array of tokens.
  *
@@ -194,7 +218,7 @@ function generateAbstractSyntaxTree(tokens) {
     // Check if the parenthesis match
     const onlyParens = tokensToParens(tokens);
     if (!matchParenthesis(onlyParens))
-        throw new Error("Parenthesis do not match")
+        throw new KError(101)
 
     for (let i in tokens) {
 
@@ -256,9 +280,9 @@ function generateAbstractSyntaxTree(tokens) {
 
             let value = tokens.slice(valueIndex, valueEndIndex);
             
-            const newToken = { type: 'ASSIGN', varName, value, isFunction, isDefine: true }
-            tokens.splice(declarationIndex, i-declarationIndex, newToken);
+            const newToken = new AssignOperator(varName, value);
 
+            tokens.splice(declarationIndex, i-declarationIndex, newToken);
             i = declarationIndex;
 
         }

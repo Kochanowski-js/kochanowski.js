@@ -13,9 +13,9 @@ export function build(run = false)
         config = JSON.parse(fs.readFileSync("konfiguracja.zojs", 'utf8'));
     } catch (err) {
         if (err.code === 'ENOENT') {
-            throw new KError('No configuration file found!\n Add \'konfiguracja.zojs\' to the root of your project.', 0);
+            throw new KError(0);
         } else {
-            throw new KError('An error has occured when parsing the configuration file.', 0)
+            throw new KError(1);
         }
     }
 
