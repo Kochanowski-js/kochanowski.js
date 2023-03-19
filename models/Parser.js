@@ -90,6 +90,13 @@ class Parser {
             }
         }
 
+        for (let i in tokens) {
+            if ( tokens[i].type === "KEYWORD" && tokens[i].value === "print" ) {
+                const computed = this.compute(tokens[i].toPrint[0]);
+                console.log(computed.value)
+            }
+        }
+
         return tokens
 
     }
@@ -100,8 +107,8 @@ class Parser {
             throw new Error('Bug in the parser. Variable name undefined')
         }
 
-        if (this.mem.variables[token.varName] !== undefined && token.isDefine)
-            throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[token.varName].value}`)
+        // if (this.mem.variables[token.varName] !== undefined && token.isDefine)
+        //     throw new Error(`Variable ${token.varName} already defined with value ${this.mem.variables[token.varName].value}`)
 
         token.value = token.value[0]
 
@@ -124,6 +131,14 @@ class Parser {
     }
 
     compute(token) {
+
+        if (token.type === "VARIABLE") {
+            return this.mem.variables[token.value];
+        }
+
+        if (token.type === "LITERAL") {
+            return token;
+        }
 
         const sign = token.value
 

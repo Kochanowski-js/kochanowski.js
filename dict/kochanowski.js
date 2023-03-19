@@ -7,7 +7,8 @@ export default {
     "sub": ["minus", "odjąć"],
     "mul": ["razy", "pomnożone przez", "pomnożona przez", "pomnożoną przez"],
     "div": ["podzielić na", "dzielone przez", "dzielona przez"],
-    "2137": [ "papajowa liczba", "papajową liczbę", "liczby papieżowej", "liczbę papieżową" ]
+    "2137": ["papajowa liczba", "papajową liczbę", "liczby papieżowej", "liczbę papieżową"],
+    "print": ["wydrukuj", "drukuj", "wypluj", "opluj"]
 }
 
 function replaceWords(text, dictionary) {

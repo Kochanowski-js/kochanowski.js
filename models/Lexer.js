@@ -179,7 +179,7 @@ class Lexer {
     }
     
     isKeyword(word) {
-        return word.match(/function/)
+        return word.match(/function|print/)
     }
 
     isAssign(word) {
@@ -286,32 +286,33 @@ function generateAbstractSyntaxTree(tokens) {
             i = declarationIndex;
 
         }
+        
+    }
 
-        // if (tokens[i].type === 'ASSIGN' && tokens[i].value !== "def") {
+
+    for (let i = 0; i < tokens.length; i++) {
+
+        // Defining a variable
+        if (tokens[i].type === 'KEYWORD' && tokens[i].value === "print") {
             
-        //     const declarationIndex = i;
-        //     let isFunction = tokens[i+1] === 'fun';
+            const declarationIndex = i;
             
-        //     // Get variable name -> go back
-        //     while (tokens[i].value !== "varname") i++;
-        //     let varName = tokens[i+1].value;
-        //     i = declarationIndex;
+            while (tokens[i].type !== 'SEPARATOR') i++;
+            let valueIndex = declarationIndex + 1;
+            let valueEndIndex = i;
+
+            let value = tokens.slice(valueIndex, valueEndIndex);
             
-        //     // Get variable value -> go back
-        //     while (tokens[i].value !== "varvalue") i++;
-        //     let valueIndex = i+1;
+            const newToken = {
+                type: "KEYWORD",
+                value: "print",
+                toPrint: value
+            }
 
-        //     while (tokens[i].type !== 'SEPARATOR') i++;
-        //     let valueEndIndex = i;
+            tokens.splice(declarationIndex, i-declarationIndex, newToken);
+            i = declarationIndex;
 
-        //     let value = tokens.slice(valueIndex, valueEndIndex);
-            
-        //     const newToken = { type: 'ASSIGN', varName, value, isFunction, isDefine: false }
-        //     tokens.splice(declarationIndex, i-declarationIndex, newToken);
-
-        //     i = declarationIndex;
-
-        // }
+        }
     }
 
     return tokens
