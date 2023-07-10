@@ -1,40 +1,28 @@
 {
   "name": "kochanowski",
   "version": "0.4.0",
-  "description": "When a person that doesn't know how to create a programming language tries to create a programming language ",
+  "description": "The only programming language you'll ever need.",
   "main": "index.js",
   "bin": "./index.js",
   "type": "module",
-  "scripts": {
-    "test": "jest"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kochanowski-js/kochanowski.js.git"
   },
-  "keywords": [
-    "polska",
-    "literatura",
-    "kochanowski"
-  ],
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
   "author": "Kochanowski Programming Language",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/kochanowski-js/kochanowski.js/issues"
   },
   "homepage": "https://github.com/kochanowski-js/kochanowski.js#readme",
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.20.2",
-    "babel-jest": "^29.3.1",
-    "jest": "^29.3.1"
-  },
   "dependencies": {
     "chalk": "^5.2.0",
     "terminal-link": "^3.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.6.1"
   }
 }
