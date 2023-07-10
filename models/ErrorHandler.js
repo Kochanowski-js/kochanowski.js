@@ -1,109 +1,46 @@
 import chalk from "chalk";
-import terminalLink from 'terminal-link';
-import { choose } from "../utils/Math.js";
 import errorCodes from "../dict/errorCodes.js";
 
-const newLine = "\n";
+const args = process.argv.slice(2);
+const useNerd = args.includes("--nerd");
 
-/**
- * Custom error handler so it looks nice
- */
-class KError {
+const icons = {
+    arrow: useNerd ? "\uf0aa" : "▲ ",
+    docs: useNerd ? "\udb81\udd9f" : "ⓘ "
+};
 
-    constructor(code, context) {
-        this.code = code;
-        this.context = context;
+const errorTypes = {
+    1: { bg: 'bgYellow', icon: "\uea6c" },
+    0: { bg: 'bgRedBright', icon: "\uea87" },
+    3: { bg: 'bgBlue', icon: "\uebdc" },
+};
 
-        if (errorCodes[this.code] === undefined) {
-            throw new KError(2)
-        }
+function KError(code, context) {
 
-        const args = process.argv.slice(2);
-        const useNerd = args.includes("--nerd");
+    if (errorCodes[code] === undefined) throw new KError(2)
 
-        let icons = {};
-        icons.warning = (useNerd) ? "\uea6c" : "⚠";
-        icons.error = (useNerd) ? "\uea87" : "⚠";
-        icons.debug = (useNerd) ? "\uebdc" : "⚠";
-        icons.success = (useNerd) ? "" : "⚠";
-        
-        icons.arrow = (useNerd) ? "\uf0aa" : "▲ ";
-        icons.hint = (useNerd) ? "\uea61 " : "";
-        icons.docs = (useNerd) ? "\udb81\udd9f" : "ⓘ ";
-        
-        const documentationLink = `https://github.com/Kochanowski-js/kochanowski.js/wiki/Errors#${this.code}`
+    console.log();
 
-        console.log("");
+    const { bg, icon } = errorTypes[errorCodes[code][0]];
+    const message = `     ${useNerd ? icon: "⚠"}  E${code}: ${errorCodes[code][1]}`.padEnd(64);
 
-        switch (errorCodes[this.code][0]) {
-            case 1:
-                console.log(chalk.bgYellow.bold(`     ${icons.warning}  E${this.code}: ${errorCodes[this.code][1]}`.padEnd(64)))
-                break;
-            
-            case 0:
-                console.log(chalk.bgRedBright.bold(`     ${icons.error}  E${this.code}: ${errorCodes[this.code][1]}`.padEnd(64)))
-                break;
+    console.log(chalk[bg].bold(message));
+    console.log();
 
-            case 3:
-                console.log(chalk.bgBlue.bold(`     ${icons.debug}  E${this.code}: ${errorCodes[this.code][1]}`.padEnd(64)))
-                break;
-                
-            default:
-                break;
-        }
-
-        console.log("");
-
-        if (context !== undefined) {
-
-            const parsedString = trimStringWithFocus(context.code, 64-6, context.col);
-
-            console.log("     "+chalk.gray(`line ${chalk.white(context.line)};${chalk.white(context.col)}: `))
-            console.log("     "+parsedString[0])
-            console.log("     "+ chalk.bold.blue((icons.arrow + "  HERE").padStart(parsedString[1]+4))+"\n")
-            
-        }
-
-        if (errorCodes[this.code][2]) {
-            console.log("     "+chalk.blue(`${icons.hint}Hint: ${errorCodes[this.code][2]}`));
-        }
-            
-        // remove?
-        console.log(chalk.italic.gray("     "+icons.docs+" Get more information on", terminalLink("the official documentation", documentationLink)))
-
-        console.log()
-
-
-        process.exit(1);
-
+    if (context !== undefined) {
+        const parsedString = trimStringWithFocus(context.code, 64 - 6, context.col);
+    
+        console.log(`     ${chalk.gray(`line ${chalk.white(context.line)};${chalk.white(context.col)}: `)}`);
+        console.log(`     ${parsedString[0]}`);
+        console.log(`     ${chalk.bold.blue(`${icons.arrow}  HERE`.padStart(parsedString[1] + 4))}\n`);
     }
 
+    if (errorCodes[code][2]) {
+        console.log(`     ${chalk.blue(`Hint: ${errorCodes[code][2]}`)}`);
+    }
 
-}
+    process.exit(1);
 
-class ScoreError extends KError {
-  /**
-   * Throw an error when not enough points.
-   * @param {number[]} points Array of points per each cathegory
-   */
-  constructor(points) {
-    const sum = points.reduce((a, b) => a + b, 0);
-    const passed = sum >= 40;
-
-    // TODO: If you have a better way of creating this string, feel free to change it.
-    const message = `${!passed ? "Nieodpowiednia" : "Odpowiednia"} ilość punktow:` +
-                    `\n\n 1. Styl:` +
-                    `\n * Ilość sylab w linijce: ${points[0]}pkt` +
-                    `\n * Długość tekstu: ${points[1]}pkt` +
-                    `\n * Antyczność słownictwa:` +
-                    `\n * Partiotyczność:` +
-                    `\n\n 2. Poprawność merytoryczna:` +
-                    `\n * co?` +
-                    `\n\n Łącznie: ${sum}pkt/40pkt (Minimum)`+
-                    `\n Komentarz: ${splash(sum)}`;
-
-    super(message, passed ? 2 : 0);
-  }
 }
 
 function trimStringWithFocus(str, maxLength, focusColumn) {
@@ -125,4 +62,4 @@ function trimStringWithFocus(str, maxLength, focusColumn) {
 }
   
 
-export { ScoreError, KError };
+export { KError };
