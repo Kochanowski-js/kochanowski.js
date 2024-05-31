@@ -15,7 +15,11 @@
     "url": "git+https://github.com/CheryX/kochanowski.js.git"
   },
   "keywords": [
-    "kochanowski", "esolang", "esoteric language", "polish", "poland"
+    "kochanowski",
+    "esolang",
+    "esoteric language",
+    "polish",
+    "poland"
   ],
   "author": "KPL Team",
   "license": "GPL-3.0",
