@@ -9,5 +9,6 @@
     "target": "ES2022",
     "resolveJsonModule": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["node_modules", "tests"]
 }
