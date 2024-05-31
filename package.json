@@ -2,7 +2,7 @@
   "name": "kochanowski",
   "version": "0.5.0",
   "description": "Esoteric programming language based on polish.",
-  "main": "build/index.js",
+  "main": "build/src/cli.js",
   "scripts": {
     "start": "node .",
     "build": "npx tsc",

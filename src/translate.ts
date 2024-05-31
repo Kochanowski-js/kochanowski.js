@@ -1,7 +1,7 @@
 import { getPatternValues, Token } from "./patterns";
 
 type Schemas = Record<string, { translation: string; schema: string; type: string[] }>;
-import schemasData from "./schemas.json"
+import schemasData from "../data/schemas.json"
 const schemas = schemasData as Schemas;
 
 enum VariableTypes {

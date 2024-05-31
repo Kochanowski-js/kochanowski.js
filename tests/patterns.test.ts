@@ -1,4 +1,4 @@
-import { getPatternValues } from "../patterns";
+import { getPatternValues } from "../src/patterns";
 
 describe('Looking for patterns', () => {
   test('Recognizing patterns', () => {

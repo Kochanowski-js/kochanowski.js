@@ -1,8 +1,8 @@
 type Synonyms = Record<string, string[]>;
 type Schemas = Record<string, { translation: string; schema: string; type: string[] }>;
 
-import synonymsData from "./synonyms.json"
-import schemasData from "./schemas.json"
+import synonymsData from "../data/synonyms.json"
+import schemasData from "../data/schemas.json"
 const synonyms = synonymsData as Synonyms;
 const schemas = schemasData as Schemas;
 

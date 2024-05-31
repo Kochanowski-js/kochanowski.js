@@ -1,5 +1,5 @@
-import { getPatternValues } from "../patterns";
-import { translate } from "../translate";
+import { getPatternValues } from "../src/patterns";
+import { translate } from "../src/translate";
 
 function KPLtoJS(input: string) {
   return translate(getPatternValues(input));
