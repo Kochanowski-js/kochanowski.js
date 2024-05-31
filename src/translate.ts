@@ -31,6 +31,11 @@ function formatVariable(input: string, type: VariableTypes = VariableTypes.STRIN
   }
 }
 
+/**
+ * Translate pattern to JavaScript
+ * @param token KPL pattern
+ * @returns JavaScript code
+ */
 export function translate(token: Token): string {
   const types = schemas[token.name].type;
   const formattedValues = token.values.map((value, index) => {
@@ -42,6 +47,12 @@ export function translate(token: Token): string {
   return translateValues(translation, formattedValues);
 }
 
+/**
+ * Translates placeholder values in a string using a provided array of values.
+ * @param translation The string containing placeholders in the format {0}
+ * @param values An array of strings to replace the placeholders
+ * @returns The translated string with placeholders replaced by corresponding values
+ */
 function translateValues(translation: string, values: string[]): string {
   return translation.replace(/{(\d+)}/g, (_, index) => values[parseInt(index)]);
 }
