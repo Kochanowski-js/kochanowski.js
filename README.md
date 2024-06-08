@@ -31,7 +31,7 @@ The following steps will guide you through the process of setting up and configu
 1. Begin by creating a new project directory and initializing it with the Kochanowski package. Run the following command in your terminal:
 
    ```shell
-   npm create kochanowski@create
+   npm create kochanowski
    ```
 
 2. After the project has been initialized, navigate to your project directory and locate the `indeks.kpl` file. This file contains your KPL script. To compile and run the script, use the following command:
