@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
     "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "declaration": true
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "build",
+    "lib": ["ES2023", "DOM"],
+    "target": "ES2022",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "exclude": ["node_modules", "**/tests/*", "dist"],
+  "exclude": ["node_modules", "tests"]
 }

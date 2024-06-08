@@ -1,51 +1,33 @@
-// Regexes
-const regex = {
-    firstCharLower: /^[a-z]/,
-    sentencesDots: /\.(?=(?:(?:[^"]*"){2})*[^"]*$)/g,
-    anythingOutsideQuotes: /.(?=(?:(?:[^"]*"){2})*[^"]*$)/g
-}
+type Synonyms = Record<string, string[]>;
+type Schemas = Record<string, { translation: string; schema: string; type: string[] }>;
+
+import synonymsData from "../data/synonyms.json"
+import schemasData from "../data/schemas.json"
+const synonyms = synonymsData as Synonyms;
+const schemas = schemasData as Schemas;
 
 /**
- * Get sentences divided by dots that are not in quotes
- * @param content Content string
- * @returns Array of sentences
+ * This function creates a regular expression of a schema using synonyms from external data. 
+ * @param schema String of a schema, where arguments are "{}"
+ * @returns Regular expression matching the schema with flag "i"
  */
-function getSentences(content: string): string[] {
-    return content.split(regex.sentencesDots).map(e => e.trim()).filter(Boolean)
+function buildRegex(schema: string): RegExp {
+  const synonymMap = schema.split(" ").map(key => {
+    if (key == "{}") {
+      return '(.+)'; // Group element
+    } else {
+      return `(?:${synonyms[key].join("|")})`; // [a, b, c] -> (?:a|b|c)
+    }
+  }).join(" ");
+
+  return new RegExp(synonymMap, 'i');
 }
 
-/**
- * Sanitizes regex
- * @param content User input
- * @returns Sanitized regex
- */
-function sanitizeRegex(content: string): string {
-    const chars = "\\^$*+?.()|{}[]";
-    
-    for (let char of chars)
-        content = content.replaceAll(char, `\\${char}`);
-    
-    return content
+const schemasRegex: Record<string, RegExp> = {};
+
+// Building schemas for every row in `schemas.json` 
+for (const [key, value] of Object.entries(schemas)) {
+  schemasRegex[key] = buildRegex(value.schema);
 }
 
-/**
- * Construct a regex that matches all occurences outside qoutes
- * @param match The character to match
- */
-function outsideConstructor(match: string): RegExp {
-    return new RegExp(`${sanitizeRegex(match)}(?=(?:(?:[^"]*"){2})*[^"]*$)`, 'g')
-}
-
-/**
- * Count characters outside quotes
- * @param content Content
- * @param match The character to match
- * @returns How many occurences
- */
-function matchOutsideQuotes(content: string, match: string): number {
-    return (content.match(outsideConstructor(match)) || []).length;
-}
-
-
-export default regex
-export { getSentences, matchOutsideQuotes, outsideConstructor}
+export default schemasRegex;

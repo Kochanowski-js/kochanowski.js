@@ -1,0 +1,50 @@
+{
+  "create": [
+    "zdefiniuj",
+    "stwórz",
+    "zadeklaruj",
+    "utwórz",
+    "napisz",
+    "wyczaruj",
+    "spłódź",
+    "usnuj"
+  ],
+  "variable": ["zmienną", "zmienna", "stałą", "zmiennej", "do", "wartość"],
+  "with_name": [
+    "o nazwie",
+    "nazwaną",
+    "której nazwa to",
+    "którą nazwę",
+    "której nadaję nazwę",
+    "która będzie się nazywać",
+    "która będzie miała nazwę"
+  ],
+  "with_value": [
+    "o wartości(?: równej| równą|)",
+    "z wartością(?: równej| równą|)",
+    "przypisawszy wartości",
+    "z przypisaną wartością równą"
+  ],
+  "assign": ["przypisz", "popraw"],
+  "value": ["wartość"],
+  "print": ["wydrukuj", "drukuj", "wypluj", "odpisz", "napisz", "wyślij"],
+  "loop": ["zapętl", "powtórz", "a niechaj się toczy"],
+  "via": ["przez"],
+  "until_end": [
+    "razy",
+    "dopóki nie powiem abyś przestał",
+    "dopóki nie nadzejdzie koniec",
+    "do momentu końca",
+    "powtórzeń następne polecenia",
+    "powtórzeń następujące polecenia",
+    "powtórzenia następne polecenia",
+    "powtórzenia następujące polecenia"
+  ],
+  "loop_end": ["koniec pętli", "przejdź do następnej iteracji"],
+  "mul": ["razy", "pomnóż przez"],
+  "div": ["podzielić na"],
+  "add": ["dodać", "plus"],
+  "sub": ["minus", "odjąć"],
+  "comment": ["komentarz twórcy"],
+  "with_iterator": ["z iteratorem"]
+}
