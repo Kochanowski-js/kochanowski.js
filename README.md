@@ -26,17 +26,18 @@ the Polish language which makes an easy coding problem next to impossible, espec
 
 ### Installation guide
 
-The following steps will guide you through the process of setting up and configuring the kochanowski package in your project. 
+The following steps will guide you through the process of setting up and configuring the kochanowski package in your project.
 
 1. Begin by creating a new project directory and initializing it with the Kochanowski package. Run the following command in your terminal:
-    ```shell
-    npm create kochanowski@latest
-    ```
 
-2. After the project has been initialized, navigate to your project directory and locate the `indeks.kpl` file. This file contains your KPL script. To compile and run the script, use the following command: 
-    ```shell
-    npm start
-    ```
+   ```shell
+   npm create kochanowski@create
+   ```
+
+2. After the project has been initialized, navigate to your project directory and locate the `indeks.kpl` file. This file contains your KPL script. To compile and run the script, use the following command:
+   ```shell
+   npm start
+   ```
 
 ## Contributors
 
