@@ -1,6 +1,6 @@
 {
   "name": "kochanowski",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Esoteric programming language based on polish.",
   "bin": "./build/src/cli.js",
   "main": "./build/src/cli.js",

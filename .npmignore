@@ -3,7 +3,7 @@ tsconfig.json
 jest.config.js
 logo.svg
 tests
-data
+/data
 node_modules
 .prettierrc
 .github
