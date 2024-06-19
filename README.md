@@ -65,6 +65,13 @@ The following steps will guide you through the process of setting up and configu
           <sub><b>ssz256</b></sub>
         </a>
       </td>
+      <td>
+        <a href="https://github.com/Nessie-XII">
+          <img src="https://avatars.githubusercontent.com/u/173301863?s=100&v=4" width="100px;" alt="ssz256"/>
+          <br />
+          <sub><b>Nessie-XII</b></sub>
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
