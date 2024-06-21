@@ -1,8 +1,8 @@
 import { getPatternValues } from "../src/patterns";
-import { translate } from "../src/translate";
+import { interpret } from "../src/translate";
 
 function KPLtoJS(input: string) {
-  return translate(getPatternValues(input));
+  return interpret(getPatternValues(input));
 }
 
 describe('Translating expressions', () => {

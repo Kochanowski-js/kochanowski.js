@@ -3,7 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { getPatternValues } from './patterns';
-import { translate } from './translate';
+import { interpret } from './translate';
 
 const inputFile: string = process.argv[2];
 
@@ -33,7 +33,7 @@ fs.readFile(inputFile, 'utf8', (err, code) => {
 
   const translations: string[] = lines.map(line => {
     const token = getPatternValues(line);
-    return translate(token);
+    return interpret(token);
   });
 
   const translatedCode: string = translations.join('\n');
