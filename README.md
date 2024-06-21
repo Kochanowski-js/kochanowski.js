@@ -39,6 +39,49 @@ The following steps will guide you through the process of setting up and configu
    npm start
    ```
 
+## Quickstart
+
+Write anything in Polish, and it will come to appear. If you encounter a "bug", don't be afraid, as it's working as intended. You can use our pre-made examples:
+
+### Fibonacci sequence
+
+```kpl
+Zdefiniuj zmienną pierwsza liczba o wartości równej 1.
+Wyczaruj zmienną druga liczba o wartości równej 0.
+Spłódź zmienną trzecia liczba o wartości równej 0.
+
+Powtórz przez 10 powtórzeń następujące polecenia.
+
+Zmiennej trzecia liczba przypisz pierwsza liczba dodać druga liczba.
+Przypisz wartość druga liczba zmiennej pierwsza liczba.
+Zmiennej druga liczba przypisz trzecia liczba.
+
+Wydrukuj druga liczba.
+
+Przejdź do następnej iteracji.
+```
+
+### Creating a triangle out of characters
+
+```kpl
+Zdefiniuj zmienną tekst o wartości równej "X".
+
+Powtórz przez 5 powtórzeń następujące polecenia.
+
+Wydrukuj tekst.
+Zmiennej tekst przypisz wartość tekst dodać "X".
+
+Przejdź do następnej iteracji.
+```
+
+### Simple grade to comment algorithm
+
+```kpl
+Zdefiniuj zmienną ocena o wartości równej 5.
+
+Drukuj "Nie jestem dumny".
+```
+
 ## Contributors
 
 <table>
