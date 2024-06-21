@@ -12,22 +12,16 @@ const schemas = schemasData as Schemas;
  * @returns Regular expression matching the schema with flag "i"
  */
 function buildRegex(schema: string): RegExp {
-  const synonymMap = schema.split(" ").map(key => {
-    if (key == "{}") {
-      return '(.+)'; // Group element
-    } else {
-      return `(?:${synonyms[key].join("|")})`; // [a, b, c] -> (?:a|b|c)
-    }
-  }).join(" ");
+  const synonymMap = schema.split(" ").map(word =>
+    word === "{}" ? '(.+)' : `(?:${synonyms[word].join("|")})`
+  ).join(" ");
 
   return new RegExp(synonymMap, 'i');
 }
 
-const schemasRegex: Record<string, RegExp> = {};
-
-// Building schemas for every row in `schemas.json` 
-for (const [key, value] of Object.entries(schemas)) {
-  schemasRegex[key] = buildRegex(value.schema);
-}
+// Building regex for each schema and storing them in an object
+const schemasRegex: Record<string, RegExp> = Object.fromEntries(
+  Object.entries(schemas).map(([key, value]) => [key, buildRegex(value.schema)])
+);
 
 export default schemasRegex;
