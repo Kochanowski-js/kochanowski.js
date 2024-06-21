@@ -79,7 +79,7 @@ Przejdź do następnej iteracji.
 ```kpl
 Zdefiniuj zmienną ocena o wartości równej 5.
 
-Drukuj "Nie jestem dumny".
+Drukuj "Twój wynik mnie nie satysfakcjonuje".
 ```
 
 ## Contributors
