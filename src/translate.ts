@@ -1,5 +1,6 @@
 import { getPatternValues, Token } from "./patterns";
 import schemasData from "../data/schemas.json"
+import getStem from 'stemmer_pl'
 const schemas = schemasData as Schemas;
 
 enum VariableTypes { STRING, NUMBER, NAME, VALUE }
@@ -27,7 +28,7 @@ function formatVariable(input: string, type: VariableTypes): string {
         return input;
       }
 
-      return input.replace(/ /g, "_").toLowerCase();
+      return variableStemmer(input)
 
     case VariableTypes.VALUE:
       const numValue = parseFloat(input);
@@ -92,4 +93,8 @@ function translateValues(input: string, values: string[]): string {
     return values[index];
   });
 
+}
+
+function variableStemmer(name: string): string {
+  return name.split(" ").map(getStem).join("_");
 }

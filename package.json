@@ -1,6 +1,6 @@
 {
   "name": "kochanowski",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Esoteric programming language based on polish.",
   "bin": "./build/src/cli.js",
   "main": "./build/src/cli.js",
@@ -34,5 +34,8 @@
     "prettier": "3.2.5",
     "ts-jest": "^29.1.3",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "stemmer_pl": "^1.0.1"
   }
 }
