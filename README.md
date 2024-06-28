@@ -79,7 +79,15 @@ Przejdź do następnej iteracji.
 ```kpl
 Zdefiniuj zmienną ocena o wartości równej 5.
 
-Drukuj "Nie jestem dumny".
+Drukuj "Twój wynik mnie nie satysfakcjonuje".
+```
+
+If you have any trouble you can always check the `/data` directory in the module and follow this chart:
+
+```mermaid
+flowchart TB
+    A[Zdefiniuj zmienną X o wartości 5.] -->|fa:fa-book Find words' meaning from synonyms.json| B[create var X value 5]
+    B -->|fa:fa-gears Format to a function using schemas.json| C["create_variable(X, 5);"]
 ```
 
 ## Contributors
