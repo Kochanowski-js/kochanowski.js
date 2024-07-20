@@ -1,5 +1,12 @@
 {
   "add": ["dodać", "plus"],
-  "mul": ["razy"],
-  "greater_or_equal": ["większe bądź równe"]
+  "subtract": ["odjąć", "minus"],
+  "multiply": ["pomnożyć", "razy"],
+  "divide": ["podzielić na"],
+  "greater_than": ["jest większe niż", "jest większe od"],
+  "less_than": ["jest mniejsze niż", "jest mniejsze od"],
+  "greater_or_equal": ["jest większy bądź równy", "jest niemniejsze od"],
+  "less_or_equal": ["jest mniejsze bądź równe", "jest niewiększe od"],
+  "equal": ["równe", "jest równe"],
+  "not_equal": ["nie równe", "nie jest równe"]
 }
