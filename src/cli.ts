@@ -31,12 +31,9 @@ fs.readFile(inputFile, 'utf8', (err, code) => {
 
   const lines: string[] = code.split(".");
 
-  const translations: string[] = lines.map(line => {
+  lines.map(line => {
     const token = getPatternValues(line);
-    return execute(token);
+    execute(token);
   });
 
-  const translatedCode: string = translations.join('\n');
-
-  eval(translatedCode);
 });

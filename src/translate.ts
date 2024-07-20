@@ -84,7 +84,7 @@ function parseValue(value: string): any {
   return value;
 }
 
-export function execute(token: Token): string {
+export function execute(token: Token): void {
   const schema = schemas[token.name];
   if (!schema) {
     throw new Error(`Schema not found for token name: ${token.name}`);
@@ -146,12 +146,11 @@ export function execute(token: Token): string {
     case "loop_end":
       if (!shouldSkip) console.log(`TODO endloop`); // Implement loop end
       break;
-    default:
-      // throw new Error(`Unknown token name: ${token.name}`);
+    case "not_found":
       break;
+    default:
+      throw new Error(`Unknown token name: ${token.name}`);
   }
-
-  return "console.log(':3')"; // Temporary placeholder
 }
 
 function variableStemmer(name: string): string {
