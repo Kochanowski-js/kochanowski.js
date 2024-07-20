@@ -39,30 +39,43 @@ function generateName(name: string) {
   return variableStemmer(name);
 }
 
-function parseValue(value: string): ParsedValue {
+function parseValue(value: string): any {
 
   value = value.trim();
 
+  // If it's a number, return as a number
   if (!isNaN(Number(value))) {
-    return `int:${value}`;
+    return Number(value);
   }
 
+  // If it's a variable, return its value
   if (doesVariableExist(value)) {
-    return `var:${value}`;
+    return memory[generateName(value)];
   }
 
+  // Check for operations
   for (const [key, regex] of Object.entries(operationsRegex)) {
     const match = value.match(regex);
     if (match) {
       const parsedOperands = match.slice(1).map(parseValue);
-      return {
-        type: key,
-        operands: parsedOperands
-      };
+      switch (key) {
+        case 'add':
+          return parsedOperands[0] + parsedOperands[1];
+        case 'subtract':
+          return parsedOperands[0] - parsedOperands[1];
+        case 'multiply':
+          return parsedOperands[0] * parsedOperands[1];
+        case 'divide':
+          return parsedOperands[0] / parsedOperands[1];
+        // Add more operations as needed
+        default:
+          throw new Error(`Unsupported operation: ${key}`);
+      }
     }
   }
 
-  return `str:"${value}"`;
+  // If it's a string, return as is
+  return value;
 }
 
 
@@ -78,56 +91,47 @@ export function execute(token: Token): string {
     case "create_no_name":
     case "create_short":
       createVariable(token.values[0], token.values[1])
-      console.log(`var cn(${token.values[0]}) = m(${token.values[1]})`)
       break;
     case "create_reverse":
       createVariable(token.values[1], token.values[0])
-      console.log(`var cn(${token.values[1]}) = m(${token.values[0]})`)
       break;
     case "assign":
     case "assign_short":
     case "assign_shortest":
       assignVariable(token.values[0], token.values[1])
-      console.log(`cn(${token.values[0]}) := m(${token.values[1]})`)
       break;
     case "assign_reverse":
     case "assign_reverse_no_name":
     case "assign_reverse_short":
     case "assign_reverse_shortest":
       assignVariable(token.values[1], token.values[0])
-      console.log(`cn(${token.values[1]}) := m(${token.values[0]})`)
       break;
     case "print":
-      console.log(`out << m(${token.values[0]})`)
+      console.log(parseValue(token.values[0]))
       break;
     case "if_clause_start":
-      console.log(`if m(${token.values[0]})`)
+      console.log(`TODO if m(${token.values[0]})`) // TO BE IMPLEMENTED
       break;
     case "if_clause_else":
-      console.log(`else`)
+      console.log(`TODO else`) // TO BE IMPLEMENTED
       break;
     case "if_clause_end":
-      console.log(`endif`)
+      console.log(`TODO endif`) // TO BE IMPLEMENTED
       break;
     case "loop_start":
     case "loop_start_short":
-      console.log(`loop i 1..m(${token.values[0]})`)
+      console.log(`TODO loop i 1..m(${token.values[0]})`) // TO BE IMPLEMENTED
       break;
     case "loop_start_iterator":
-      console.log(`loop cn(${token.values[0]}) 1..m(${token.values[1]})`)
+      console.log(`TODO loop cn(${token.values[0]}) 1..m(${token.values[1]})`) // TO BE IMPLEMENTED
       break;
     case "loop_end":
-      console.log(`endloop`)
-
+      console.log(`TODO endloop`) // TO BE IMPLEMENTED
     default:
-      break;
+      throw new Error(`Unknown token name: ${token.name}`);
+
   }
-
-  console.log(memory)
-
-  // console.log(token.name)
-  return "console.log(':3')";
-  // return translateValues(translation, formattedValues);
+  return "console.log(':3')"; // will remove soon, it's needed because of later execution steps
 
 }
 

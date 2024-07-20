@@ -34,6 +34,5 @@ const operationsRegex: Record<string, RegExp> = Object.fromEntries(
   Object.entries(operations).map(([key, value]) => [key, buildOperatorRegex(value)])
 );
 
-console.log(operationsRegex)
 export default schemasRegex;
 export { operationsRegex };
