@@ -3,7 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { getPatternValues } from './patterns';
-import { execute } from './translate';
+import { execute } from './execute';
 
 const inputFile: string = process.argv[2];
 
