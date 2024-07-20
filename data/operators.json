@@ -1,0 +1,5 @@
+{
+  "add": ["dodać", "plus"],
+  "mul": ["razy"],
+  "greater_or_equal": ["większe bądź równe"]
+}

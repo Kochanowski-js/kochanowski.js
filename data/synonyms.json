@@ -27,7 +27,16 @@
   ],
   "assign": ["przypisz", "popraw"],
   "value": ["wartość"],
-  "print": ["wydrukuj", "drukuj", "wypluj", "odpisz", "napisz", "wyślij"],
+  "print": [
+    "wydrukuj",
+    "drukuj",
+    "wypluj",
+    "odpisz",
+    "napisz",
+    "wyślij",
+    "pokaż",
+    "powiedz"
+  ],
   "loop": ["zapętl", "powtórz", "a niechaj się toczy"],
   "via": ["przez"],
   "until_end": [
@@ -40,11 +49,15 @@
     "powtórzenia następne polecenia",
     "powtórzenia następujące polecenia"
   ],
-  "loop_end": ["koniec pętli", "przejdź do następnej iteracji"],
-  "mul": ["razy", "pomnóż przez"],
-  "div": ["podzielić na"],
-  "add": ["dodać", "plus"],
-  "sub": ["minus", "odjąć"],
+  "loop_end": [
+    "koniec pętli",
+    "przejdź do następnej iteracji",
+    "zakończ pętle"
+  ],
   "comment": ["komentarz twórcy"],
-  "with_iterator": ["z iteratorem"]
+  "with_iterator": ["z iteratorem"],
+  "to": ["do"],
+  "if": ["jeżeli"],
+  "if_end": ["niezależnie od wypadku wykonaj poniższe kroki"],
+  "else": ["w przeciwnym wypadku"]
 }
