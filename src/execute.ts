@@ -61,7 +61,7 @@ function parseValue(value: string): any {
  * @param {Instruction} instruction - The instruction to be executed. 
  * @returns {void}
  */
-export function executeInstruction(instruction: Instruction): void {
+export function executeInstruction(instruction: Instruction): boolean | void {
 
   switch (instruction.type) {
     case "assign":
@@ -71,6 +71,8 @@ export function executeInstruction(instruction: Instruction): void {
     case "print":
       console.log(parseValue(instruction.params[0]));
       break;
+    case "if":
+      return parseValue(instruction.params[0]);
     default:
       break;
   }
