@@ -2,8 +2,9 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { getRawInstrction, normalizeInstruction } from './instruction';
-import { execute } from './execute';
+import { getRawInstruction, normalizeInstruction } from './instruction';
+import { executeInstruction } from './execute';
+import run from './main';
 
 const inputFile: string = process.argv[2];
 
@@ -29,11 +30,6 @@ fs.readFile(inputFile, 'utf8', (err, code) => {
     process.exit(1);
   }
 
-  const lines: string[] = code.split(".");
-
-  lines.map(line => {
-    const token = normalizeInstruction(getRawInstrction(line));
-    execute(token);
-  });
+  run(code);
 
 });

@@ -7,7 +7,7 @@ import { schemasRegex } from "./regex";
  * @param pattern - The input string to be checked
  * @returns An object containing the matched schema name and values
  */
-export function getRawInstrction(pattern: string): RawInstruction {
+export function getRawInstruction(pattern: string): RawInstruction {
   for (const [schemaName, regex] of Object.entries(schemasRegex)) {
     const match = pattern.match(regex);
     if (match) {
@@ -46,7 +46,7 @@ export function normalizeInstruction(instruction: RawInstruction): Instruction {
     "print": "print",
     "if_clause_start": "if",
     "if_clause_else": "else",
-    "if_clause_endif": "endif",
+    "if_clause_end": "endif",
     "loop_start": "loop",
     "loop_start_short": "loop",
     "loop_start_iterator": "loop",
@@ -59,18 +59,18 @@ export function normalizeInstruction(instruction: RawInstruction): Instruction {
     "assign": values => ["assign_reverse", "assign_reverse_no_name", "assign_reverse_short", "assign_reverse_shortest"].includes(instruction.name) ? [values[1], values[0]] : [values[0], values[1]],
     "print": values => [values[0]],
     "if": values => [values[0]],
-    "else": values => [values[0]],
-    "endif": values => [values[0]],
+    "else": _ => [],
+    "endif": _ => [],
     "loop": values => ["loop_start_iterator"].includes(instruction.name) ? [values[0], values[1]] : ["_", values[0]],
     "endloop": _ => [],
     "unknown": _ => [],
   };
 
-  const normalizedName: InstructionType = mappings[instruction.name] || "unknown";
-  const normalizedValues = (valueMappings[normalizedName] || (() => []))(instruction.values);
+  const normalizedType: InstructionType = mappings[instruction.name] || "unknown";
+  const normalizedParams = (valueMappings[normalizedType] || (() => []))(instruction.values);
 
   return {
-    name: normalizedName,
-    values: normalizedValues,
+    type: normalizedType,
+    params: normalizedParams,
   };
 }

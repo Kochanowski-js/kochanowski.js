@@ -13,6 +13,6 @@ interface RawInstruction {
 
 type InstructionType = "create" | "assign" | "print" | "if" | "else" | "endif" | "loop" | "endloop" | "unknown"
 interface Instruction {
-  name: InstructionType;
-  values: string[];
+  type: InstructionType;
+  params: string[];
 }
