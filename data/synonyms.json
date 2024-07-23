@@ -7,7 +7,8 @@
     "napisz",
     "wyczaruj",
     "spłódź",
-    "usnuj"
+    "usnuj",
+    "zainicjuj"
   ],
   "variable": ["zmienną", "zmienna", "stałą", "zmiennej", "do", "wartość"],
   "with_name": [
@@ -54,10 +55,12 @@
     "przejdź do następnej iteracji",
     "zakończ pętle"
   ],
-  "comment": ["komentarz twórcy"],
   "with_iterator": ["z iteratorem"],
   "to": ["do"],
-  "if": ["jeżeli"],
-  "if_end": ["niezależnie od wypadku wykonaj poniższe kroki"],
-  "else": ["w przeciwnym wypadku"]
+  "from": ["od"],
+  "if": ["jeżeli", "jeśli"],
+  "if_end": ["niezależnie od wypadku wykonaj poniższe kroki", "kontynuując"],
+  "else": ["w przeciwnym wypadku"],
+  "add": ["dodaj"],
+  "sub": ["odejmuj", "usuń"]
 }

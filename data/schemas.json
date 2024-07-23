@@ -9,6 +9,8 @@
   "assign_reverse_no_name": "assign value {} variable {}",
   "assign_reverse_short": "assign {} variable {}",
   "assign_reverse_shortest": "assign {} to {}",
+  "add_to": "add {} to {}",
+  "remove_from": "sub {} from {}",
   "print": "print {}",
   "if_clause_start": "if {}",
   "if_clause_else": "else",
@@ -17,6 +19,5 @@
   "loop_start": "loop via {} until_end",
   "loop_start_short": "loop {} until_end",
   "loop_end": "loop_end",
-  "comment": "comment {}",
-  "not_found": "print comment {}"
+  "not_found": "if_end if_end if_end if_end {}"
 }

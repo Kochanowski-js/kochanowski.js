@@ -52,11 +52,17 @@ export function normalizeInstruction(instruction: RawInstruction): Instruction {
     "loop_start_iterator": "loop",
     "loop_end": "endloop",
     "not_found": "unknown",
+    "add_to": "assign",
+    "remove_from": "assign"
   };
 
   const valueMappings: { [key: string]: (values: any[]) => any[] } = {
     "create": values => ["create_reverse"].includes(instruction.name) ? [values[1], values[0]] : [values[0], values[1]],
-    "assign": values => ["assign_reverse", "assign_reverse_no_name", "assign_reverse_short", "assign_reverse_shortest"].includes(instruction.name) ? [values[1], values[0]] : [values[0], values[1]],
+    "assign": values =>
+      instruction.name === "add_to" ? [values[1], values[1] + " dodać " + values[0]] :
+        instruction.name === "remove_from" ? [values[1], values[1] + " minus " + values[0]] :
+          ["assign_reverse", "assign_reverse_no_name", "assign_reverse_short", "assign_reverse_shortest"].includes(instruction.name) ? [values[1], values[0]] :
+            [values[0], values[1]],
     "print": values => [values[0]],
     "if": values => [values[0]],
     "else": _ => [],
