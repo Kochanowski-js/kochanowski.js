@@ -80,5 +80,5 @@ export default function run(code: string) {
   });
 
   runInstructions(instructions);
-  console.table(instructions);
+  // console.table(instructions);
 }
