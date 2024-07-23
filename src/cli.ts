@@ -2,7 +2,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { getRawInstrction, normalizeInstruction } from './patterns';
+import { getRawInstrction, normalizeInstruction } from './instruction';
 import { execute } from './execute';
 
 const inputFile: string = process.argv[2];
