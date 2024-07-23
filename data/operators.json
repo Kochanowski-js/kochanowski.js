@@ -8,5 +8,6 @@
   "greater_or_equal": ["jest większy bądź równy", "jest niemniejsze od"],
   "less_or_equal": ["jest mniejsze bądź równe", "jest niewiększe od"],
   "equal": ["równe", "jest równe"],
-  "not_equal": ["nie równe", "nie jest równe"]
+  "not_equal": ["nie równe", "nie jest równe"],
+  "sign": ["znaków o numerze"]
 }

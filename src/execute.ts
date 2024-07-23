@@ -41,7 +41,8 @@ function parseValue(value: string): any {
         greater_or_equal: (a, b) => a >= b,
         less_or_equal: (a, b) => a <= b,
         equal: (a, b) => a === b,
-        not_equal: (a, b) => a !== b
+        not_equal: (a, b) => a !== b,
+        sign: (a, b) => Array(a).join(String.fromCharCode(b))
       };
 
       const operation = operations[key];
