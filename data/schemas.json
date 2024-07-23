@@ -13,9 +13,9 @@
   "if_clause_start": "if {}",
   "if_clause_else": "else",
   "if_clause_end": "if_end",
+  "loop_start_iterator": "loop with_iterator {} via {} until_end",
   "loop_start": "loop via {} until_end",
   "loop_start_short": "loop {} until_end",
-  "loop_start_iterator": "loop with_iterator {} via {} until_end",
   "loop_end": "loop_end",
   "comment": "comment {}",
   "not_found": "print comment {}"

@@ -2,8 +2,6 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { getRawInstruction, normalizeInstruction } from './instruction';
-import { executeInstruction } from './execute';
 import run from './main';
 
 const inputFile: string = process.argv[2];
