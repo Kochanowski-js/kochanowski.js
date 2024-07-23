@@ -2,8 +2,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { getPatternValues } from './patterns';
-import { interpret } from './translate';
+import run from './main';
 
 const inputFile: string = process.argv[2];
 
@@ -29,14 +28,6 @@ fs.readFile(inputFile, 'utf8', (err, code) => {
     process.exit(1);
   }
 
-  const lines: string[] = code.split(".");
+  run(code);
 
-  const translations: string[] = lines.map(line => {
-    const token = getPatternValues(line);
-    return interpret(token);
-  });
-
-  const translatedCode: string = translations.join('\n');
-
-  eval(translatedCode);
 });

@@ -1,14 +1,14 @@
-type Synonyms = Record<string, string[]>;
-type Schemas = Record<string, { translation: string; schema: string; type: string[] }>;
-
 import synonymsData from "../data/synonyms.json"
 import schemasData from "../data/schemas.json"
-const synonyms = synonymsData as Synonyms;
-const schemas = schemasData as Schemas;
+import operationsData from "../data/operators.json"
+
+const synonyms: Synonyms = synonymsData;
+const schemas: Schemas = schemasData;
+const operations: Operations = operationsData;
 
 /**
  * This function creates a regular expression of a schema using synonyms from external data. 
- * @param schema String of a schema, where arguments are "{}"
+ * @param schema - String of a schema, where arguments are "{}"
  * @returns Regular expression matching the schema with flag "i"
  */
 function buildRegex(schema: string): RegExp {
@@ -19,9 +19,21 @@ function buildRegex(schema: string): RegExp {
   return new RegExp(synonymMap, 'i');
 }
 
+/**
+ * This function creates a regular expression for operations using provided values.
+ * @param values - Array of operator strings
+ * @returns Regular expression matching the operations with flag "i"
+ */
+function buildOperatorRegex(values: string[]): RegExp {
+  return new RegExp(`(.+)\\s+(?:${values.join("|")})\\s+(.+)`, 'i');
+}
+
 // Building regex for each schema and storing them in an object
-const schemasRegex: Record<string, RegExp> = Object.fromEntries(
-  Object.entries(schemas).map(([key, value]) => [key, buildRegex(value.schema)])
+export const schemasRegex: RegexDictionary = Object.fromEntries(
+  Object.entries(schemas).map(([key, value]) => [key, buildRegex(value)])
 );
 
-export default schemasRegex;
+// Building regex for each operation and storing them in an object
+export const operationsRegex: RegexDictionary = Object.fromEntries(
+  Object.entries(operations).map(([key, value]) => [key, buildOperatorRegex(value)])
+);

@@ -1,132 +1,22 @@
 {
-  "create": {
-    "translation": "var {0} = {1};",
-    "schema": "create variable with_name {} with_value {}",
-    "type": ["NAME", "VALUE"]
-  },
-  "create_alt": {
-    "translation": "var {1} = {0};",
-    "schema": "create variable with_value {} with_name {}",
-    "type": ["VALUE", "NAME"]
-  },
-  "create_short": {
-    "translation": "var {0} = {1};",
-    "schema": "create variable {} with_value {}",
-    "type": ["VALUE", "NAME"]
-  },
-  "assign": {
-    "translation": "{0} = {1};",
-    "schema": "variable with_name {} assign value {}",
-    "type": ["NAME", "VALUE"]
-  },
-  "assign_short": {
-    "translation": "{0} = {1};",
-    "schema": "variable {} assign {}",
-    "type": ["NAME", "VALUE"]
-  },
-  "assign_alt": {
-    "translation": "{1} = {0};",
-    "schema": "assign value {} variable with_name {}",
-    "type": ["VALUE", "NAME"]
-  },
-  "assign_short_alt": {
-    "translation": "{1} = {0};",
-    "schema": "assign value {} variable {}",
-    "type": ["VALUE", "NAME"]
-  },
-  "assign_short2_alt": {
-    "translation": "{1} = {0};",
-    "schema": "assign {} variable {}",
-    "type": ["VALUE", "NAME"]
-  },
-  "print": {
-    "translation": "console.log({0});",
-    "schema": "print {}",
-    "type": ["VALUE"]
-  },
-  "loop_start": {
-    "translation": "for (let i = 0; i < {0}; i++) {",
-    "schema": "loop via {} until_end",
-    "type": ["NUMBER"]
-  },
-  "loop_start_iterator": {
-    "translation": "for (let {0} = 0; {0} < {1}; {0}++) {",
-    "schema": "loop with_iterator {} via {} until_end",
-    "type": ["NAME", "NUMBER"]
-  },
-  "loop_end": {
-    "translation": "}",
-    "schema": "loop_end",
-    "type": []
-  },
-  "alt_lr_addition": {
-    "translation": "( {0} + {1} )",
-    "schema": "variable {} add variable {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_lr_subtraction": {
-    "translation": "( {0} - {1} )",
-    "schema": "variable {} sub variable {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_lr_multiplication": {
-    "translation": "( {0} * {1} )",
-    "schema": "variable {} mul variable {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_lr_division": {
-    "translation": "( {0} / {1} )",
-    "schema": "variable {} div {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_l_addition": {
-    "translation": "( {0} + {1} )",
-    "schema": "variable {} add {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_l_subtraction": {
-    "translation": "( {0} - {1} )",
-    "schema": "variable {} sub {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_l_multiplication": {
-    "translation": "( {0} * {1} )",
-    "schema": "variable {} mul {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "alt_l_division": {
-    "translation": "( {0} / {1} )",
-    "schema": "variable {} div {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "addition": {
-    "translation": "( {0} + {1} )",
-    "schema": "{} add {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "subtraction": {
-    "translation": "( {0} - {1} )",
-    "schema": "{} sub {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "multiplication": {
-    "translation": "( {0} * {1} )",
-    "schema": "{} mul {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "division": {
-    "translation": "( {0} / {1} )",
-    "schema": "{} div {}",
-    "type": ["VALUE", "VALUE"]
-  },
-  "comment": {
-    "translation": "// {0}",
-    "schema": "comment {}",
-    "type": ["STRING"]
-  },
-  "not_found": {
-    "translation": "{0}",
-    "schema": "mul mul mul div div div {}",
-    "type": ["NAME"]
-  }
+  "create": "create variable with_name {} with_value {}",
+  "create_reverse": "create variable with_value {} with_name {}",
+  "create_no_name": "create variable {} with_value {}",
+  "create_short": "create {} with_value {}",
+  "assign": "variable with_name {} assign value {}",
+  "assign_short": "variable {} assign {}",
+  "assign_reverse": "assign value {} variable with_name {}",
+  "assign_reverse_no_name": "assign value {} variable {}",
+  "assign_reverse_short": "assign {} variable {}",
+  "assign_reverse_shortest": "assign {} to {}",
+  "print": "print {}",
+  "if_clause_start": "if {}",
+  "if_clause_else": "else",
+  "if_clause_end": "if_end",
+  "loop_start_iterator": "loop with_iterator {} via {} until_end",
+  "loop_start": "loop via {} until_end",
+  "loop_start_short": "loop {} until_end",
+  "loop_end": "loop_end",
+  "comment": "comment {}",
+  "not_found": "print comment {}"
 }

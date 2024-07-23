@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node .",
     "build": "npx tsc",
-    "dev": "npm run build && npm start",
+    "dev": "npm run build && npm start indeks.kpl",
     "lint": "npx prettier . --write",
     "test": "jest"
   },
