@@ -2,7 +2,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { getPatternValues } from './patterns';
+import { getRawInstrction, normalizeInstruction } from './patterns';
 import { execute } from './execute';
 
 const inputFile: string = process.argv[2];
@@ -32,7 +32,7 @@ fs.readFile(inputFile, 'utf8', (err, code) => {
   const lines: string[] = code.split(".");
 
   lines.map(line => {
-    const token = getPatternValues(line);
+    const token = normalizeInstruction(getRawInstrction(line));
     execute(token);
   });
 
