@@ -3,11 +3,59 @@
   "subtract": ["odjąć", "minus"],
   "multiply": ["pomnożyć", "razy"],
   "divide": ["podzielić na"],
-  "greater_than": ["jest większe niż", "jest większe od"],
-  "less_than": ["jest mniejsze niż", "jest mniejsze od"],
-  "greater_or_equal": ["jest większy bądź równy", "jest niemniejsze od"],
-  "less_or_equal": ["jest mniejsze bądź równe", "jest niewiększe od"],
-  "equal": ["równe", "jest równe"],
-  "not_equal": ["nie równe", "nie jest równe"],
-  "sign": ["znaków o numerze"]
+  "greater_than": [
+    "jest większe niż",
+    "jest większa niż",
+    "jest większy niż",
+    "jest większe od",
+    "jest większa od",
+    "jest większy od"
+  ],
+  "less_than": [
+    "jest mniejsze niż",
+    "jest mniejsza niż",
+    "jest mniejszy niż",
+    "jest mniejsze od",
+    "jest mniejsza od",
+    "jest mniejszy od"
+  ],
+  "greater_or_equal": [
+    "jest większe bądź równe",
+    "jest większy bądź równy",
+    "jest większa bądź równa",
+    "jest niemniejsze od",
+    "jest niemniejszy od",
+    "jest niemniejsza od"
+  ],
+  "less_or_equal": [
+    "jest mniejsze bądź równe",
+    "jest mniejszy bądź równy",
+    "jest mniejsza bądź równa",
+    "jest niewiększe od",
+    "jest niewiększy od",
+    "jest niewiększa od"
+  ],
+  "equal": [
+    "jest równe",
+    "jest równy",
+    "jest równa",
+    "są równi",
+    "są równe",
+    "równe",
+    "równa",
+    "równy",
+    "równi"
+  ],
+  "not_equal": [
+    "nie równe",
+    "nie jest równe",
+    "nie równy",
+    "nie jest równy",
+    "nie równa",
+    "nie jest równa",
+    "nie równi",
+    "nie są równi",
+    "nie są równe"
+  ],
+  "sign": ["znaków o numerze", "znak o numerze", "znaki o numerze"]
 }
