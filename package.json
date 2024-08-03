@@ -2,7 +2,9 @@
   "name": "kochanowski",
   "version": "0.6.0",
   "description": "Esoteric programming language based on polish.",
-  "bin": "./build/src/cli.js",
+  "bin": {
+    "kochanowski": "build/src/cli.js"
+  },
   "main": "./build/src/cli.js",
   "scripts": {
     "start": "node .",
