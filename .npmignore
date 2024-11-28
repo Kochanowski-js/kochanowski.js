@@ -1,9 +1,5 @@
-src
+node_modules/
+src/
 tsconfig.json
-jest.config.js
-logo.svg
-tests
-/data
-node_modules
-.prettierrc
-.github
+assets/
+typings/

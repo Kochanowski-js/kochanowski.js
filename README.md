@@ -1,7 +1,7 @@
 <div align="center">
   
   <p>
-    <img src="logo.svg" width="400" />
+    <img src="assets/logo.svg" width="400" />
   </p>
       
   <p>
@@ -64,12 +64,12 @@ Przejdź do następnej iteracji.
 ### Creating a triangle out of characters
 
 ```kpl
-Zdefiniuj zmienną tekst o wartości równej "X".
+Zdefiniuj tekst o wartości X.
 
 Powtórz przez 5 powtórzeń następujące polecenia.
 
 Wydrukuj tekst.
-Zmiennej tekst przypisz wartość tekst dodać "X".
+Dodaj X do tekstu.
 
 Przejdź do następnej iteracji.
 ```

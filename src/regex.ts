@@ -1,6 +1,6 @@
-import synonymsData from "../data/synonyms.json"
-import schemasData from "../data/schemas.json"
-import operationsData from "../data/operators.json"
+import synonymsData from "../data/synonyms.json";
+import schemasData from "../data/schemas.json";
+import operationsData from "../data/operators.json";
 
 const synonyms: Synonyms = synonymsData;
 const schemas: Schemas = schemasData;

@@ -4,11 +4,11 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "outDir": "build",
+    "outDir": "dist",
     "lib": ["ES2023", "DOM"],
     "target": "ES2022",
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "tests"]
+  "exclude": ["node_modules"]
 }
