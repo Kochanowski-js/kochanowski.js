@@ -1,11 +1,42 @@
-import getStem from 'stemmer_pl';
+import sameStem from 'same-stem';
 import { operationsRegex } from "./regex";
+import { randomUUID, UUID } from 'crypto';
 
-let memory: Record<string, any> = {};
+let memory: Record<UUID, any> = {};
+let variableAliases: Record<string, UUID> = {};
 
-function generateName(name: string): string {
-  return name.split(" ").map(getStem).join("_");
+/**
+ * Generates a name for a variable based on the memory key.
+ * @param name The name of the variable
+ * @returns The name of the variable with the memory key 
+ */
+function getMemoryKey(name: string): UUID {
+
+  let memoryKey: UUID;
+
+  // If key is already in memory, return the value
+  for (const key in variableAliases) {
+    if ( sameStem(name, key) ) {
+      memoryKey = variableAliases[key];
+      variableAliases[name] = memoryKey;
+      break;
+    }
+  }
+
+  // If key is not in memory, generate a new key
+  if (!memoryKey) {
+    memoryKey = randomUUID();
+    variableAliases[name] = memoryKey;
+  }
+
+  return memoryKey;
+
 }
+
+function getValue(key: UUID): any {
+  return memory[key];
+}
+
 
 /**
  * Parses the input value to return a number, a value from memory, or evaluates 
@@ -22,8 +53,9 @@ function parseValue(value: string): any {
     return Number(value);
   }
 
-  if (memory[generateName(value)] !== undefined) {
-    return memory[generateName(value)];
+  let key = getMemoryKey(value);
+  if (getValue(key) !== undefined) {
+    return getValue(key);
   }
 
   // Recursive operation parsing
@@ -67,7 +99,7 @@ export function executeInstruction(instruction: Instruction): boolean | void {
   switch (instruction.type) {
     case "assign":
     case "create":
-      memory[generateName(instruction.params[0])] = parseValue(instruction.params[1]);
+      memory[getMemoryKey(instruction.params[0])] = parseValue(instruction.params[1]);
       break;
     case "print":
       console.log(parseValue(instruction.params[0]));

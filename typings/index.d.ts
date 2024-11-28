@@ -1,5 +1,3 @@
-declare module 'stemmer_pl';
-
 type Synonyms = Record<string, string[]>;
 type Schemas = Record<string, string>;
 type Operations = Record<string, string[]>;

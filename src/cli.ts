@@ -1,27 +1,31 @@
 #!/usr/bin/env node
 
-import * as fs from 'fs';
+import { existsSync, promises as fsPromises } from 'fs';
 import run from './main';
 
-const inputFile: string = process.argv[2];
+const inputFile = process.argv[2];
 
 if (!inputFile) {
-  console.error('Usage: npm start <inputFile>');
+  console.error('Error: Usage: npm start <inputFilePath>');
   process.exit(1);
 }
 
-if (!fs.existsSync(inputFile)) {
-  console.error('Error: File not found');
+if (!existsSync(inputFile)) {
+  console.error('Error: Input file not found:', inputFile);
   process.exit(1);
 }
 
-fs.readFile(inputFile, 'utf8', (err, code) => {
-  
-  if (err) {
+(async () => {
+  try {
+    const code = await fsPromises.readFile(inputFile, 'utf8');
+    try {
+      run(code);
+    } catch (err) {
+      console.error('Error running the code:', err);
+      process.exit(1);
+    }
+  } catch (err) {
     console.error('Error reading input file:', err);
     process.exit(1);
   }
-
-  run(code);
-
-});
+})();
