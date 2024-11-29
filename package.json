@@ -1,6 +1,6 @@
 {
   "name": "kochanowski",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Esoteric programming language based on polish.",
   "main": "./dist/src/cli.js",
   "bin": {
@@ -34,6 +34,6 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "same-stem": "^1.0.3"
+    "same-stem": "^1.0.4"
   }
 }
