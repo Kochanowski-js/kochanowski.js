@@ -3,6 +3,7 @@
   "subtract": ["odjąć", "minus"],
   "multiply": ["pomnożyć", "razy"],
   "divide": ["podzielić na"],
+  "modulo": ["zmodulować przez", "modulo", "zmodulowanego na", "zmodulowany przez", "zmodulowana przez", "zmodulowane przez", "zmodulowana na", "zmodulowane na"],
   "greater_than": [
     "jest większe niż",
     "jest większa niż",

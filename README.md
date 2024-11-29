@@ -64,12 +64,11 @@ Przejdź do następnej iteracji.
 ### Creating a triangle out of characters
 
 ```kpl
-Zdefiniuj tekst o wartości X.
+Powtórz przez 20 powtórzeń z iteratorem Marcin następujące polecenia.
 
-Powtórz przez 5 powtórzeń następujące polecenia.
-
-Wydrukuj tekst.
-Dodaj X do tekstu.
+Zmiennej Krzysiu przypisz 20 minus Marcina podzielić na 2 minus Marcina zmodulowanego na 2 podzielić na 2.
+Komentarz autora: 20 - (m/2 - (m%2)/2) -> 20 - m // 2
+Napisz Krzysia razy spacje dodać Macina razy X.
 
 Przejdź do następnej iteracji.
 ```

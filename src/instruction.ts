@@ -50,6 +50,7 @@ export function normalizeInstruction(instruction: RawInstruction): Instruction {
     "loop_start": "loop",
     "loop_start_short": "loop",
     "loop_start_iterator": "loop",
+    "loop_start_iterator_reverse": "loop",
     "loop_end": "endloop",
     "not_found": "unknown",
     "add_to": "assign",
@@ -67,7 +68,15 @@ export function normalizeInstruction(instruction: RawInstruction): Instruction {
     "if": values => [values[0]],
     "else": _ => [],
     "endif": _ => [],
-    "loop": values => ["loop_start_iterator"].includes(instruction.name) ? [values[0], values[1]] : ["_", values[0]],
+    loop: values => {
+      if (["loop_start_iterator"].includes(instruction.name)) {
+          return [values[0], values[1]];
+      } else if (["loop_start_iterator_reverse"].includes(instruction.name)) {
+          return [values[1], values[0]];
+      } else {
+          return ["_", values[0]];
+        }
+    },
     "endloop": _ => [],
     "unknown": _ => [],
   };

@@ -33,11 +33,6 @@ function getMemoryKey(name: string): UUID {
 
 }
 
-function getValue(key: UUID): any {
-  return memory[key];
-}
-
-
 /**
  * Parses the input value to return a number, a value from memory, or evaluates 
  * an operation based on `operators.json`.
@@ -54,27 +49,38 @@ function parseValue(value: string): any {
   }
 
   let key = getMemoryKey(value);
-  if (getValue(key) !== undefined) {
-    return getValue(key);
+  if (memory[key] !== undefined) {
+    return memory[key];
   }
 
   // Recursive operation parsing
   for (const [key, regex] of Object.entries(operationsRegex)) {
     const match = value.match(regex);
     if (match) {
-      const parsedOperands = match.slice(1).map(parseValue);
+
+      const parsedOperands = match.slice(1).map(operand => {
+        const trimmedOperand = operand.trim();
+        return !isNaN(Number(trimmedOperand)) ? Number(trimmedOperand) : parseValue(trimmedOperand);
+      });
+
       const operations: Record<string, (a: any, b: any) => any> = {
         add: (a, b) => a + b,
         subtract: (a, b) => a - b,
-        multiply: (a, b) => a * b,
+        multiply: (a, b) => {
+          if (typeof b === 'string') {
+            return b.startsWith('spacj') ? Array(a + 1).join(' ') : Array(a + 1).join(b);
+          }
+          return a * b;
+        },
         divide: (a, b) => a / b,
+        modulo: (a, b) => a % b,
         greater_than: (a, b) => a > b,
         less_than: (a, b) => a < b,
         greater_or_equal: (a, b) => a >= b,
         less_or_equal: (a, b) => a <= b,
         equal: (a, b) => a === b,
         not_equal: (a, b) => a !== b,
-        sign: (a, b) => Array(a).join(String.fromCharCode(b))
+        sign: (a, b) => Array(a).join(String.fromCharCode(b)),
       };
 
       const operation = operations[key];
